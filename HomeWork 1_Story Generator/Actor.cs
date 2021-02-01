@@ -9,12 +9,12 @@ namespace HomeWork_1_Story_Generator
     class Actor
     {
         private string name;
-        private int age;
+        private string skill;
         private string profession;
-        public Actor(string name, int age, string profession)
+        public Actor(string name, string skill, string profession)
         {
             this.name = name;
-            this.age = age;
+            this.skill = skill;
             this.profession = profession;
         }
 
@@ -30,15 +30,15 @@ namespace HomeWork_1_Story_Generator
             set { profession = value; }
         }
 
-        public int Age
+        public string Skill
         {
-            get { return age; }
-            set { age = value; }
+            get { return skill; }
+            set { skill = value; }
         }
 
         public override string ToString()
         {
-            return $"{name}|{age}|{profession}";
+            return $"{name}|{skill}|{profession}";
         }
     }
 }

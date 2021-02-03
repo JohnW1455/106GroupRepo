@@ -1,10 +1,10 @@
-war|world peace|happy
-race|training and practice|happy
-high school dance|courage|romantic
-divorce|reconciliation|romantic
-rivalry|friendship|twist
-family drama|common ground|twist
-Alien invasion|world unity|destructive
-kaiju attack|giant robots|destructive
-Indecisiveness|resolve|tragic
-murder mystery|confession of guilt|tragic
+happy|It's World War 3, and {actorName} has to end the conflict using his {actorSkill} skill.|{actorName} achieves world peace at {location}.
+happy|race|training and practice
+romantic|high school dance|courage
+romantic|divorce|reconciliation
+twist|rivalry|friendship
+twist|family drama|common ground
+destructive|Alien invasion|world unity
+destructive|kaiju attack|giant robots
+tragic|Indecisiveness|resolve
+tragic|murder mystery|confession of guilt

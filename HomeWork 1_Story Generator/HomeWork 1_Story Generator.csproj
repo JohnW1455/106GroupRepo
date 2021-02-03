@@ -55,6 +55,7 @@
   <ItemGroup>
     <Content Include="actors.txt" />
     <Content Include="settings.txt" />
+    <Content Include="Conflict Stories.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -28,7 +28,7 @@ namespace HomeWork_1_Story_Generator
             // Initializes the lists to store the objects
             List<Actor> actors = new List<Actor>();
             List<Setting> settings = new List<Setting>();
-            //List<Conflict> conflicts = new List<Conflict>();
+            List<Conflict> conflicts = new List<Conflict>();
             
             // Adds the actor objects to the actors list
             foreach (string line in actors_raw)
@@ -48,6 +48,7 @@ namespace HomeWork_1_Story_Generator
             foreach (string line in conflicts_raw)
             {
                 string[] conflictInfo = line.Split('|');
+                conflicts.Add(new Conflict(conflictInfo[0], conflictInfo[1], conflictInfo[2]));
             }
 
 

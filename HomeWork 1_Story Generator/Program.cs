@@ -82,7 +82,13 @@ namespace HomeWork_1_Story_Generator
 
                 ///find way to get the generated story
 
-
+                /* StreamReader reader = new StreamReader("../../filename.txt");
+                 * string text = null;
+                 * while(text = reader.ReadLine()) != null)
+                 * {
+                 *  string[] actorInfo = text.Split('|');
+                 *  
+                */
 
 
                 //Print out generated sotry

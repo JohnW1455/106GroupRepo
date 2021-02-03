@@ -34,7 +34,7 @@ namespace HomeWork_1_Story_Generator
             //This repeats when the option is chosen to choice multiple stories
             for (int i = 0; i < 1; i++)
             {
-                //means the do - while will activate at least ounce
+                //means the do - while will activate at least once
                 validInput = false;
 
                 do //while validInput == false
@@ -47,7 +47,7 @@ namespace HomeWork_1_Story_Generator
                     string userInput = Console.ReadLine();
 
                     //putt the input to lower to check for caps errors
-                    storyEnd = userInput.ToLower();
+                    storyEnd = userInput.ToLower().Trim();
 
                     switch (storyEnd)
                     {

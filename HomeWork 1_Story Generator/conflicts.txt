@@ -1,4 +1,4 @@
-happy|war|world peace|
+happy|It's World War 3, and {actorName} has to end the conflict using his {actorSkill} skill.|{actorName} achieves world peace at {location}.
 happy|race|training and practice
 romantic|high school dance|courage
 romantic|divorce|reconciliation

@@ -1,0 +1,12 @@
+war|world peace|happy
+race|training and practice|happy
+high school dance|courage|romantic
+divorce|reconciliation|romantic
+rivalry|friendship|twist
+family drama|common ground|twist
+Alien invasion|world unity|destructive
+kaiju attack|giant robots|destructive
+Indecisiveness|resolve|tragic
+murder mystery|confession of guilt|tragic
+
+

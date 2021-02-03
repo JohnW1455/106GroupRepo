@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 //Start date 2/1/21
 
@@ -18,6 +19,39 @@ namespace HomeWork_1_Story_Generator
     {
         static void Main(string[] args)
         {
+
+            // Reads in data from text files and stores it in arrays
+            string[] actors_raw = File.ReadAllLines("../../actors.txt");
+            string[] settings_raw = File.ReadAllLines("../../settings.txt");
+            string[] conflicts_raw = File.ReadAllLines("../../conflicts.txt");
+
+            // Initializes the lists to store the objects
+            List<Actor> actors = new List<Actor>();
+            List<Setting> settings = new List<Setting>();
+            List<Conflict> conflicts = new List<Conflict>();
+            
+            // Adds the actor objects to the actors list
+            foreach (string line in actors_raw)
+            {
+                string[] actorInfo = line.Split('|');
+                actors.Add(new Actor(actorInfo[0], actorInfo[1], actorInfo[2]));
+            }
+
+            // Adds the setting objects to the settings list
+            foreach (string line in settings_raw)
+            {
+                string[] settingInfo = line.Split('|');
+                settings.Add(new Setting(settingInfo[0], settingInfo[1]));
+            }
+
+            // Adds the conflict objects to the conflicts list
+            foreach (string line in conflicts_raw)
+            {
+                string[] conflictInfo = line.Split('|');
+                conflicts.Add(new Conflict(conflictInfo[0], conflictInfo[1], conflictInfo[2]));
+            }
+
+
             //vars
             string storyEnd;
             string fullStory = "";
@@ -81,13 +115,7 @@ namespace HomeWork_1_Story_Generator
 
                 ///find way to get the generated story
 
-                /* StreamReader reader = new StreamReader("../../filename.txt");
-                 * string text = null;
-                 * while(text = reader.ReadLine()) != null)
-                 * {
-                 *  string[] actorInfo = text.Split('|');
-                 *  
-                */
+
 
 
                 //Print out generated sotry

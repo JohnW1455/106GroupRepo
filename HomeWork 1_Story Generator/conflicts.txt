@@ -1,10 +1,10 @@
-happy|It's World War 3, and {actorName} has to end the conflict using his {actorSkill} skill.|{actorName} achieves world peace at {location}.
-happy|race|training and practice
-romantic|high school dance|courage
-romantic|divorce|reconciliation
-twist|rivalry|friendship
-twist|family drama|common ground
-destructive|Alien invasion|world unity
-destructive|kaiju attack|giant robots
-tragic|Indecisiveness|resolve
-tragic|murder mystery|confession of guilt
+happy|World War 3 was caused by {actor1Name}, and {actor2Name} has to end the conflict using their {actorSkill1} skill.|{actor1Name} achieves world peace at {location}.
+happy|{actor1Name} has to win the race and compete against {actor2Name}.|With enough {actor1skill}, {actor1Name} wins the race.
+romantic|The High School dance is coming up, and {actor1Name} wants to ask {actor2Name} out.|{actor1Name} needed {actor1skill} to get the courage, and {actor2Name} said yes.
+romantic|{actor1Name} and {actor2Name} are divorced.|They kiss up and reconcile.
+twist|{actor1Name} and {actor2Name} have a life-time rivalry|Through the power of friendship, anime prevails.
+twist|Family drama has split {actor1Name} and {actor2Name} apart.|They have a mutual understanding, and leave one another.
+destructive|{actor1Name} is invading {location}, and {actor2Name} has to unite the world.| The world comes together and defeats {actor1Name} at the cost of all {location}.
+destructive|{actor1Name}, a giant kaiju, is destroying {location}, and {actor2Name} pilots a mecha to fight {actor1Name}|In the name of plot armor, {actor2Name} wins.
+tragic|{actor1Name} is too indecisiveness, so {actor2Name} will use {actor2skill} to fix {actor1Name}.|{actor1Name} couldn't be fixed, so {actor1Name} got the axe.
+tragic|{actor1Name} is accused of murder, so {actor2Name} tries to solve the mystery by doing {actor2Skill}|{actor1Name} confessed at {location}, and thus was sentenced to death.

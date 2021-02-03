@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="actors.txt" />
+    <Content Include="settings.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

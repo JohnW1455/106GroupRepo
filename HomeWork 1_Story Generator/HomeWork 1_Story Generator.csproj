@@ -55,7 +55,7 @@
   <ItemGroup>
     <Content Include="actors.txt" />
     <Content Include="settings.txt" />
-    <Content Include="Conflict Stories.txt" />
+    <Content Include="conflicts.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />

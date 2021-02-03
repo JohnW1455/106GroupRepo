@@ -1,4 +1,4 @@
-war|world peace|happy
+war|world peace|happy|<actorname>,<actorskill>,<actorprofession>,<settinglocation>,<settingtimeperiod>But the world has been engulfed in a new world war, and it's up to 
 race|training and practice|happy
 high school dance|courage|romantic
 divorce|reconciliation|romantic

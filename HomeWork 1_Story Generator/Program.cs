@@ -7,7 +7,7 @@ using System.IO;
 
 //Start date 2/1/21
 
-//Lance Royer, Elliot Gong, John, Jack Doyle
+//Lance Royer, Elliot Gong, John Wager, Jack Doyle, Nathan Caron
 
 
 
@@ -67,8 +67,7 @@ namespace HomeWork_1_Story_Generator
             //This repeats when the option is chosen to choice multiple stories
             for (int i = 0; i < 1; i++)
             {
-                //means the do - while will activate at least ounce
-                validInput = false;
+                
 
                 do //while validInput == false
                 {
@@ -80,7 +79,7 @@ namespace HomeWork_1_Story_Generator
                     string userInput = Console.ReadLine();
 
                     //putt the input to lower to check for caps errors
-                    storyEnd = userInput.ToLower();
+                    storyEnd = userInput.ToLower().Trim();
 
                     switch (storyEnd)
                     {
@@ -104,7 +103,7 @@ namespace HomeWork_1_Story_Generator
                             break;
                         default:
                             Console.WriteLine("That is not one of the choices, please retry\n");
-                            
+                            validInput = false;
                             break;
                     }
                 } while (validInput == false);
@@ -115,13 +114,7 @@ namespace HomeWork_1_Story_Generator
 
                 ///find way to get the generated story
 
-                /* StreamReader reader = new StreamReader("../../filename.txt");
-                 * string text = null;
-                 * while(text = reader.ReadLine()) != null)
-                 * {
-                 *  string[] actorInfo = text.Split('|');
-                 *  
-                */
+
 
 
                 //Print out generated sotry

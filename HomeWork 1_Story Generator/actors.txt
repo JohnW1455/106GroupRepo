@@ -1,0 +1,6 @@
+Sam|Dummy fast|Blacksmith
+Eddy|Pickpocketing|Fisherman
+Duncan|Extremely fast learner|Adventurer
+Sophia|Speaks many languages|Magician
+Luanne|Good at Rubiks Cubes|Accountant
+Alicia|Make anything taste good|Tailor

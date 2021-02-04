@@ -28,7 +28,13 @@ namespace HomeWork_1_Story_Generator
 
         public string EndTag { get { return endTag; } }
 
-        public void ReplaceStrings(Actor actor1, Actor actor2, Setting setting)
+        /// <summary>
+        /// Replaces TextKeys in the conflict with proper data
+        /// </summary>
+        /// <param name="actor1">The first actor in the conflict</param>
+        /// <param name="actor2">The second actor in the conflict</param>
+        /// <param name="setting">The setting for the conflict</param>
+        private void ReplaceStrings(Actor actor1, Actor actor2, Setting setting)
         {
             problem = problem.Replace("{actor1Name}", actor1.Name);
             problem = problem.Replace("{actor2Name}", actor2.Name);
@@ -48,9 +54,16 @@ namespace HomeWork_1_Story_Generator
             resolution = resolution.Replace("{timePeriod}", setting.TimePeriod);
         }
 
-        public string GenerateStory()
+        /// <summary>
+        /// Generates the story for this conflict
+        /// </summary>
+        /// <param name="actor1">The first actor in the conflict</param>
+        /// <param name="actor2">The second actor in the conflict</param>
+        /// <param name="setting">The setting for the conflict</param>
+        /// <returns>The story</returns>
+        public string GenerateStory(Actor actor1, Actor actor2, Setting setting)
         {
-            // could just be the ToString()
+            ReplaceStrings(actor1, actor2, setting);
             return problem + " " + resolution;
         }
 

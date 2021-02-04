@@ -98,6 +98,7 @@ namespace HomeWork_1_Story_Generator
                         continue;
                     }
 
+                    // find a corresponding conflict
                     Conflict conflict;
                     if (storyEnd == "any ending")
                     {
@@ -107,8 +108,9 @@ namespace HomeWork_1_Story_Generator
                     {
                         conflict = validConflicts[random.Next(validConflicts.Length)];
                     }
-                    conflict.ReplaceStrings(actor1, actor2, setting);
-                    fullStory = conflict.GenerateStory();
+                    
+                    // assimilate the story
+                    fullStory = conflict.GenerateStory(actor1, actor2, setting);
                     break;
                 }
             

@@ -29,7 +29,7 @@ namespace HomeWork_1_Story_Generator
             List<Actor> actors = new List<Actor>();
             List<Setting> settings = new List<Setting>();
             List<Conflict> conflicts = new List<Conflict>();
-            
+
             // Adds the actor objects to the actors list
             foreach (string line in actors_raw)
             {
@@ -56,7 +56,7 @@ namespace HomeWork_1_Story_Generator
             string storyEnd;
             string fullStory = "";
             string repeatString;
-            bool validInput;
+            Random random = new Random();
             
 
 
@@ -69,10 +69,16 @@ namespace HomeWork_1_Story_Generator
             for (int i = 0; i < 1; i++)
             {
                 
-
-                do //while validInput == false
+                // loop exists until input is valid
+                while (true)
                 {
+                    Actor actor1 = actors[random.Next(actors.Count)];
+                    // create a list where actor1 is not in it then select a random element
+                    Actor actor2 = actors.Where(x => x != actor1)
+                        .ElementAt(random.Next(actors.Count - 1));
 
+                    Setting setting = settings[random.Next(settings.Count)];
+                    
                     //ask for type of story that is wanted
                     Console.WriteLine("Please choose a type of ending to generate a story: \n'happy' 'tragic' 'romantic' \n'destructive' 'twist' 'any ending'\n\n");
 
@@ -81,33 +87,28 @@ namespace HomeWork_1_Story_Generator
 
                     //putt the input to lower to check for caps errors
                     storyEnd = userInput.ToLower().Trim();
-
-                    switch (storyEnd)
+                    
+                    Conflict[] validConflicts = conflicts.Where(x => x.EndTag == storyEnd).ToArray();
+                    // if storyEnd was not found in conflicts then validConflicts will be empty
+                    // and it was not valid unless 'any ending' was given
+                    if (storyEnd != "any ending" && validConflicts.Length == 0)
                     {
-                        case "happy":
-                            validInput = true;
-                            break;
-                        case "tragic":
-                            validInput = true;
-                            break;
-                        case "romantic":
-                            validInput = true;
-                            break;
-                        case "destructive":
-                            validInput = true;
-                            break;
-                        case "twist":
-                            validInput = true;
-                            break;
-                        case "any ending":
-                            validInput = true;
-                            break;
-                        default:
-                            Console.WriteLine("That is not one of the choices, please retry\n");
-                            validInput = false;
-                            break;
+                        Console.WriteLine("That is not one of the choices, please retry\n");
+                        // run the loop again
+                        continue;
                     }
-                } while (validInput == false);
+
+                    Conflict conflict;
+                    if (storyEnd == "any ending")
+                    {
+                        conflict = conflicts[random.Next(conflicts.Count)];
+                    }
+                    else
+                    {
+                        conflict = validConflicts[random.Next(validConflicts.Length)];
+                    }
+                    break;
+                }
             
 
                 Console.WriteLine("\n");

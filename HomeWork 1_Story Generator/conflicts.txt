@@ -1,6 +1,6 @@
-happy|World War 3 was caused by {actor1Name}, and {actor2Name} has to end the conflict using their {actorSkill1} skill.|{actor1Name} achieves world peace at {location}.
-happy|{actor1Name} has to win the race and compete against {actor2Name}.|With enough {actor1skill}, {actor1Name} wins the race.
-romantic|The High School dance is coming up, and {actor1Name} wants to ask {actor2Name} out.|{actor1Name} needed {actor1skill} to get the courage, and {actor2Name} said yes.
+happy|World War 3 was caused by {actor1Name}, and {actor2Name} has to end the conflict using their {actor1Skill} skill.|{actor1Name} achieves world peace at {location}.
+happy|{actor1Name} has to win the race and compete against {actor2Name}.|With enough {actor1Skill}, {actor1Name} wins the race.
+romantic|The High School dance is coming up, and {actor1Name} wants to ask {actor2Name} out.|{actor1Name} needed {actor1Skill} to get the courage, and {actor2Name} said yes.
 romantic|{actor1Name} and {actor2Name} are divorced.|They kiss up and reconcile.
 twist|{actor1Name} and {actor2Name} have a life-time rivalry|Through the power of friendship, anime prevails.
 twist|Family drama has split {actor1Name} and {actor2Name} apart.|They have a mutual understanding, and leave one another.

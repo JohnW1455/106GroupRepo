@@ -107,6 +107,8 @@ namespace HomeWork_1_Story_Generator
                     {
                         conflict = validConflicts[random.Next(validConflicts.Length)];
                     }
+                    conflict.ReplaceStrings(actor1, actor2, setting);
+                    fullStory = conflict.GenerateStory();
                     break;
                 }
             

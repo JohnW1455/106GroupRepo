@@ -116,7 +116,7 @@ namespace HomeWork_1_Story_Generator
                 Console.WriteLine("\n");
 
 
-                ///find way to get the generated story
+                
 
 
 
@@ -129,8 +129,9 @@ namespace HomeWork_1_Story_Generator
                 //loop to make sure a valid answer is inputted
                 for (int k = 0; k < 1; k++)
                 {
-                    Console.WriteLine("Would you like another story? Choose 'yes' or 'no' >> ");
+                    Console.WriteLine("\nWould you like another story? Choose 'yes' or 'no' >> ");
                     repeatString = Console.ReadLine();
+                    Console.WriteLine("");
 
                     //to lower to remove caps errors
                     string stringLower = repeatString.ToLower();

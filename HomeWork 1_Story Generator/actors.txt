@@ -1,6 +1,6 @@
-Sam|Dummy fast|Blacksmith
+Sam|Being dummy fast|Blacksmith
 Eddy|Pickpocketing|Fisherman
-Duncan|Extremely fast learner|Adventurer
-Sophia|Speaks many languages|Magician
-Luanne|Good at Rubiks Cubes|Accountant
-Alicia|Make anything taste good|Tailor
+Duncan|Being an Extremely fast learner|Adventurer
+Sophia|Speaking many languages|Magician
+Luanne|Flexing skills of using a Rubiks Cubes|Accountant
+Alicia|Making any food taste good|Tailor

@@ -15,6 +15,12 @@ namespace HomeWork_1_Story_Generator
         private string resolution;
         private string endTag;
 
+        /// <summary>
+        /// Creates a Conflict object with data from file pertaining to the plot of the story and what kind of story it is
+        /// </summary>
+        /// <param name="endingType"> What kind of ending the story has </param>
+        /// <param name="conflictFromFile"> the conflict portion of the story </param>
+        /// <param name="rapUp"> the resolution portion of the story </param>
         public Conflict(string endingType, string conflictFromFile, string rapUp)
         {
             problem = conflictFromFile;

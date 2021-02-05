@@ -82,7 +82,7 @@ namespace HomeWork_1_Story_Generator
                     //ask for type of story that is wanted
                     Console.WriteLine("Please choose a type of ending to generate a story: \n'happy' 'tragic' 'romantic' \n'destructive' 'twist' 'any ending'\n\n");
 
-                    Console.WriteLine("Your choice >> ");
+                    Console.Write("Your choice >>  ");
                     string userInput = Console.ReadLine();
 
                     //putt the input to lower to check for caps errors

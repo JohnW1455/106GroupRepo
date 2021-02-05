@@ -31,27 +31,21 @@ namespace HomeWork_1_Story_Generator
         /// <summary>
         /// Replaces TextKeys in the conflict with proper data
         /// </summary>
+        /// <param name="str">The string to replace</param>
         /// <param name="actor1">The first actor in the conflict</param>
         /// <param name="actor2">The second actor in the conflict</param>
         /// <param name="setting">The setting for the conflict</param>
-        private void ReplaceStrings(Actor actor1, Actor actor2, Setting setting)
+        private string ReplaceStrings(string str, Actor actor1, Actor actor2, Setting setting)
         {
-            problem = problem.Replace("{actor1Name}", actor1.Name);
-            problem = problem.Replace("{actor2Name}", actor2.Name);
-            problem = problem.Replace("{actor1Skill}", actor1.Skill);
-            problem = problem.Replace("{actor2Skill}", actor2.Skill);
-            problem = problem.Replace("{actor1Job}", actor1.Profession);
-            problem = problem.Replace("{actor2Job}", actor2.Profession);
-            problem = problem.Replace("{location}", setting.Location);
-            problem = problem.Replace("{timePeriod}", setting.TimePeriod);
-            resolution = resolution.Replace("{actor1Name}", actor1.Name);
-            resolution = resolution.Replace("{actor2Name}", actor2.Name);
-            resolution = resolution.Replace("{actor1Skill}", actor1.Skill);
-            resolution = resolution.Replace("{actor2Skill}", actor2.Skill);
-            resolution = resolution.Replace("{actor1Job}", actor1.Profession);
-            resolution = resolution.Replace("{actor2Job}", actor2.Profession);
-            resolution = resolution.Replace("{location}", setting.Location);
-            resolution = resolution.Replace("{timePeriod}", setting.TimePeriod);
+            return str
+                .Replace("{actor1Name}", actor1.Name)
+                .Replace("{actor2Name}", actor2.Name)
+                .Replace("{actor1Skill}", actor1.Skill)
+                .Replace("{actor2Skill}", actor2.Skill)
+                .Replace("{actor1Job}", actor1.Profession)
+                .Replace("{actor2Job}", actor2.Profession)
+                .Replace("{location}", setting.Location)
+                .Replace("{timePeriod}", setting.TimePeriod);
         }
 
         /// <summary>
@@ -63,8 +57,9 @@ namespace HomeWork_1_Story_Generator
         /// <returns>The story</returns>
         public string GenerateStory(Actor actor1, Actor actor2, Setting setting)
         {
-            ReplaceStrings(actor1, actor2, setting);
-            return problem + " " + resolution;
+            string newProblem = ReplaceStrings(problem, actor1, actor2, setting);
+            string newResolution = ReplaceStrings(resolution, actor1, actor2, setting);
+            return newProblem + " " + newResolution;
         }
 
         public override string ToString()

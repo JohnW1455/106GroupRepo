@@ -131,7 +131,7 @@ namespace HomeWork_1_Story_Generator
                 //loop to make sure a valid answer is inputted
                 for (int k = 0; k < 1; k++)
                 {
-                    Console.WriteLine("\nWould you like another story? Choose 'yes' or 'no' >> ");
+                    Console.Write("\nWould you like another story? Choose 'yes' or 'no' >> ");
                     repeatString = Console.ReadLine();
                     Console.WriteLine("");
 

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace HomeWork_1_Story_Generator
 {
     /// <summary>
+    /// John Wager
     /// Conflict class takes the data read from a file and organizes it into usable sections
     /// </summary>
     class Conflict

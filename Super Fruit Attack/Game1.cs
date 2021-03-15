@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Super_Fruit_Attack
 {
+    public enum GameStage {menu, instructions, gameplay, transition, gameOver, Win };
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;

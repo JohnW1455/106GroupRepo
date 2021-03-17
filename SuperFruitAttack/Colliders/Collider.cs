@@ -13,14 +13,6 @@ namespace SuperFruitAttack.Colliders
         public Vector2 Position { get; set; }
         public Point Size { get; }
 
-        private static MethodInfo[] _methods;
-
-        static Collider()
-        {
-            _methods = typeof(Collider).GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
-                .Where(x => x.GetParameters().Length == 2).ToArray();
-        }
-
         /// <summary>
         /// Creates a new collider
         /// </summary>

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Xna.Framework;
 
-namespace Super_Fruit_Attack.Colliders
+namespace SuperFruitAttack.Colliders
 {
     //Author: Nathan Caron
     //Date: 2/26/21

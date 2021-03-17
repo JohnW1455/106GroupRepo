@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Super_Fruit_Attack
+namespace SuperFruitAttack
 {
     public static class Program
     {

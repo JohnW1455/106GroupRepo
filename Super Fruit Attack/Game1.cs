@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace SuperFruitAttack
+namespace Super_Fruit_Attack
 {
     public enum GameStage {menu, instructions, gameplay, transition, gameOver, Win };
     public class Game1 : Game

@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace SuperFruitAttack.Colliders
+namespace Super_Fruit_Attack.Colliders
 {
     //Author: Nathan Caron
     //Date: 2/26/21

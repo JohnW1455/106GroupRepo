@@ -12,12 +12,19 @@ namespace SuperFruitAttack
     {
         private Rectangle box;
         private Texture2D image;
-        private Collider collider;
+        private Collider collideObject;
 
 
-        public GameObject(Texture2D image, int x, int y, int width, int height, Collider collider)
+        public GameObject(Texture2D image, int x, int y, int width, int height, Collider collide)
         {
-            this.collider = collider;
+            if(collide is BoxCollider)
+            {
+                collideObject = new BoxCollider(x, y, width, height);
+            }
+            else if(collide is CircleCollider)
+            {
+                collideObject = new CircleCollider(X, Y, width / 2);
+            }
             this.image = image;
             box = new Rectangle(x, y, width, height);
 
@@ -65,19 +72,20 @@ namespace SuperFruitAttack
 
         public virtual void CheckCollision(Collider objectCollide)
         {
-            if (collider is BoxCollider)
+            if (objectCollide is BoxCollider)
             {
-                BoxCollider boxCollision = (BoxCollider)collider;
-                boxCollision.CheckCollision(objectCollide);
-                boxCollision.CheckCollision((BoxCollider)objectCollide);
-                boxCollision.CheckCollision((CircleCollider)objectCollide);
+                BoxCollider boxCollision = (BoxCollider)objectCollide;
+
+                boxCollision.CheckCollision(collideObject);
+                boxCollision.CheckCollision((BoxCollider)collideObject);
+                boxCollision.CheckCollision((CircleCollider)collideObject);
             }
-            else if (collider is CircleCollider)
+            else if (objectCollide is CircleCollider)
             {
-                CircleCollider circleCollision = (CircleCollider)collider;
-                circleCollision.CheckCollision(objectCollide);
-                circleCollision.CheckCollision((BoxCollider)objectCollide);
-                circleCollision.CheckCollision((CircleCollider)objectCollide);
+                CircleCollider circleCollision = (CircleCollider)objectCollide;
+                circleCollision.CheckCollision(collideObject);
+                circleCollision.CheckCollision((BoxCollider)collideObject);
+                circleCollision.CheckCollision((CircleCollider)collideObject);
             }
         }
 

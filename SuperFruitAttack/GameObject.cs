@@ -70,22 +70,23 @@ namespace SuperFruitAttack
 
         }
 
-        public virtual void CheckCollision(Collider objectCollide)
+        public virtual bool CheckCollision(Collider objectCollide)
         {
             if (objectCollide is BoxCollider)
             {
                 BoxCollider boxCollision = (BoxCollider)objectCollide;
-
                 boxCollision.CheckCollision(collideObject);
-                boxCollision.CheckCollision((BoxCollider)collideObject);
-                boxCollision.CheckCollision((CircleCollider)collideObject);
+
             }
             else if (objectCollide is CircleCollider)
             {
                 CircleCollider circleCollision = (CircleCollider)objectCollide;
                 circleCollision.CheckCollision(collideObject);
-                circleCollision.CheckCollision((BoxCollider)collideObject);
-                circleCollision.CheckCollision((CircleCollider)collideObject);
+                
+            }
+            else if(objectCollide is Collider)
+            {
+                objectCollide.CheckCollision(collideObject);
             }
         }
 

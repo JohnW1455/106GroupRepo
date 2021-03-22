@@ -8,19 +8,25 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SuperFruitAttack
 {
-    public class Button : GameObject
+    public class Button 
     {
-
-        public Button(Texture2D image, Collider collide)
-            :base(image, collide)
+        private Texture2D image;
+        private Rectangle box;
+        public Button(Texture2D image, int x, int y, int width, int height)
         {
+            this.image = image;
+            box = new Rectangle(x, y, width, height);
         }
-
-        public override void Draw(SpriteBatch sb)
+        
+        public void Draw(SpriteBatch sb)
         {
             MouseState mouse = Mouse.GetState();
-            base.Draw(sb);
-            
+            sb.Draw(image, box, Color.GhostWhite);
+            if(mouse.X > box.X && mouse.X < (box.X + box.Width) 
+               && mouse.Y > box.Y && mouse.Y <(box.Y + box.Height))
+            {
+                sb.Draw(image, box, Color.White);
+            }
         }
     }
 }

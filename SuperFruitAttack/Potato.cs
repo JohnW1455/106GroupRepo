@@ -17,7 +17,7 @@ namespace SuperFruitAttack
     {
         protected float homePosition;
 
-        public Potato(Texture2D pic, int health, int speed, Player p, Colliders.Collider collide) : base(pic, health, speed, p, collide)
+        public Potato(Texture2D pic, int health, int speed, Colliders.Collider collide) : base(pic, health, speed, collide)
         {
             homePosition = collide.Position.X;
         }

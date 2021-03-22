@@ -6,6 +6,7 @@ namespace SuperFruitAttack
 {
     public class Game1 : Game
     {
+        public const int RESOLUTION = 32;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -26,6 +27,7 @@ namespace SuperFruitAttack
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Level.LoadTextures(Content);
 
             // TODO: use this.Content to load your game content here
         }

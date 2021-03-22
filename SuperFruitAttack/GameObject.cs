@@ -64,12 +64,6 @@ namespace SuperFruitAttack
         {
             sb.Draw(image, box, Color.White);
         }
-
-        public virtual void IsDead()
-        {
-
-        }
-
         public virtual void CheckCollision(Collider objectCollide)
         {
             if (objectCollide is BoxCollider)

@@ -22,9 +22,16 @@ namespace SuperFruitAttack
             homePosition = collide.Position.X;
         }
 
+        /// <summary>
+        /// Makes the potato walk back and forth
+        /// </summary>
         public override void Tick()
         {
-            
+            this.X -= MoveSpeed;
+            if (this.X <= homePosition - 80 || this.X >= homePosition + 80)
+            {
+                MoveSpeed *= -1;
+            }
         }
     }
 }

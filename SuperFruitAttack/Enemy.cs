@@ -14,6 +14,8 @@ namespace SuperFruitAttack
         private int moveSpeed;
         private Player player;
 
+        public int MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
+
         public Enemy(Texture2D pic, int pHealth, int speed, Player p, Colliders.Collider collide) : base(pic, collide)
         {
             health = pHealth;

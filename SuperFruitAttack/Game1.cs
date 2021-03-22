@@ -4,12 +4,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SuperFruitAttack
 {
+    public enum GameStages { menu, instructions, gameplay, gameOver, winGame, transition};
     public class Game1 : Game
     {
         public const int RESOLUTION = 32;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
+        private MouseState previousMouse;
+        private GameStages status;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -20,7 +22,7 @@ namespace SuperFruitAttack
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            status = GameStages.menu;
             base.Initialize();
         }
 
@@ -38,7 +40,22 @@ namespace SuperFruitAttack
                 Exit();
 
             // TODO: Add your update logic here
-
+            switch(status)
+            {
+                case GameStages.menu:
+                    break;
+                case GameStages.instructions:
+                    break;
+                case GameStages.gameplay:
+                    break;
+                case GameStages.transition:
+                    break;
+                case GameStages.winGame:
+                    break;
+                case GameStages.gameOver:
+                    break;
+            }
+            previousMouse = Mouse.GetState();
             base.Update(gameTime);
         }
 

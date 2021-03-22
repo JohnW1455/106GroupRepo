@@ -19,7 +19,6 @@ namespace SuperFruitAttack
         public override void Draw(SpriteBatch sb)
         {
             MouseState mouse = Mouse.GetState();
-            if()
             base.Draw(sb);
             
         }

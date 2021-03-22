@@ -10,24 +10,13 @@ namespace SuperFruitAttack
 {
     public abstract class GameObject
     {
-        private Rectangle box;
         private Texture2D image;
         private Collider collideObject;
 
-
-        public GameObject(Texture2D image, int x, int y, int width, int height, Collider collide)
+        public GameObject(Texture2D image, Collider collide)
         {
-            if(collide is BoxCollider)
-            {
-                collideObject = new BoxCollider(x, y, width, height);
-            }
-            else if(collide is CircleCollider)
-            {
-                collideObject = new CircleCollider(X, Y, width / 2);
-            }
+            collideObject = collide;
             this.image = image;
-            box = new Rectangle(x, y, width, height);
-
         }
 
         public Texture2D Image
@@ -38,31 +27,37 @@ namespace SuperFruitAttack
 
         public int X
         {
-            get { return box.X; }
-            set { box.X = value; }
+            get { return (int)collideObject.Position.X; }
+            set { collideObject.Position = new Vector2(value, Y); }
         }
 
         public int Y
         {
-            get { return box.Y; }
-            set { box.Y = value; }
+            get { return (int)collideObject.Position.Y; }
+            set { collideObject.Position = new Vector2(X, value); }
         }
 
         public int Width
         {
-            get { return box.Width; }
-            set { box.Width = value; }
+            get { return collideObject.Size.X; }
         }
 
         public int Height
         {
-            get { return box.Height; }
-            set { box.Height = value; }
+            get { return collideObject.Size.Y; }
         }
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, box, Color.White);
+            sb.Draw(image, 
+                new Rectangle(collideObject.Position.ToPoint(),
+                    collideObject.Size), 
+                Color.White);
+        }
+
+        public virtual void IsDead()
+        {
+
         }
 
         public virtual void CheckCollision(Collider objectCollide)

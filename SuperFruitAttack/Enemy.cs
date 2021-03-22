@@ -14,11 +14,29 @@ namespace SuperFruitAttack
         private int moveSpeed;
         private Player player;
 
-        public Enemy(int health, int speed, Texture2D picture, Collider collider )
-           : base(picture, collider)
+        public int MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
+
+        public Enemy(Texture2D pic, int pHealth, int speed, Player p, Colliders.Collider collide) : base(pic, collide)
         {
-            this.health = health;
-            this.moveSpeed = speed;
+            health = pHealth;
+            moveSpeed = speed;
+            player = p;
+        }
+
+        // called when the enemy takes damage
+        public void TakeDamage(int dmg)
+        {
+            health -= dmg;
+        }
+
+        public abstract void Tick();
+
+        public override void Draw(SpriteBatch sb)
+        {
+            if (health <= 0)
+            {
+                base.Draw(sb);
+            }
         }
 
     }

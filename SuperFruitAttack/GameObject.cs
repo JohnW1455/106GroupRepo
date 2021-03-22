@@ -10,8 +10,8 @@ namespace SuperFruitAttack
 {
     public abstract class GameObject
     {
-        private Texture2D image;
-        private Collider collideObject;
+        protected Texture2D image;
+        protected Collider collideObject;
 
         public GameObject(Texture2D image, Collider collide)
         {

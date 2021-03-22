@@ -47,7 +47,7 @@ namespace SuperFruitAttack
             get { return collideObject.Size.Y; }
         }
 
-        public void Draw(SpriteBatch sb)
+        public virtual void Draw(SpriteBatch sb)
         {
             sb.Draw(image, 
                 new Rectangle(collideObject.Position.ToPoint(),

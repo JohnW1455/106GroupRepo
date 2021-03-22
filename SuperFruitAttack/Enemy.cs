@@ -14,10 +14,11 @@ namespace SuperFruitAttack
         private int moveSpeed;
         private Player player;
 
-        public Enemy(Texture2D picture, int x, int y, int width, int height, Collider collider )
-           : base(picture, x, y, width, height, collider)
+        public Enemy(int health, int speed, Texture2D picture, Collider collider )
+           : base(picture, collider)
         {
-
+            this.health = health;
+            this.moveSpeed = speed;
         }
 
     }

@@ -47,7 +47,7 @@ namespace SuperFruitAttack
             get { return collideObject.Size.Y; }
         }
 
-        public void Draw(SpriteBatch sb)
+        public virtual void Draw(SpriteBatch sb)
         {
             sb.Draw(image, 
                 new Rectangle(collideObject.Position.ToPoint(),
@@ -55,9 +55,29 @@ namespace SuperFruitAttack
                 Color.White);
         }
 
-        public virtual bool CheckCollision(Collider objectCollide)
+        public virtual void IsDead()
         {
-            return collideObject.CheckCollision(objectCollide);
+
         }
+
+        public virtual void CheckCollision(Collider objectCollide)
+        {
+            if (objectCollide is BoxCollider)
+            {
+                BoxCollider boxCollision = (BoxCollider)objectCollide;
+
+                boxCollision.CheckCollision(collideObject);
+                boxCollision.CheckCollision((BoxCollider)collideObject);
+                boxCollision.CheckCollision((CircleCollider)collideObject);
+            }
+            else if (objectCollide is CircleCollider)
+            {
+                CircleCollider circleCollision = (CircleCollider)objectCollide;
+                circleCollision.CheckCollision(collideObject);
+                circleCollision.CheckCollision((BoxCollider)collideObject);
+                circleCollision.CheckCollision((CircleCollider)collideObject);
+            }
+        }
+
     }
 }

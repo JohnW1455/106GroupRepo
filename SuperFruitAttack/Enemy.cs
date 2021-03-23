@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using SuperFruitAttack.Colliders;
 
 namespace SuperFruitAttack
 {
@@ -12,13 +12,13 @@ namespace SuperFruitAttack
     {
         private int health;
         private int moveSpeed;
-        private Player player;
 
-        public Enemy(Texture2D pic, int pHealth, int speed, Player p, Colliders.Collider collide) : base(pic, collide)
+        public int MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
+
+        public Enemy(Texture2D pic, int pHealth, int speed, Collider collide) : base(pic, collide)
         {
             health = pHealth;
             moveSpeed = speed;
-            player = p;
         }
 
         // called when the enemy takes damage

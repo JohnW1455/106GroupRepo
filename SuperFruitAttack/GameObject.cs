@@ -10,13 +10,25 @@ namespace SuperFruitAttack
 {
     public abstract class GameObject
     {
-        private Texture2D image;
-        private Collider collideObject;
+        protected Texture2D image;
+        protected Collider collideObject;
 
         public GameObject(Texture2D image, Collider collide)
         {
             collideObject = collide;
             this.image = image;
+        }
+
+        public static GameObject Create(string imageName, Texture2D texture)
+        {
+            switch (imageName.ToLower())
+            {
+                case "potato":
+                    //temp
+                    return new Potato(texture, 1, 10, new BoxCollider(0, 0, 0, 0));
+            }
+
+            return null;
         }
 
         public Texture2D Image
@@ -55,28 +67,9 @@ namespace SuperFruitAttack
                 Color.White);
         }
 
-        public virtual void IsDead()
+        public virtual bool CheckCollision(Collider objectCollide)
         {
-
-        }
-
-        public virtual void CheckCollision(Collider objectCollide)
-        {
-            if (objectCollide is BoxCollider)
-            {
-                BoxCollider boxCollision = (BoxCollider)objectCollide;
-
-                boxCollision.CheckCollision(collideObject);
-                boxCollision.CheckCollision((BoxCollider)collideObject);
-                boxCollision.CheckCollision((CircleCollider)collideObject);
-            }
-            else if (objectCollide is CircleCollider)
-            {
-                CircleCollider circleCollision = (CircleCollider)objectCollide;
-                circleCollision.CheckCollision(collideObject);
-                circleCollision.CheckCollision((BoxCollider)collideObject);
-                circleCollision.CheckCollision((CircleCollider)collideObject);
-            }
+            return collideObject.CheckCollision(objectCollide);
         }
 
     }

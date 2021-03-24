@@ -36,20 +36,22 @@ namespace SuperFruitAttack
         {
             Level level = new Level(data.Width, data.Height);
 
-            for (int y = 0; y < data.Height; y++)
+            for (int gridY = 0; gridY < data.Height; gridY++)
             {
-                for (int x = 0; x < data.Width; x++)
+                for (int gridX = 0; gridX < data.Width; gridX++)
                 {
-                    string objectString = data.Objects[data.Indices[y * data.Width + x]];
+                    string objectString = data.Objects[data.Indices[gridY * data.Width + gridX]];
 
                     if (string.IsNullOrEmpty(objectString))
                     {
                         continue;
                     }
-                    
-                    //add texture things here with correct positioning off grid
-                    // TODO CURRENTLY NOT CORRECT
-                    GameObject obj = GameObject.Create(x, y, objectString, _textures[objectString]);
+
+                    Texture2D texture = _textures[objectString];
+                    int x = gridX * Game1.RESOLUTION + (Game1.RESOLUTION - texture.Width) / 2;
+                    int y = gridY * Game1.RESOLUTION + Game1.RESOLUTION - texture.Height;
+
+                    GameObject obj = GameObject.Create(x, y, objectString, texture);
                     level.Objects.Add(obj);
                 }
             }

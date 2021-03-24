@@ -4,6 +4,8 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using SuperFruitAttack.Colliders;
+
 namespace SuperFruitAttack
 {
     class GameObjectManager
@@ -54,12 +56,12 @@ namespace SuperFruitAttack
             }
         }
 
-        public void Tick()
+        public void Tick(int gameTime)
         {
 
         }
 
-        public void CheckCollision()
+        public void CheckCollision(Collider collider)
         {
 
         }

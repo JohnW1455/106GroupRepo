@@ -55,6 +55,8 @@ namespace SuperFruitAttack
 						entityRect.Y += resultant.Height;
 					}
 				}
+				Vector2 newPos = entityRect.Location.ToVector2();
+				objectCollide.Position = newPos;
 
 				return true;
 			}

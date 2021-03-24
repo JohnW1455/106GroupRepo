@@ -23,8 +23,9 @@ namespace SuperFruitAttack
         private Dictionary<string, Texture2D> images;
         private Texture2D startButton;
         private Texture2D instructionsButton;
+        private Texture2D menuBtton;
         private Button start;
-        
+        private Button menu;
         private Button instructions;
         public Game1()
         {
@@ -48,6 +49,7 @@ namespace SuperFruitAttack
             Level.LoadTextures(Content);
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
+            menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
             start = new Button( startButton,
                                 _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2,
                                 _graphics.PreferredBackBufferHeight / 2 - 3 * startButton.Height,
@@ -58,6 +60,11 @@ namespace SuperFruitAttack
                                       _graphics.PreferredBackBufferHeight / 2 - 2 * instructionsButton.Height,
                                       instructionsButton.Width,
                                       instructionsButton.Height);
+            menu = new Button(menuBtton,
+                              _graphics.PreferredBackBufferWidth / 2 - menuBtton.Width / 2,
+                              _graphics.PreferredBackBufferHeight / 2 - 3 * menuBtton.Height,
+                              menuBtton.Width,
+                              menuBtton.Height);
             // TODO: use this.Content to load your game content here
             
         }
@@ -75,9 +82,13 @@ namespace SuperFruitAttack
                     {
                         status = GameStages.gameplay;
                     }
-                    
+                    else if(instructions.IsClicked(previousMouse) == true)
+                    {
+                        status = GameStages.instructions;
+                    }
                     break;
                 case GameStages.instructions:
+
                     break;
                 case GameStages.gameplay:
                     break;
@@ -100,6 +111,8 @@ namespace SuperFruitAttack
             switch(status)
             {
                 case GameStages.menu:
+                    start.Draw(_spriteBatch);
+                    instructions.Draw(_spriteBatch);
                     break;
                 case GameStages.instructions:
                     break;

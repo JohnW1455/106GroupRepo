@@ -38,5 +38,20 @@ namespace SuperFruitAttack
             }
         }
        
+        public void RemoveObject(GameObject thing)
+        {
+            if (thing is Enemy)
+            {
+                enemies.Remove((Enemy)thing);
+            }
+            else if(thing is Projectile)
+            {
+                projectiles.Remove((Projectile)thing);
+            }
+            else if(thing is Collectible)
+            {
+                collectibles.Remove((Collectible)thing);
+            }
+        }
     }
 }

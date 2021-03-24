@@ -11,7 +11,7 @@ namespace SuperFruitAttack
     // Author: Jack Doyle
     // Purpose: To represent the player and store info on the player
     //          in game.
-    class Player : GameObject
+    public class Player : GameObject
     {
         // Fields
         private int health;

@@ -42,6 +42,8 @@ namespace SuperFruitAttack
                     return new Player(4, 10, texture, new BoxCollider(x, y, width, height));
                 case "collectible":
                     return new Collectible(texture, new BoxCollider(x, y, width, height));
+                case "platform":
+                    return new Platform(texture, new BoxCollider(x, y, width, height));
             }
 
             return null;

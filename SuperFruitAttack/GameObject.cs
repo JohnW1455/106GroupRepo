@@ -85,6 +85,12 @@ namespace SuperFruitAttack
                     collider.Size), 
                 Color.White);
         }
+
+        public Collider OtherCollider
+        {
+            get { return collider; }
+            set { collider = value; }
+        }
         /// <summary>
         /// This method checks if a game object is colliding with another game object.
         /// </summary>

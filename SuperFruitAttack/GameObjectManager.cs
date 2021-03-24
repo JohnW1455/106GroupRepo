@@ -53,5 +53,15 @@ namespace SuperFruitAttack
                 collectibles.Remove((Collectible)thing);
             }
         }
+
+        public void Tick()
+        {
+
+        }
+
+        public void CheckCollision()
+        {
+
+        }
     }
 }

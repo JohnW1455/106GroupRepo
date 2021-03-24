@@ -10,7 +10,7 @@ namespace SuperFruitAttack
 {
     class Platform : GameObject
     {
-        public Platform(Texture2D pic, int pHealth, int speed, Collider collide) : base(pic, collide)
+        public Platform(Texture2D pic, Collider collide) : base(pic, collide)
         {
 
         }

@@ -17,21 +17,31 @@ namespace SuperFruitAttack
         //These are the 2 fields for the gameObject class: the image and the 
         //collider object.
         protected Texture2D image;
-        protected Collider collideObject;
+        protected Collider collider;
 
         public GameObject(Texture2D image, Collider collide)
         {
-            collideObject = collide;
+            collider = collide;
             this.image = image;
         }
 
-        public static GameObject Create(string imageName, Texture2D texture)
+        public static GameObject Create(int x, int y, string name, Texture2D texture)
         {
+            int width = texture.Width;
+            int height = texture.Height;
+            
             switch (name.ToLower())
             {
                 case "potato":
-                    //temp
-                    return new Potato(texture, 1, 10, new BoxCollider(0, 0, 0, 0));
+                    return new Potato(texture, 1, 10, new BoxCollider(x, y, width, height));
+                case "carrot":
+                    return new Carrot(texture, 2, 0, new BoxCollider(x, y, width, height));
+                case "peapod":
+                    return new PeaPod(texture, 1000, 0, new BoxCollider(x, y, width, height));
+                case "player":
+                    return new Player(4, 10, texture, new BoxCollider(x, y, width, height));
+                case "collectible":
+                    return new Collectible(texture, new BoxCollider(x, y, width, height));
             }
 
             return null;
@@ -45,24 +55,24 @@ namespace SuperFruitAttack
 
         public int X
         {
-            get { return (int)collideObject.Position.X; }
-            set { collideObject.Position = new Vector2(value, Y); }
+            get { return (int)collider.Position.X; }
+            set { collider.Position = new Vector2(value, Y); }
         }
 
         public int Y
         {
-            get { return (int)collideObject.Position.Y; }
-            set { collideObject.Position = new Vector2(X, value); }
+            get { return (int)collider.Position.Y; }
+            set { collider.Position = new Vector2(X, value); }
         }
 
         public int Width
         {
-            get { return collideObject.Size.X; }
+            get { return collider.Size.X; }
         }
 
         public int Height
         {
-            get { return collideObject.Size.Y; }
+            get { return collider.Size.Y; }
         }
         /// <summary>
         /// This method draws the game object in its specified location.
@@ -71,18 +81,18 @@ namespace SuperFruitAttack
         public virtual void Draw(SpriteBatch sb)
         {
             sb.Draw(image, 
-                new Rectangle(collideObject.Position.ToPoint(),
-                    collideObject.Size), 
+                new Rectangle(collider.Position.ToPoint(),
+                    collider.Size), 
                 Color.White);
         }
         /// <summary>
         /// This method checks if a game object is colliding with another game object.
         /// </summary>
-        /// <param name="objectCollide"></param>
+        /// <param name="otherCollider"></param>
         /// <returns></returns>
-        public virtual bool CheckCollision(Collider objectCollide)
+        public virtual bool CheckCollision(Collider otherCollider)
         {
-            return collideObject.CheckCollision(objectCollide);
+            return collider.CheckCollision(otherCollider);
         }
 
     }

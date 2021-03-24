@@ -88,7 +88,7 @@ namespace SuperFruitAttack
                 Color.White);
         }
 
-        public Collider OtherCollider
+        public Collider Collider
         {
             get { return collider; }
             set { collider = value; }

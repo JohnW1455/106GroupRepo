@@ -17,12 +17,13 @@ namespace SuperFruitAttack
         private List<Projectile> projectiles;
 
 
-        public GameObjectManager()
+        public GameObjectManager(Player player)
         {
             collectibles = new List<Collectible>();
             projectiles = new List<Projectile>();
             enemies = new List<Enemy>();
             items = new List<GameObject>();
+            this.player = player;
         }
         public void AddObject(GameObject thing)
         {
@@ -58,7 +59,14 @@ namespace SuperFruitAttack
 
         public void Tick(int gameTime)
         {
-
+            foreach(Enemy enemy in enemies)
+            {
+                enemy.CheckCollision(player.Collider);
+            }
+            foreach(Collectible collectible in collectibles)
+            {
+                collectible.CheckCollision(player.Collider);
+            }
         }
 
         public void CheckCollision(Collider collider)

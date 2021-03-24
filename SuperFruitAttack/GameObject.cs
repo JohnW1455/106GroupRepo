@@ -25,19 +25,13 @@ namespace SuperFruitAttack
             this.image = image;
         }
 
-        public static GameObject Create(string imageName, Texture2D texture, Player p)
+        public static GameObject Create(string imageName, Texture2D texture)
         {
-            switch (imageName.ToLower())
+            switch (name.ToLower())
             {
                 case "potato":
                     //temp
                     return new Potato(texture, 1, 10, new BoxCollider(0, 0, 0, 0));
-                case "carrot":
-
-                    return new Carrot(texture, 1, 10, p, new BoxCollider(0, 0, 0, 0));
-                case "peapod":
-
-                    return new PeaPod(texture, 1, 10, p, new BoxCollider(0, 0, 0, 0));
             }
 
             return null;

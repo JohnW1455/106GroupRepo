@@ -21,7 +21,7 @@ namespace SuperFruitAttack
 
         public void Tick()
         {
-
+            collider.Position += velocity;
         }
     }
 }

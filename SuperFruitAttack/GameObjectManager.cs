@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
+using System.Threading.Tasks;
+using System.Diagnostics;
 namespace SuperFruitAttack
 {
     class GameObjectManager
@@ -20,22 +22,21 @@ namespace SuperFruitAttack
             enemies = new List<Enemy>();
             items = new List<GameObject>();
         }
-
-        public void AddEnemy(Enemy enemy)
+        public void AddObject(GameObject thing)
         {
-            enemies.Add(enemy);
+            if(thing is Enemy)
+            {
+                enemies.Add((Enemy)thing);
+            }
+            else if(thing is Projectile)
+            {
+                projectiles.Add((Projectile)thing);
+            }
+            else if(thing is Collectible)
+            {
+                collectibles.Add((Collectible)thing);
+            }
         }
-
-        public void AddCollectible(Collectible collectible)
-        {
-            collectibles.Add(collectible);
-        }
-
-        public void AddProjectile(Projectile projectile)
-        {
-            projectiles.Add(projectile);
-        }
-
-
+       
     }
 }

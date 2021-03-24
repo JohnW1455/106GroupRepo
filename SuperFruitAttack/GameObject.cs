@@ -8,8 +8,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SuperFruitAttack
 {
+    /* Author: Elliot Gong
+     * Purpose: Create a class that simulates a universal game object.
+     * Restriction: Must use the inherent collider class.
+     * Date: 3/17/2021*/
     public abstract class GameObject
     {
+        //These are the 2 fields for the gameObject class: the image and the 
+        //collider object.
         protected Texture2D image;
         protected Collider collideObject;
 
@@ -19,13 +25,19 @@ namespace SuperFruitAttack
             this.image = image;
         }
 
-        public static GameObject Create(string imageName, Texture2D texture)
+        public static GameObject Create(string imageName, Texture2D texture, Player p)
         {
             switch (imageName.ToLower())
             {
                 case "potato":
                     //temp
                     return new Potato(texture, 1, 10, new BoxCollider(0, 0, 0, 0));
+                case "carrot":
+
+                    return new Carrot(texture, 1, 10, p, new BoxCollider(0, 0, 0, 0));
+                case "peapod":
+
+                    return new PeaPod(texture, 1, 10, p, new BoxCollider(0, 0, 0, 0));
             }
 
             return null;
@@ -58,7 +70,10 @@ namespace SuperFruitAttack
         {
             get { return collideObject.Size.Y; }
         }
-
+        /// <summary>
+        /// This method draws the game object in its specified location.
+        /// </summary>
+        /// <param name="sb">This is the spritebatch object that'll draw the game object.</param>
         public virtual void Draw(SpriteBatch sb)
         {
             sb.Draw(image, 
@@ -66,7 +81,11 @@ namespace SuperFruitAttack
                     collideObject.Size), 
                 Color.White);
         }
-
+        /// <summary>
+        /// This method checks if a game object is colliding with another game object.
+        /// </summary>
+        /// <param name="objectCollide"></param>
+        /// <returns></returns>
         public virtual bool CheckCollision(Collider objectCollide)
         {
             return collideObject.CheckCollision(objectCollide);

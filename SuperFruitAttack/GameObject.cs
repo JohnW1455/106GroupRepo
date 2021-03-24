@@ -98,9 +98,9 @@ namespace SuperFruitAttack
         /// </summary>
         /// <param name="otherCollider"></param>
         /// <returns></returns>
-        public virtual bool CheckCollision(Collider otherCollider)
+        public virtual bool CheckCollision(GameObject otherObject)
         {
-            return collider.CheckCollision(otherCollider);
+            return collider.CheckCollision(otherObject.Collider);
         }
 
     }

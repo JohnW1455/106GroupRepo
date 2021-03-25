@@ -17,11 +17,11 @@ namespace SuperFruitAttack
         //These are the 2 fields for the gameObject class: the image and the 
         //collider object.
         protected Texture2D image;
-        protected Collider collider;
+        protected Collider colliderObject;
 
-        public GameObject(Texture2D image, Collider collide)
+        public GameObject(Texture2D image, Collider colliderObject)
         {
-            collider = collide;
+            this.colliderObject = colliderObject;
             this.image = image;
         }
 
@@ -57,24 +57,24 @@ namespace SuperFruitAttack
 
         public int X
         {
-            get { return (int)collider.Position.X; }
-            set { collider.Position = new Vector2(value, Y); }
+            get { return (int)colliderObject.Position.X; }
+            set { colliderObject.Position = new Vector2(value, Y); }
         }
 
         public int Y
         {
-            get { return (int)collider.Position.Y; }
-            set { collider.Position = new Vector2(X, value); }
+            get { return (int)colliderObject.Position.Y; }
+            set { colliderObject.Position = new Vector2(X, value); }
         }
 
         public int Width
         {
-            get { return collider.Size.X; }
+            get { return colliderObject.Size.X; }
         }
 
         public int Height
         {
-            get { return collider.Size.Y; }
+            get { return colliderObject.Size.Y; }
         }
         /// <summary>
         /// This method draws the game object in its specified location.
@@ -83,15 +83,15 @@ namespace SuperFruitAttack
         public virtual void Draw(SpriteBatch sb)
         {
             sb.Draw(image, 
-                new Rectangle(collider.Position.ToPoint(),
-                    collider.Size), 
+                new Rectangle(colliderObject.Position.ToPoint(),
+                    colliderObject.Size), 
                 Color.White);
         }
 
-        public Collider Collider
+        public Collider ColliderObject
         {
-            get { return collider; }
-            set { collider = value; }
+            get { return colliderObject; }
+            set { colliderObject = value; }
         }
         /// <summary>
         /// This method checks if a game object is colliding with another game object.
@@ -100,7 +100,7 @@ namespace SuperFruitAttack
         /// <returns></returns>
         public virtual bool CheckCollision(GameObject otherObject)
         {
-            return collider.CheckCollision(otherObject.Collider);
+            return colliderObject.CheckCollision(otherObject.ColliderObject);
         }
 
     }

@@ -66,13 +66,23 @@ namespace SuperFruitAttack
         {
             foreach(Enemy enemy in enemies)
             {
-                enemy.CheckCollision(player.Collider);
+                if(enemy.CheckCollision(player.ColliderObject) == true)
+                {
+                    player.TakeDamage(enemy.Dmg);
+                }
             }
             foreach(Collectible collectible in collectibles)
             {
-                collectible.CheckCollision(player.Collider);
+                collectible.CheckCollision(player.ColliderObject);
             }
+            foreach(Projectile bullet in projectiles)
+            {
+                if(bullet.CheckCollision(player.ColliderObject) == true && bullet.IsPlayerBullet == false)
+                {
+                    player.TakeDamage(bullet.Damage);
+                }
 
+            }
         }
     }
 }

@@ -27,6 +27,7 @@ namespace SuperFruitAttack
         private Button start;
         private Button menu;
         private Button instructions;
+        private Player p1;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -88,7 +89,10 @@ namespace SuperFruitAttack
                     }
                     break;
                 case GameStages.instructions:
-
+                    if(menu.IsClicked(previousMouse) == true)
+                    {
+                        status = GameStages.menu;
+                    }
                     break;
                 case GameStages.gameplay:
                     break;

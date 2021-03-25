@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SuperFruitAttack
 {
-    /* Author: Elliot Gong
+    /* Author: Elliot Gong & Nathan Caron
      * Purpose: Create a class that simulates a universal game object.
-     * Restriction: Must use the inherent collider class.
+     * Restriction: Must use the collider class to handle collisions between objects.
      * Date: 3/17/2021*/
     public abstract class GameObject
     {

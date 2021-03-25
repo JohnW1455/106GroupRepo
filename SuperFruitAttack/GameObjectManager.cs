@@ -57,7 +57,12 @@ namespace SuperFruitAttack
             }
         }
 
-        public void Tick(int gameTime)
+        public void Tick()
+        {
+            
+        }
+
+        public void CheckCollision()
         {
             foreach(Enemy enemy in enemies)
             {
@@ -67,10 +72,6 @@ namespace SuperFruitAttack
             {
                 collectible.CheckCollision(player.Collider);
             }
-        }
-
-        public void CheckCollision(Collider collider)
-        {
 
         }
     }

@@ -15,13 +15,13 @@ namespace SuperFruitAttack
 
         }
 
-        public override bool CheckCollision(Collider objectCollide)
+        public override bool CheckCollision(GameObject gameObject)
         {
             // First checks if the player is intersecting an obstacle
-            if (base.CheckCollision(objectCollide))
+            if (base.CheckCollision(gameObject))
             {
-                Rectangle entityRect = objectCollide.Bounds;
-                Rectangle platRect = objectCollide.Bounds;
+                Rectangle entityRect = gameObject.ColliderObject.Bounds;
+                Rectangle platRect = gameObject.ColliderObject.Bounds;
 
                 Rectangle resultant = Rectangle.Intersect(entityRect, platRect);
 
@@ -56,7 +56,7 @@ namespace SuperFruitAttack
 					}
 				}
 				Vector2 newPos = entityRect.Location.ToVector2();
-				objectCollide.Position = newPos;
+				gameObject.ColliderObject.Position = newPos;
 
 				return true;
 			}

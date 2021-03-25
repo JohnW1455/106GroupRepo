@@ -13,15 +13,17 @@ namespace SuperFruitAttack
         protected bool isPlayerBullet;
         protected Vector2 velocity;
         protected int damage;
+        protected Collider collider;
 
-        public Projectile(Texture2D pic, Colliders.Collider collide, bool pBullet, Vector2 vel, int damage)
-            : base(pic, collide)
+        public Projectile(Texture2D pic, Collider collider, bool pBullet, Vector2 vel, int damage)
+            : base(pic, collider)
         {
+            this.collider = collider;
             this.damage = damage;
             isPlayerBullet = pBullet;
             velocity = vel;
         }
-
+        
         public bool IsPlayerBullet
         {
             get { return isPlayerBullet; }

@@ -39,7 +39,7 @@ namespace SuperFruitAttack
         {
             // TODO: Add your initialization logic here
             status = GameStages.menu;
-            objectManager = new GameObjectManager();
+            
             images = new Dictionary<string, Texture2D>();
             base.Initialize();
         }
@@ -66,6 +66,7 @@ namespace SuperFruitAttack
                               _graphics.PreferredBackBufferHeight / 2 - 3 * menuBtton.Height,
                               menuBtton.Width,
                               menuBtton.Height);
+            objectManager = new GameObjectManager(p1);
             // TODO: use this.Content to load your game content here
             
         }

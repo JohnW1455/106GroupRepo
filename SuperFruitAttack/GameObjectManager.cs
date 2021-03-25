@@ -4,7 +4,7 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using SuperFruitAttack.Colliders;
+
 
 namespace SuperFruitAttack
 {
@@ -66,18 +66,18 @@ namespace SuperFruitAttack
         {
             foreach(Enemy enemy in enemies)
             {
-                if(enemy.CheckCollision(player.ColliderObject) == true)
+                if(enemy.CheckCollision(player) == true)
                 {
                     player.TakeDamage(enemy.Dmg);
                 }
             }
             foreach(Collectible collectible in collectibles)
             {
-                collectible.CheckCollision(player.ColliderObject);
+                collectible.CheckCollision(player);
             }
             foreach(Projectile bullet in projectiles)
             {
-                if(bullet.CheckCollision(player.ColliderObject) == true && bullet.IsPlayerBullet == false)
+                if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
                 {
                     player.TakeDamage(bullet.Damage);
                 }

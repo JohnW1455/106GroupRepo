@@ -10,11 +10,25 @@ namespace SuperFruitAttack
 {
     class Platform : GameObject
     {
+		//fields
+
+
+
+		//Properties
+
+
+
+
+		//Constructoor
+
         public Platform(Texture2D pic, Collider collide) : base(pic, collide)
         {
 
         }
 
+
+
+		//Methods
         public override bool CheckCollision(GameObject gameObject)
         {
             // First checks if the player is intersecting an obstacle
@@ -55,6 +69,8 @@ namespace SuperFruitAttack
 						entityRect.Y += resultant.Height;
 					}
 				}
+
+
 				Vector2 newPos = entityRect.Location.ToVector2();
 				gameObject.ColliderObject.Position = newPos;
 
@@ -62,5 +78,21 @@ namespace SuperFruitAttack
 			}
 			return false;
 		}
-    }
+
+
+
+		public override void Draw(SpriteBatch sb)
+		
+		{
+			//add if statements to give platforms a reason to have sepperate draw methods
+
+			//I was thinking maybe some rectangles we can jump through the bottom off but that might be too hard
+			base.Draw(sb);
+		}
+		
+
+
+
+
+	}
 }

@@ -95,15 +95,9 @@
         <None Include="App.config" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include="Resources\carrot.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Resources\ground.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Resources\potato.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
+        <Content Include="Content\**">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
       <Content Include="Scripts\i18n\angular-locale_sl-si.js" />
       <Content Include="Scripts\i18n\angular-locale_sl.js" />
       <Content Include="Scripts\i18n\angular-locale_smn-fi.js" />

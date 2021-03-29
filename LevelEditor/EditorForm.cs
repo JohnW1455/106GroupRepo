@@ -14,13 +14,12 @@ namespace LevelEditor
     public partial class EditorForm : Form
     {
         // JSON save data structure
-        private struct MapData
+        public struct LevelData
         {
             public int Width;
             public int Height;
-            public int[] Colors;
-            // Each byte is an index in the Colors array
-            public byte[] Data;
+            public string[] Objects;
+            public byte[] Indices;
         }
         
         private int _mapWidth;
@@ -28,14 +27,16 @@ namespace LevelEditor
         private PictureBox[,] _tiles;
         private bool _unsavedChanges;
         private Dictionary<string, Image> _images;
+        private Dictionary<Image, string> _image2Name;
         
         private EditorForm()
         {
             InitializeComponent();
             
             _images = new Dictionary<string, Image>();
+            _image2Name = new Dictionary<Image, string>();
             string[] paths = Directory.EnumerateFiles(
-                "Resources/", 
+                "Content/", 
                 "*.png", 
                 SearchOption.TopDirectoryOnly).ToArray();
             
@@ -43,6 +44,7 @@ namespace LevelEditor
             {
                 imagesList.Items.Add(path);
                 _images[path] = Image.FromFile(path);
+                _image2Name[_images[path]] = path;
             }
         }
 
@@ -91,6 +93,7 @@ namespace LevelEditor
 
                     tile.BorderStyle = BorderStyle.FixedSingle;
                     tile.SizeMode = PictureBoxSizeMode.Zoom;
+                    tile.Image = _images["Content/empty.png"];
                     tile.MouseDown += OnMapTileClick;
                     tile.MouseEnter += OnMapTileClick;
                     tilesPanel.Controls.Add(tile);
@@ -255,21 +258,20 @@ namespace LevelEditor
         /// <param name="data">JSON formatted map data</param>
         private void ReadMapData(string data)
         {
-            MapData mapData = JsonConvert.DeserializeObject<MapData>(data);
+            LevelData mapData = JsonConvert.DeserializeObject<LevelData>(data);
 
             _mapWidth = mapData.Width;
             _mapHeight = mapData.Height;
             AddTiles();
             
-            using (BinaryReader rdr = new BinaryReader(new MemoryStream(mapData.Data)))
+            for (int y = 0; y < _mapHeight; y++)
             {
-                for (int y = 0; y < _mapHeight; y++)
+                for (int x = 0; x < _mapWidth; x++)
                 {
-                    for (int x = 0; x < _mapWidth; x++)
-                    {
-                        Color tileColor = Color.FromArgb(mapData.Colors[rdr.ReadByte()]);
-                        _tiles[x, y].BackColor = tileColor;
-                    }
+                    byte index = mapData.Indices[y * _mapWidth + x];
+                    string imageName = mapData.Objects[index];
+                    Image image = _images[imageName];
+                    _tiles[x, y].Image = image;
                 }
             }
         }
@@ -281,37 +283,34 @@ namespace LevelEditor
         private void WriteMapData(string fileName)
         {
 
-            MapData mapData = new MapData()
+            LevelData mapData = new LevelData()
             {
                 Width = _mapWidth,
                 Height = _mapHeight,
-                Data = new byte[Width * Height]
+                Indices = new byte[Width * Height]
             };
-
-            // Write data to the JSON struct
-            using (BinaryWriter wtr = new BinaryWriter(new MemoryStream(mapData.Data)))
+            
+            Dictionary<string, byte> images = new Dictionary<string, byte>();
+            for (int y = 0; y < _mapHeight; y++)
             {
-                Dictionary<int, byte> colors = new Dictionary<int, byte>();
-                for (int y = 0; y < _mapHeight; y++)
+                for (int x = 0; x < _mapWidth; x++)
                 {
-                    for (int x = 0; x < _mapWidth; x++)
+                    string imageName = _image2Name[_tiles[x, y].Image];
+                    if (!images.ContainsKey(imageName))
                     {
-                        int tileColor = _tiles[x, y].BackColor.ToArgb();
-                        if (!colors.ContainsKey(tileColor))
-                        {
-                            colors[tileColor] = (byte)colors.Count;
-                        }
-
-                        wtr.Write(colors[tileColor]);
+                        images[imageName] = (byte)images.Count;
                     }
+
+                    mapData.Indices[y * _mapWidth + x] = images[imageName];
                 }
-                
-                mapData.Colors = colors.Keys.ToArray();
             }
 
-            // Write the JSON struct to the .level file
+            mapData.Objects = images.Keys.ToArray();
             string mapString = JsonConvert.SerializeObject(mapData);
             File.WriteAllText(fileName, mapString);
+
+            // Write the JSON struct to the .level file
+
         }
 
         private void imagesList_SelectedValueChanged(object sender, EventArgs e)

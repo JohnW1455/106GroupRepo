@@ -24,6 +24,7 @@ namespace SuperFruitAttack
         private Texture2D startButton;
         private Texture2D instructionsButton;
         private Texture2D menuBtton;
+        private Texture2D playerAvatar;
         private Button start;
         private Button menu;
         private Button instructions;
@@ -51,6 +52,7 @@ namespace SuperFruitAttack
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
+            playerAvatar = Content.Load<Texture2D>("Images/Player/simple stickman");
             start = new Button( startButton,
                                 _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2,
                                 _graphics.PreferredBackBufferHeight / 2 - 3 * startButton.Height,
@@ -66,6 +68,7 @@ namespace SuperFruitAttack
                               _graphics.PreferredBackBufferHeight / 2 - 3 * menuBtton.Height,
                               menuBtton.Width,
                               menuBtton.Height);
+            p1 = new Player(75, RESOLUTION, playerAvatar, );
             objectManager = new GameObjectManager(p1);
             // TODO: use this.Content to load your game content here
             

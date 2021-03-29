@@ -101,6 +101,7 @@
     <Content Include="Resources\ground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\potato2.png" />
     <Content Include="Scripts\i18n\angular-locale_sl-si.js" />
     <Content Include="Scripts\i18n\angular-locale_sl.js" />
     <Content Include="Scripts\i18n\angular-locale_smn-fi.js" />

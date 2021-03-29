@@ -26,7 +26,7 @@ namespace SuperFruitAttack
         /// <summary>
         /// Makes the potato walk back and forth
         /// </summary>
-        public override void Tick()
+        public override void Tick(GameTime time)
         {
             this.X -= MoveSpeed;
             if (this.X <= homePosition - 80 || this.X >= homePosition + 80)

@@ -46,10 +46,6 @@ namespace SuperFruitAttack
 
         }
 
-
-
-
-
         public override void Draw(SpriteBatch sb)
         //Method used to draw Collectibles
         {

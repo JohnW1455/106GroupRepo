@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-
+using SuperFruitAttack.Colliders;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
@@ -28,6 +28,7 @@ namespace SuperFruitAttack
         private Button menu;
         private Button instructions;
         private Player p1;
+        
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -67,7 +68,9 @@ namespace SuperFruitAttack
                               _graphics.PreferredBackBufferHeight / 2 - 3 * menuBtton.Height,
                               menuBtton.Width,
                               menuBtton.Height);
-            objectManager = new GameObjectManager(p1);
+
+            p1 = new Player(100, 10, playerAvatar, new BoxCollider(30,30,playerAvatar.Width, playerAvatar.Height));
+            
             // TODO: use this.Content to load your game content here
             
         }

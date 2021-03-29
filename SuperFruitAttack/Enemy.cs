@@ -27,8 +27,6 @@ namespace SuperFruitAttack
             health -= dmg;
         }
 
-        public abstract void Tick();
-
         public override void Draw(SpriteBatch sb)
         {
             if (health <= 0)

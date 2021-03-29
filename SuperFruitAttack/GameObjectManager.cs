@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
@@ -13,13 +16,14 @@ namespace SuperFruitAttack
     /// </summary>
     static class GameObjectManager
     {
+       
         private static Player player;
         //These are the lists that'll hold all the gameObjects that will be in the game.
         private static List<GameObject> items;
         private static List<Enemy> enemies;
         private static List<Collectible> collectibles;
         private static List<Projectile> projectiles;
-
+        
         /// <summary>
         /// This constructor instantiates all the gameObjects in the game, including the player.
         /// </summary>
@@ -27,6 +31,7 @@ namespace SuperFruitAttack
         static GameObjectManager()
         {
             //Here I instantiate all the fields.
+            
             collectibles = new List<Collectible>();
             projectiles = new List<Projectile>();
             enemies = new List<Enemy>();
@@ -55,6 +60,10 @@ namespace SuperFruitAttack
             {
                 collectibles.Add((Collectible)thing);
             }
+            else if(thing is Player)
+            {
+                player = (Player)thing;
+            }
         }
        /// <summary>
        /// This method removes any specific game Object from their respective list.
@@ -78,10 +87,6 @@ namespace SuperFruitAttack
             }
         }
 
-        public static void Tick()
-        {
-            
-        }
         /// <summary>
         /// This method checks all the objects and performs specific actions for when specific objects
         /// collide.

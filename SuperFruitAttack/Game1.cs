@@ -40,7 +40,6 @@ namespace SuperFruitAttack
         {
             // TODO: Add your initialization logic here
             status = GameStages.menu;
-            
             images = new Dictionary<string, Texture2D>();
             base.Initialize();
         }

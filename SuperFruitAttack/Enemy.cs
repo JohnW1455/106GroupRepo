@@ -32,7 +32,6 @@ namespace SuperFruitAttack
             get { return health; }
             set { health = value; }
         }
-        public abstract void Tick();
 
         public override void Draw(SpriteBatch sb)
         {

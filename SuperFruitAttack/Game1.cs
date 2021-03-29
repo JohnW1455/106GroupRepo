@@ -19,8 +19,7 @@ namespace SuperFruitAttack
         private SpriteBatch _spriteBatch;
         private MouseState previousMouse;
         private GameStages status;
-        private GameObjectManager objectManager;
-        private Dictionary<string, Texture2D> images;
+        private static Dictionary<string, Texture2D> images;
         private Texture2D startButton;
         private Texture2D instructionsButton;
         private Texture2D menuBtton;
@@ -66,7 +65,6 @@ namespace SuperFruitAttack
                               _graphics.PreferredBackBufferHeight / 2 - 3 * menuBtton.Height,
                               menuBtton.Width,
                               menuBtton.Height);
-            objectManager = new GameObjectManager(p1);
             // TODO: use this.Content to load your game content here
             
         }
@@ -136,6 +134,11 @@ namespace SuperFruitAttack
         public void NextLevel()
         {
 
+        }
+
+        public static Texture2D GetTexture(string textureName)
+        {
+            return images[textureName];
         }
     }
 }

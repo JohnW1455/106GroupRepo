@@ -18,7 +18,7 @@ namespace SuperFruitAttack
 
         }
 
-        public void Tick(GameTime time)
+        public override void Tick(GameTime time)
         {
             triggerTime += time.ElapsedGameTime.TotalSeconds;
 

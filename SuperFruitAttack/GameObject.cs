@@ -33,8 +33,8 @@ namespace SuperFruitAttack
         /// <summary>
         /// This method will create a specific game object/enemy based on user input.
         /// </summary>
-        /// <param name="x">This is the width of the game object.</param>
-        /// <param name="y">This is the height of the game object.</param>
+        /// <param name="x">This is the x of the game object.</param>
+        /// <param name="y">This is the y of the game object.</param>
         /// <param name="name">This is the object's designated name.</param>
         /// <param name="texture">This will be the object's image.</param>
         /// <returns></returns>

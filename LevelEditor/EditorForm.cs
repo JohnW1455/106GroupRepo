@@ -27,10 +27,23 @@ namespace LevelEditor
         private int _mapHeight;
         private PictureBox[,] _tiles;
         private bool _unsavedChanges;
+        private Dictionary<string, Image> _images;
         
         private EditorForm()
         {
             InitializeComponent();
+            
+            _images = new Dictionary<string, Image>();
+            string[] paths = Directory.EnumerateFiles(
+                "Resources/", 
+                "*.png", 
+                SearchOption.TopDirectoryOnly).ToArray();
+            
+            foreach (string path in paths)
+            {
+                imagesList.Items.Add(path);
+                _images[path] = Image.FromFile(path);
+            }
         }
 
         /// <summary>
@@ -60,9 +73,9 @@ namespace LevelEditor
         /// </summary>
         private void AddTiles()
         {
-            mapGroupBox.Controls.Clear();
+            tilesPanel.Controls.Clear();
             _tiles = new PictureBox[_mapWidth, _mapHeight];
-            int tileSize = mapGroupBox.DisplayRectangle.Height / _mapHeight;
+            int tileSize = tilesPanel.DisplayRectangle.Height / _mapHeight;
             for (int y = 0; y < _mapHeight; y++)
             {
                 for (int x = 0; x < _mapWidth; x++)
@@ -71,20 +84,20 @@ namespace LevelEditor
                     { 
                         BackColor = Color.Transparent,
                         Location = new Point(
-                            mapGroupBox.DisplayRectangle.X + x * tileSize,
-                            mapGroupBox.DisplayRectangle.Y + y * tileSize),
+                            tilesPanel.DisplayRectangle.X + x * tileSize,
+                            tilesPanel.DisplayRectangle.Y + y * tileSize),
                         Size = new Size(tileSize, tileSize)
                     };
-                    
+
+                    tile.BorderStyle = BorderStyle.FixedSingle;
+                    tile.SizeMode = PictureBoxSizeMode.Zoom;
                     tile.MouseDown += OnMapTileClick;
                     tile.MouseEnter += OnMapTileClick;
-                    mapGroupBox.Controls.Add(tile);
+                    tilesPanel.Controls.Add(tile);
                     // Store (x, y) reference to PictureBox
                     _tiles[x, y] = tile;
                 }
             }
-            
-            mapGroupBox.AutoSize = true;
         }
         
         /// <summary>
@@ -97,7 +110,7 @@ namespace LevelEditor
             if (sender is PictureBox tile && MouseButtons == MouseButtons.Left)
             {
                 tile.Capture = false;
-                tile.BackColor = currentTile.BackColor;
+                tile.Image = currentTile.Image;
 
                 if (!_unsavedChanges)
                 {
@@ -299,6 +312,11 @@ namespace LevelEditor
             // Write the JSON struct to the .level file
             string mapString = JsonConvert.SerializeObject(mapData);
             File.WriteAllText(fileName, mapString);
+        }
+
+        private void imagesList_SelectedValueChanged(object sender, EventArgs e)
+        {
+            currentTile.Image = _images[(string) imagesList.SelectedItem];
         }
     }
 }

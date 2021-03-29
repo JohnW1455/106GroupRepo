@@ -18,7 +18,7 @@ namespace SuperFruitAttack
             triggerTime = 0;
         }
 
-        public void Tick(GameTime time)
+        public override void Tick(GameTime time)
         {
             int posCompare = this.X - GameObjectManager.Player.X;
 

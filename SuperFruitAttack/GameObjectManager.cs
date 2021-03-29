@@ -102,7 +102,7 @@ namespace SuperFruitAttack
             {
                 if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
                 {
-                    player.TakeDamage(bullet.Damage);
+                    player.TakeDamage();
                 }
 
             }

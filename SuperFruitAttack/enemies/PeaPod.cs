@@ -10,15 +10,24 @@ namespace SuperFruitAttack
 {
     class PeaPod : Enemy
     {
-        public PeaPod(Texture2D pic, int health, int speed, Collider collide) : 
-            base(pic, health, speed, collide)
+
+        private double triggerTime;
+
+        public PeaPod(Texture2D pic, int health, int speed, Collider collide) : base(pic, health, speed, collide)
         {
 
         }
 
-        public override void Tick()
+        public void Tick(GameTime time)
         {
+            triggerTime += time.ElapsedGameTime.TotalSeconds;
 
+            if (triggerTime >= 2)
+            {
+                GameObjectManager.AddObject(new Projectile(Game1.GetTexture("simple ball"),
+                        new CircleCollider(this.X, this.Y, 20), false, new Vector2(0, 5)));
+                triggerTime = 0;
+            }
         }
     }
 }

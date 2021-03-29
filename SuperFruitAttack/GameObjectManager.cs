@@ -15,7 +15,7 @@ namespace SuperFruitAttack
     {
         private Player player;
         //These are the lists that'll hold all the gameObjects that will be in the game.
-        private List<GameObject> items;
+        private List<GameObject> characters;
         private List<Enemy> enemies;
         private List<Collectible> collectibles;
         private List<Projectile> projectiles;
@@ -27,11 +27,17 @@ namespace SuperFruitAttack
         public GameObjectManager(Player player)
         {
             //Here I instantiate all the fields.
+            characters = new List<GameObject>();
             collectibles = new List<Collectible>();
             projectiles = new List<Projectile>();
             enemies = new List<Enemy>();
-            items = new List<GameObject>();
             this.player = player;
+        }
+
+        public Player P1
+        {
+            get { return player; }
+            set { player = value; }
         }
         /// <summary>
         /// This method adds any type of game Object to their respective list.
@@ -44,6 +50,7 @@ namespace SuperFruitAttack
             //For each type of object, we add it to its respective list.
             if (thing is Enemy)
             {
+                characters.Add(thing);
                 enemies.Add((Enemy)thing);
             }
             else if(thing is Projectile)
@@ -52,6 +59,7 @@ namespace SuperFruitAttack
             }
             else if(thing is Collectible)
             {
+                characters.Add(thing);
                 collectibles.Add((Collectible)thing);
             }
         }
@@ -65,6 +73,7 @@ namespace SuperFruitAttack
             //For each type of object, we remove it from its respective list.
             if (thing is Enemy)
             {
+
                 enemies.Remove((Enemy)thing);
             }
             else if(thing is Projectile)
@@ -75,11 +84,34 @@ namespace SuperFruitAttack
             {
                 collectibles.Remove((Collectible)thing);
             }
+            
         }
-
+        /// <summary>
+        /// This method 
+        /// </summary>
         public void Tick()
         {
-            
+            foreach(Enemy enemy in enemies)
+            {
+                if(enemy.Health == 0)
+                {
+                    RemoveObject(enemy);
+                }
+            }
+            foreach (Collectible item in collectibles)
+            {
+                if (item.IsActive == false)
+                {
+                    RemoveObject(item);
+                }
+            }
+            foreach(Projectile bullet in projectiles)
+            {
+                if(bullet.Collided == true)
+                {
+                    RemoveObject(bullet);
+                }
+            }
         }
         /// <summary>
         /// This method checks all the objects and performs specific actions for when specific objects
@@ -91,20 +123,35 @@ namespace SuperFruitAttack
             {
                 if(enemy.CheckCollision(player) == true)
                 {
-                    player.TakeDamage(enemy.Dmg);
+                    player.TakeDamage(1);
                 }
             }
             foreach(Collectible collectible in collectibles)
             {
-                collectible.CheckCollision(player);
+                if(collectible.CheckCollision(player) == true);
+                {
+                    collectibles.Remove(collectible);
+                }
+                
             }
             foreach(Projectile bullet in projectiles)
             {
                 if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
                 {
                     player.TakeDamage(bullet.Damage);
+                    bullet.Collided = true;
                 }
-
+            }
+            foreach(Projectile bullet in projectiles)
+            {
+                foreach(Enemy enemy in enemies)
+                {
+                    if(bullet.CheckCollision(enemy) == true && bullet.IsPlayerBullet == true)
+                    {
+                        enemy.TakeDamage(bullet.Damage);
+                        bullet.Collided = true;
+                    }
+                }
             }
         }
     }

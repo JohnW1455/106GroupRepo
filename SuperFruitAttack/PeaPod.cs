@@ -10,7 +10,8 @@ namespace SuperFruitAttack
 {
     class PeaPod : Enemy
     {
-        public PeaPod(Texture2D pic, int health, int speed, Collider collide) : base(pic, health, speed, collide)
+        public PeaPod(Texture2D pic, int health, int speed, Collider collide) : 
+            base(pic, health, speed, collide)
         {
 
         }

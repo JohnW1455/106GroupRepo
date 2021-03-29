@@ -10,7 +10,8 @@ namespace SuperFruitAttack
 {
     class Carrot : Enemy
     {
-        public Carrot(Texture2D pic, int health, int speed, Collider collide) : base(pic, health, speed, collide)
+        public Carrot(Texture2D pic, int health, int speed, Collider collide)
+            : base(pic, health, speed, collide)
         {
 
         }

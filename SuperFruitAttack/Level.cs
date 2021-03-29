@@ -11,7 +11,7 @@ namespace SuperFruitAttack
         public int Width;
         public int Height;
         public string[] Objects;
-        public int[] Indices;
+        public byte[] Indices;
     }
 
     public class Level

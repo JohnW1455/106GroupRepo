@@ -17,7 +17,8 @@ namespace SuperFruitAttack
     {
         protected float homePosition;
 
-        public Potato(Texture2D pic, int health, int speed, Colliders.Collider collide) : base(pic, health, speed, collide)
+        public Potato(Texture2D pic, int health, int speed,  Collider collide) :
+            base(pic, health, speed, collide)
         {
             homePosition = collide.Position.X;
         }
@@ -25,7 +26,7 @@ namespace SuperFruitAttack
         /// <summary>
         /// Makes the potato walk back and forth
         /// </summary>
-        public override void Tick()
+        public override void Tick(GameTime time)
         {
             this.X -= MoveSpeed;
             if (this.X <= homePosition - 80 || this.X >= homePosition + 80)

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-
+using SuperFruitAttack.Colliders;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
@@ -20,15 +20,16 @@ namespace SuperFruitAttack
         private SpriteBatch _spriteBatch;
         private MouseState previousMouse;
         private GameStages status;
-        private GameObjectManager objectManager;
-        private Dictionary<string, Texture2D> images;
+        private static Dictionary<string, Texture2D> images;
         private Texture2D startButton;
         private Texture2D instructionsButton;
         private Texture2D menuBtton;
+        private Texture2D playerAvatar;
         private Button start;
         private Button menu;
         private Button instructions;
         private Player p1;
+        
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -52,6 +53,7 @@ namespace SuperFruitAttack
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
+            playerAvatar = Content.Load<Texture2D>("Images/Player/simple stickman");
             start = new Button( startButton,
                                 _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2,
                                 _graphics.PreferredBackBufferHeight / 2 - 3 * startButton.Height,
@@ -67,7 +69,9 @@ namespace SuperFruitAttack
                               _graphics.PreferredBackBufferHeight / 2 - 3 * menuBtton.Height,
                               menuBtton.Width,
                               menuBtton.Height);
-            objectManager = new GameObjectManager(p1);
+
+            p1 = new Player(100, 10, playerAvatar, new BoxCollider(30,30,playerAvatar.Width, playerAvatar.Height));
+            
             // TODO: use this.Content to load your game content here
             
         }
@@ -137,6 +141,11 @@ namespace SuperFruitAttack
         public void NextLevel()
         {
 
+        }
+
+        public static Texture2D GetTexture(string textureName)
+        {
+            return images[textureName];
         }
     }
 }

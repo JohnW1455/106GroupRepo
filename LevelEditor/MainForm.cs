@@ -17,6 +17,7 @@ namespace LevelEditor
     {
         private const int MinSize = 10;
         private const int MaxSize = 30;
+        private const int MaxWidth = byte.MaxValue;
         private int _mapWidth;
         private int _mapHeight;
         
@@ -89,9 +90,9 @@ namespace LevelEditor
                 _errors.Enqueue("'Width' too small. Minimum is " + MinSize);
             }
 
-            if (_mapWidth > MaxSize)
+            if (_mapWidth > MaxWidth)
             {
-                _errors.Enqueue("'Width' too big. Maximum is " + MaxSize);
+                _errors.Enqueue("'Width' too big. Maximum is " + MaxWidth);
             }
             
             if (!int.TryParse(heightTextBox.Text, out _mapHeight))

@@ -27,7 +27,13 @@ namespace SuperFruitAttack
             health -= dmg;
         }
 
-        public abstract void Tick();
+        public int Health
+        {
+            get { return health; }
+            set { health = value; }
+        }
+        
+        public abstract void Tick(GameTime time);
 
         public override void Draw(SpriteBatch sb)
         {

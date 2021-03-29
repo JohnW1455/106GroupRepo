@@ -33,8 +33,8 @@ namespace SuperFruitAttack
         /// <summary>
         /// This method will create a specific game object/enemy based on user input.
         /// </summary>
-        /// <param name="x">This is the width of the game object.</param>
-        /// <param name="y">This is the height of the game object.</param>
+        /// <param name="x">This is the x of the game object.</param>
+        /// <param name="y">This is the y of the game object.</param>
         /// <param name="name">This is the object's designated name.</param>
         /// <param name="texture">This will be the object's image.</param>
         /// <returns></returns>
@@ -42,21 +42,21 @@ namespace SuperFruitAttack
         {
             int width = texture.Width;
             int height = texture.Height;
-            
+            BoxCollider box = new BoxCollider(x, y, width, height);
             switch (name.ToLower())
             {
                 case "potato":
-                    return new Potato(texture, 1, 10, new BoxCollider(x, y, width, height));
+                    return new Potato(texture, 1, 10, box);
                 case "carrot":
-                    return new Carrot(texture, 2, 0, new BoxCollider(x, y, width, height));
+                    return new Carrot(texture, 4, 0, box);
                 case "peapod":
-                    return new PeaPod(texture, 1000, 0, new BoxCollider(x, y, width, height));
+                    return new PeaPod(texture, 1000, 0, box);
                 case "player":
-                    return new Player(4, 10, texture, new BoxCollider(x, y, width, height));
+                    return new Player(4, 10, texture, box);
                 case "collectible":
-                    return new Collectible(texture, new BoxCollider(x, y, width, height));
+                    return new Collectible(texture, box);
                 case "platform":
-                    return new Platform(texture, new BoxCollider(x, y, width, height));
+                    return new Platform(texture, box);
             }
 
             return null;

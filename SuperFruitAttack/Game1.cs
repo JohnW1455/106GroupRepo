@@ -12,6 +12,7 @@ using System.Diagnostics;
 namespace SuperFruitAttack
 {
     public enum GameStages { menu, instructions, gameplay, gameOver, winGame, transition};
+    public enum PlayerState { faceLeft, faceRight, walkLeft, walkRight, jumpLeft, jumpRight, dead};
     public class Game1 : Game
     {
         public const int RESOLUTION = 32;

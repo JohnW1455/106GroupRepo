@@ -91,7 +91,7 @@ namespace SuperFruitAttack
             {
                 if(enemy.CheckCollision(player) == true)
                 {
-                    player.TakeDamage(enemy.Dmg);
+                    player.TakeDamage();
                 }
             }
             foreach(Collectible collectible in collectibles)

@@ -10,15 +10,10 @@ namespace SuperFruitAttack
     {
         public int Width;
         public int Height;
-        public TileData[] Tiles;
+        public string[] Objects;
+        public int[] Indices;
     }
 
-    public struct TileData
-    {
-        public string Ground;
-        public string Object;
-    }
-    
     public class Level
     {
         private static Dictionary<string, Texture2D> _textures;
@@ -41,19 +36,26 @@ namespace SuperFruitAttack
         {
             Level level = new Level(data.Width, data.Height);
 
-            foreach (TileData tile in data.Tiles)
+            for (int gridY = 0; gridY < data.Height; gridY++)
             {
-                if (!string.IsNullOrEmpty(tile.Ground))
+                for (int gridX = 0; gridX < data.Width; gridX++)
                 {
-                    level.Ground.Add(_textures[tile.Ground]);
-                }
+                    string objectString = data.Objects[data.Indices[gridY * data.Width + gridX]];
 
-                if (!string.IsNullOrEmpty(tile.Object))
-                {
-                    GameObject obj = GameObject.Create(tile.Object, _textures[tile.Object]);
+                    if (string.IsNullOrEmpty(objectString))
+                    {
+                        continue;
+                    }
+
+                    Texture2D texture = _textures[objectString];
+                    int x = gridX * Game1.RESOLUTION + (Game1.RESOLUTION - texture.Width) / 2;
+                    int y = gridY * Game1.RESOLUTION + Game1.RESOLUTION - texture.Height;
+
+                    GameObject obj = GameObject.Create(x, y, objectString, texture);
+                    level.Objects.Add(obj);
                 }
             }
-            
+
             return level;
         }
 
@@ -61,8 +63,7 @@ namespace SuperFruitAttack
         public int Height { get; }
         public int PixelWidth { get; }
         public int PixelHeight { get; }
-
-        public readonly List<Texture2D> Ground;
+        
         public readonly List<GameObject> Objects;
 
         private Level(int width, int height)
@@ -71,8 +72,7 @@ namespace SuperFruitAttack
             Height = height;
             PixelWidth = width * Game1.RESOLUTION;
             PixelHeight = height * Game1.RESOLUTION;
-
-            Ground = new List<Texture2D>();
+            
             Objects = new List<GameObject>();
         }
     }

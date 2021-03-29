@@ -11,9 +11,10 @@ namespace SuperFruitAttack
     // Author: Jack Doyle
     // Purpose: To represent the player and store info on the player
     //          in game.
-    class Player : GameObject
+    public class Player : GameObject
     {
         // Fields
+        
         private int health;
         private int moveSpeed;
         // private Projectile bullet; (I don't know how this is relevant)
@@ -22,6 +23,7 @@ namespace SuperFruitAttack
         public int Health
         {
             get { return health; }
+            
         }
 
         public int MoveSpeed
@@ -39,7 +41,7 @@ namespace SuperFruitAttack
 
         public void TakeDamage(int damage)
         {
-
+            health -= damage;
         }
 
         public void Tick(GameTime time)

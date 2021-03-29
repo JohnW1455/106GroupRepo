@@ -12,6 +12,7 @@ namespace SuperFruitAttack.Colliders
     {
         public Vector2 Position { get; set; }
         public Point Size { get; }
+        public Rectangle Bounds => new Rectangle(Position.ToPoint(), Size);
 
         /// <summary>
         /// Creates a new collider

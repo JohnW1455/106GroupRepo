@@ -12,15 +12,21 @@ namespace SuperFruitAttack
     {
         private int health;
         private int moveSpeed;
+        private int dmg;
 
         public int MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
 
-        public Enemy(Texture2D pic, int pHealth, int speed, Collider collide) : base(pic, collide)
+        public Enemy(Texture2D pic, int pHealth, int speed, int dmg, Collider collide) : base(pic, collide)
         {
+            this.dmg = dmg;
             health = pHealth;
             moveSpeed = speed;
         }
-
+        public int Dmg
+        {
+            get { return dmg; }
+            set { dmg = value; }
+        }
         // called when the enemy takes damage
         public void TakeDamage(int dmg)
         {

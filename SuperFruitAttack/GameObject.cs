@@ -46,7 +46,7 @@ namespace SuperFruitAttack
             switch (name.ToLower())
             {
                 case "potato":
-                    return new Potato(texture, 1, 10, new BoxCollider(x, y, width, height));
+                    return new Potato(texture, 1, 10,  new BoxCollider(x, y, width, height));
                 case "carrot":
                     return new Carrot(texture, 2, 0, new BoxCollider(x, y, width, height));
                 case "peapod":

@@ -36,5 +36,15 @@ namespace SuperFruitAttack
             health = playerHealth;
             moveSpeed = playerMS;
         }
+
+        public void TakeDamage(int damage)
+        {
+
+        }
+
+        public void Tick(GameTime time)
+        {
+
+        }
     }
 }

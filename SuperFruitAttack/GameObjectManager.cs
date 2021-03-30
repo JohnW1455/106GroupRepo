@@ -23,7 +23,7 @@ namespace SuperFruitAttack
         private static List<Enemy> enemies;
         private static List<Collectible> collectibles;
         private static List<Projectile> projectiles;
-        
+        private static List<Platform> platforms;
         /// <summary>
         /// This constructor instantiates all the gameObjects in the game, including the player.
         /// </summary>
@@ -31,11 +31,12 @@ namespace SuperFruitAttack
         static GameObjectManager()
         {
             //Here I instantiate all the fields.
-            
+            player = null;
             collectibles = new List<Collectible>();
             projectiles = new List<Projectile>();
             enemies = new List<Enemy>();
             items = new List<GameObject>();
+            platforms = new List<Platform>();
         }
 
         public static Player Player => player;
@@ -64,6 +65,10 @@ namespace SuperFruitAttack
             {
                 player = (Player)thing;
             }
+            else if(thing is Platform)
+            {
+                platforms.Add((Platform)thing);
+            }
         }
        /// <summary>
        /// This method removes any specific game Object from their respective list.
@@ -85,6 +90,10 @@ namespace SuperFruitAttack
             {
                 collectibles.Remove((Collectible)thing);
             }
+            else if(thing is Platform)
+            {
+                platforms.Remove((Platform)thing);
+            }
         }
 
         /// <summary>
@@ -103,14 +112,25 @@ namespace SuperFruitAttack
             foreach(Collectible collectible in collectibles)
             {
                 collectible.CheckCollision(player);
+                RemoveObject(collectible);
             }
             foreach(Projectile bullet in projectiles)
             {
                 if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
                 {
                     player.TakeDamage();
+                    RemoveObject(bullet);
+                } 
+            }
+            foreach(Projectile bullet in projectiles)
+            {
+                foreach(Platform platform in platforms)
+                {
+                    if(bullet.CheckCollision(platform) == true)
+                    {
+                        RemoveObject(bullet);
+                    }
                 }
-
             }
         }
     }

@@ -105,13 +105,18 @@ namespace SuperFruitAttack
                     GameObjectManager.Player.FireGun(gameTime);
                     GameObjectManager.Player.Tick(gameTime);
                     GameObjectManager.CheckCollision();
-                    
+                    if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
+                    {
+                        status = GameStages.gameOver;
+                    }
                     break;
                 case GameStages.transition:
                     break;
                 case GameStages.winGame:
+
                     break;
                 case GameStages.gameOver:
+
                     break;
             }
             previousMouse = Mouse.GetState();
@@ -144,6 +149,10 @@ namespace SuperFruitAttack
                 case GameStages.winGame:
                     break;
                 case GameStages.gameOver:
+                    _spriteBatch.DrawString(gameTitle, "You Died",
+                                new Vector2(_graphics.PreferredBackBufferWidth/2 - 50,
+                                _graphics.PreferredBackBufferHeight/2 - 200),
+                                Color.White);
                     break;
             }
             base.Draw(gameTime);

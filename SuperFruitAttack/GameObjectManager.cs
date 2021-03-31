@@ -115,8 +115,11 @@ namespace SuperFruitAttack
             }
             foreach(Collectible collectible in collectibles)
             {
-                collectible.CheckCollision(player);
-                RemoveObject(collectible);
+                if(collectible.CheckCollision(player) == true)
+                {
+
+                    RemoveObject(collectible);
+                }
             }
             foreach(Projectile bullet in projectiles)
             {
@@ -124,9 +127,12 @@ namespace SuperFruitAttack
                 {
                     if(bullet.CheckCollision(enemy) == true && bullet.IsPlayerBullet == true)
                     {
-                        enemy.TakeDamage(10);
-                    }
-                    
+                        enemy.TakeDamage(6);
+                        if(enemy.Health <= 0)
+                        {
+                            enemies.Remove(enemy);
+                        }
+                    }   
                 }
                 if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
                 {
@@ -156,7 +162,7 @@ namespace SuperFruitAttack
             player.Draw(sb);
             foreach(Platform platform in platforms)
             {
-                sb.Draw(platform.Image, platform.ColliderObject.Bounds, Color.White);
+                platform.Draw(sb);
             }
             foreach(Enemy enemy in enemies)
             {
@@ -164,11 +170,11 @@ namespace SuperFruitAttack
             }
             foreach(Projectile bullet in projectiles)
             {
-                sb.Draw(bullet.Image, bullet.ColliderObject.Bounds, Color.White);
+                bullet.Draw(sb);
             }
             foreach(Collectible item in collectibles)
             {
-                sb.Draw(item.Image, item.ColliderObject.Bounds, Color.White);
+                item.Draw(sb);
             }
         }
     }

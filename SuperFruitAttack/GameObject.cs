@@ -62,7 +62,6 @@ namespace SuperFruitAttack
                     throw new ArgumentException($"{name} is not a valid GameObject type");
             }
 
-            return null;
         }
         /// <summary>
         /// This is the property for an object's image.

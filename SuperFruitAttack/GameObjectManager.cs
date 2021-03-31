@@ -107,16 +107,20 @@ namespace SuperFruitAttack
         /// </summary>
         public static void CheckCollision()
         {
-            
+            //I loop through the enemy objects and check if they collide with the player.
             foreach(Enemy enemy in enemies)
             {
+                //If the player collides with an enemy, the player takes damage.
                 if(enemy.CheckCollision(player) == true)
                 {
                     player.TakeDamage();
                 }
             }
+            //I loop through the collectible objects to check if they collide with the player.
             foreach(Collectible collectible in collectibles)
             {
+                //If the player collides with a collectible, they get some bonus, and the collectible
+                //is deleted and removed from GameObjectManager.
                 if(collectible.CheckCollision(player) == true)
                 {
 

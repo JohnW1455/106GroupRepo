@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
@@ -13,13 +16,14 @@ namespace SuperFruitAttack
     /// </summary>
     static class GameObjectManager
     {
+       
         private static Player player;
         //These are the lists that'll hold all the gameObjects that will be in the game.
         private static List<GameObject> items;
         private static List<Enemy> enemies;
         private static List<Collectible> collectibles;
         private static List<Projectile> projectiles;
-
+        private static List<Platform> platforms;
         /// <summary>
         /// This constructor instantiates all the gameObjects in the game, including the player.
         /// </summary>
@@ -27,12 +31,14 @@ namespace SuperFruitAttack
         static GameObjectManager()
         {
             //Here I instantiate all the fields.
+            player = null;
             collectibles = new List<Collectible>();
             projectiles = new List<Projectile>();
             enemies = new List<Enemy>();
             items = new List<GameObject>();
+            platforms = new List<Platform>();
         }
-
+        
         public static Player Player => player;
         /// <summary>
         /// This method adds any type of game Object to their respective list.
@@ -55,6 +61,14 @@ namespace SuperFruitAttack
             {
                 collectibles.Add((Collectible)thing);
             }
+            else if(thing is Player)
+            {
+                player = (Player)thing;
+            }
+            else if(thing is Platform)
+            {
+                platforms.Add((Platform)thing);
+            }
         }
        /// <summary>
        /// This method removes any specific game Object from their respective list.
@@ -76,12 +90,16 @@ namespace SuperFruitAttack
             {
                 collectibles.Remove((Collectible)thing);
             }
+            else if(thing is Platform)
+            {
+                platforms.Remove((Platform)thing);
+            }
+            else if(thing is Player)
+            {
+                player = null;
+            }
         }
 
-        public static void Tick()
-        {
-            
-        }
         /// <summary>
         /// This method checks all the objects and performs specific actions for when specific objects
         /// collide.
@@ -97,15 +115,66 @@ namespace SuperFruitAttack
             }
             foreach(Collectible collectible in collectibles)
             {
-                collectible.CheckCollision(player);
+                if(collectible.CheckCollision(player) == true)
+                {
+
+                    RemoveObject(collectible);
+                }
             }
             foreach(Projectile bullet in projectiles)
             {
+                foreach(Enemy enemy in enemies)
+                {
+                    if(bullet.CheckCollision(enemy) == true && bullet.IsPlayerBullet == true)
+                    {
+                        enemy.TakeDamage(6);
+                        if(enemy.Health <= 0)
+                        {
+                            enemies.Remove(enemy);
+                        }
+                    }   
+                }
                 if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
                 {
                     player.TakeDamage();
+                    RemoveObject(bullet);
+                    if(player.Health == 0)
+                    {
+                        RemoveObject(player);
+                    }
+                } 
+            }
+            foreach(Projectile bullet in projectiles)
+            {
+                foreach(Platform platform in platforms)
+                {
+                    if(bullet.CheckCollision(platform) == true)
+                    {
+                        RemoveObject(bullet);
+                    }
                 }
+            }
+            
+        }
 
+        public static void Draw(SpriteBatch sb)
+        {
+            player.Draw(sb);
+            foreach(Platform platform in platforms)
+            {
+                platform.Draw(sb);
+            }
+            foreach(Enemy enemy in enemies)
+            {
+                enemy.Draw(sb);
+            }
+            foreach(Projectile bullet in projectiles)
+            {
+                bullet.Draw(sb);
+            }
+            foreach(Collectible item in collectibles)
+            {
+                item.Draw(sb);
             }
         }
     }

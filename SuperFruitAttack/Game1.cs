@@ -12,6 +12,7 @@ using System.Diagnostics;
 namespace SuperFruitAttack
 {
     public enum GameStages { menu, instructions, gameplay, gameOver, winGame, transition};
+    public enum PlayerState { faceLeft, faceRight, walkLeft, walkRight, jumpLeft, jumpRight, dead};
     public class Game1 : Game
     {
         public const int RESOLUTION = 32;
@@ -23,6 +24,7 @@ namespace SuperFruitAttack
         private Texture2D instructionsButton;
         private Texture2D menuBtton;
         private Texture2D playerAvatar;
+        private SpriteFont gameTitle;
         private Button start;
         private Button menu;
         private Button instructions;
@@ -39,7 +41,6 @@ namespace SuperFruitAttack
         {
             // TODO: Add your initialization logic here
             status = GameStages.menu;
-
             base.Initialize();
         }
 
@@ -48,6 +49,7 @@ namespace SuperFruitAttack
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Resources.Init(Content);
             LevelManager.LoadLevels();
+            gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
@@ -69,7 +71,7 @@ namespace SuperFruitAttack
                               menuBtton.Height);
 
             p1 = new Player(100, 10, playerAvatar, new BoxCollider(30,30,playerAvatar.Width, playerAvatar.Height));
-            
+            GameObjectManager.AddObject(p1);
             // TODO: use this.Content to load your game content here
             
         }
@@ -99,12 +101,21 @@ namespace SuperFruitAttack
                     }
                     break;
                 case GameStages.gameplay:
+                    GameObjectManager.Player.FireGun(gameTime);
+                    GameObjectManager.Player.Tick(gameTime);
+                    GameObjectManager.CheckCollision();
+                    if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
+                    {
+                        status = GameStages.gameOver;
+                    }
                     break;
                 case GameStages.transition:
                     break;
                 case GameStages.winGame:
+
                     break;
                 case GameStages.gameOver:
+
                     break;
             }
             previousMouse = Mouse.GetState();
@@ -121,18 +132,28 @@ namespace SuperFruitAttack
             switch(status)
             {
                 case GameStages.menu:
+                    _spriteBatch.DrawString(gameTitle, "Super Fruit Attack",
+                        new Vector2(_graphics.PreferredBackBufferWidth / 2 - 50,
+                                    _graphics.PreferredBackBufferHeight / 2 - 200),
+                                    Color.White);
                     start.Draw(_spriteBatch);
                     instructions.Draw(_spriteBatch);
                     break;
                 case GameStages.instructions:
                     break;
                 case GameStages.gameplay:
+                    GameObjectManager.Draw(_spriteBatch);
+                    GameObjectManager.Player.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:
                     break;
                 case GameStages.winGame:
                     break;
                 case GameStages.gameOver:
+                    _spriteBatch.DrawString(gameTitle, "You Died",
+                                new Vector2(_graphics.PreferredBackBufferWidth/2 - 50,
+                                _graphics.PreferredBackBufferHeight/2 - 200),
+                                Color.White);
                     break;
             }
             _spriteBatch.End();

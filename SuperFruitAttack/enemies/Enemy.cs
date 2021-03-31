@@ -35,5 +35,13 @@ namespace SuperFruitAttack
         
         public abstract void Tick(GameTime time);
 
+        public override void Draw(SpriteBatch sb)
+        {
+            if (health > 0)
+            {
+                base.Draw(sb);
+            }
+        }
+
     }
 }

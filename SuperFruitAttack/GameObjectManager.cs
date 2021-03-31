@@ -126,10 +126,7 @@ namespace SuperFruitAttack
                     {
                         enemy.TakeDamage(10);
                     }
-                    if(enemy.Health == 0)
-                    {
-                        RemoveObject(enemy);
-                    }
+                    
                 }
                 if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
                 {
@@ -163,7 +160,7 @@ namespace SuperFruitAttack
             }
             foreach(Enemy enemy in enemies)
             {
-                sb.Draw(enemy.Image, enemy.ColliderObject.Bounds, Color.White);
+                enemy.Draw(sb);
             }
             foreach(Projectile bullet in projectiles)
             {

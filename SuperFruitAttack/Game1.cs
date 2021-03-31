@@ -137,6 +137,7 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.gameplay:
                     GameObjectManager.Draw(_spriteBatch);
+                    GameObjectManager.Player.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:
                     break;

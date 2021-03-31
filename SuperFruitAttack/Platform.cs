@@ -82,7 +82,6 @@ namespace SuperFruitAttack
 
 
 		public override void Draw(SpriteBatch sb)
-		
 		{
 			//add if statements to give platforms a reason to have sepperate draw methods
 

@@ -296,7 +296,7 @@ namespace SuperFruitAttack
                     // Fires the bullet from the left
                     GameObjectManager.AddObject(
                         new Projectile(
-                            Game1.GetTexture("simple ball"),
+                            Resources.GetTexture("simple ball"),
                             new CircleCollider(this.X, this.Y + (this.Height / 2), 20),
                             true,
                             new Vector2(-5f, 0)));
@@ -307,7 +307,7 @@ namespace SuperFruitAttack
                     // Fires the bullet from the right
                     GameObjectManager.AddObject(
                         new Projectile(
-                            Game1.GetTexture("simple ball"),
+                            Resources.GetTexture("simple ball"),
                             new CircleCollider(this.X + this.Width, 
                                                this.Y + (this.Height / 2), 20),
                             true,

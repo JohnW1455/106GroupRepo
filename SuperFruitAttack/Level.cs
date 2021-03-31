@@ -16,49 +16,32 @@ namespace SuperFruitAttack
 
     public class Level
     {
-        private static Dictionary<string, Texture2D> _textures;
-
-        public static void LoadTextures(ContentManager contentManager)
+        public static Level Parse(LevelData mapData)
         {
-            string[] paths = Directory.EnumerateFiles(
-                "Content/", 
-                "*.png", 
-                SearchOption.TopDirectoryOnly).ToArray();
+            var level = new Level(mapData.Width, mapData.Height);
 
-            _textures = new Dictionary<string, Texture2D>();
-            for (int i = 0; i < paths.Length; i++)
+            for (var gridY = 0; gridY < mapData.Height; gridY++)
             {
-                _textures[paths[i]] = contentManager.Load<Texture2D>(paths[i]);
-            }
-        }
-        
-        public static Level Parse(LevelData data)
-        {
-            Level level = new Level(data.Width, data.Height);
-
-            for (int gridY = 0; gridY < data.Height; gridY++)
-            {
-                for (int gridX = 0; gridX < data.Width; gridX++)
+                for (var gridX = 0; gridX < mapData.Width; gridX++)
                 {
-                    string objectString = data.Objects[data.Indices[gridY * data.Width + gridX]];
-
-                    if (string.IsNullOrEmpty(objectString))
-                    {
+                    var index = mapData.Indices[gridY * mapData.Width + gridX];
+                    var imageName = mapData.Objects[index];
+                    
+                    if (imageName == "empty")
                         continue;
-                    }
+                    
+                    var texture = Resources.GetTexture(imageName);
+                    var x = gridX * Game1.RESOLUTION + (Game1.RESOLUTION - texture.Width) / 2;
+                    var y = gridY * Game1.RESOLUTION + Game1.RESOLUTION - texture.Height;
 
-                    Texture2D texture = _textures[objectString];
-                    int x = gridX * Game1.RESOLUTION + (Game1.RESOLUTION - texture.Width) / 2;
-                    int y = gridY * Game1.RESOLUTION + Game1.RESOLUTION - texture.Height;
-
-                    GameObject obj = GameObject.Create(x, y, objectString, texture);
-                    level.Objects.Add(obj);
+                    var gameObject = GameObject.Create(texture.Name, x, y, texture);
+                    level.Objects.Add(gameObject);
                 }
             }
 
             return level;
         }
-
+        
         public int Width { get; }
         public int Height { get; }
         public int PixelWidth { get; }

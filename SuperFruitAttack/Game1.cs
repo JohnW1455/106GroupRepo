@@ -19,7 +19,6 @@ namespace SuperFruitAttack
         private SpriteBatch _spriteBatch;
         private MouseState previousMouse;
         private GameStages status;
-        private static Dictionary<string, Texture2D> images;
         private Texture2D startButton;
         private Texture2D instructionsButton;
         private Texture2D menuBtton;
@@ -32,7 +31,7 @@ namespace SuperFruitAttack
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = Resources.ROOT_DIRECTORY;
             IsMouseVisible = true;
         }
 
@@ -40,15 +39,15 @@ namespace SuperFruitAttack
         {
             // TODO: Add your initialization logic here
             status = GameStages.menu;
-            
-            images = new Dictionary<string, Texture2D>();
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Level.LoadTextures(Content);
+            Resources.Init(Content);
+            LevelManager.LoadLevels();
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
@@ -116,6 +115,8 @@ namespace SuperFruitAttack
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            _spriteBatch.Begin();
+            LevelManager.DrawLevel(_spriteBatch);
             // TODO: Add your drawing code here
             switch(status)
             {
@@ -134,17 +135,13 @@ namespace SuperFruitAttack
                 case GameStages.gameOver:
                     break;
             }
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
 
         public void NextLevel()
         {
 
-        }
-
-        public static Texture2D GetTexture(string textureName)
-        {
-            return images[textureName];
         }
     }
 }

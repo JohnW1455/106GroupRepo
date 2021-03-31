@@ -88,7 +88,7 @@ namespace SuperFruitAttack
                 case GameStages.menu:
                     if(start.IsClicked(previousMouse) == true)
                     {
-                        status = GameStages.gameplay;
+                        status = GameStages.transition;
                     }
                     else if(instructions.IsClicked(previousMouse) == true)
                     {

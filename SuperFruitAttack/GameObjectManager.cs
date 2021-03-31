@@ -123,7 +123,6 @@ namespace SuperFruitAttack
                 //is deleted and removed from GameObjectManager.
                 if(collectible.CheckCollision(player) == true)
                 {
-
                     RemoveObject(collectible);
                 }
             }

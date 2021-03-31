@@ -56,6 +56,7 @@ namespace SuperFruitAttack
                 case "collectible":
                     return new Collectible(texture, box);
                 case "platform":
+                    return new Platform(texture, box);
                 case "ground":
                     return new Platform(texture, box);
                 default:

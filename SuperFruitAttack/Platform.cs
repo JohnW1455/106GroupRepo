@@ -81,18 +81,7 @@ namespace SuperFruitAttack
 
 
 
-		public override void Draw(SpriteBatch sb)
-		
-		{
-			//add if statements to give platforms a reason to have sepperate draw methods
-
-			//I was thinking maybe some rectangles we can jump through the bottom off but that might be too hard
-			base.Draw(sb);
-		}
-		
 
 
-
-
-	}
+    }
 }

@@ -44,7 +44,9 @@ namespace LevelEditor
             {
                 imagesList.Items.Add(path);
                 _images[path] = Image.FromFile(path);
-                _image2Name[_images[path]] = path;
+
+                string name = path.Split('/').Last().Replace(".png", "");
+                _image2Name[_images[path]] = name;
             }
         }
 
@@ -269,7 +271,7 @@ namespace LevelEditor
                 for (int x = 0; x < _mapWidth; x++)
                 {
                     byte index = mapData.Indices[y * _mapWidth + x];
-                    string imageName = mapData.Objects[index];
+                    string imageName = $"Content/{mapData.Objects[index]}.png";
                     Image image = _images[imageName];
                     _tiles[x, y].Image = image;
                 }

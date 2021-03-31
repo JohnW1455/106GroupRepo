@@ -38,7 +38,7 @@ namespace SuperFruitAttack
             items = new List<GameObject>();
             platforms = new List<Platform>();
         }
-
+        
         public static Player Player => player;
         /// <summary>
         /// This method adds any type of game Object to their respective list.
@@ -94,6 +94,10 @@ namespace SuperFruitAttack
             {
                 platforms.Remove((Platform)thing);
             }
+            else if(thing is Player)
+            {
+                player = null;
+            }
         }
 
         /// <summary>
@@ -111,15 +115,33 @@ namespace SuperFruitAttack
             }
             foreach(Collectible collectible in collectibles)
             {
-                collectible.CheckCollision(player);
-                RemoveObject(collectible);
+                if(collectible.CheckCollision(player) == true)
+                {
+
+                    RemoveObject(collectible);
+                }
             }
             foreach(Projectile bullet in projectiles)
             {
+                foreach(Enemy enemy in enemies)
+                {
+                    if(bullet.CheckCollision(enemy) == true && bullet.IsPlayerBullet == true)
+                    {
+                        enemy.TakeDamage(6);
+                        if(enemy.Health <= 0)
+                        {
+                            enemies.Remove(enemy);
+                        }
+                    }   
+                }
                 if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
                 {
                     player.TakeDamage();
                     RemoveObject(bullet);
+                    if(player.Health == 0)
+                    {
+                        RemoveObject(player);
+                    }
                 } 
             }
             foreach(Projectile bullet in projectiles)
@@ -132,26 +154,27 @@ namespace SuperFruitAttack
                     }
                 }
             }
+            
         }
 
         public static void Draw(SpriteBatch sb)
         {
-            sb.Draw(player.Image, player.ColliderObject.Bounds, Color.White);
+            player.Draw(sb);
             foreach(Platform platform in platforms)
             {
-                sb.Draw(platform.Image, platform.ColliderObject.Bounds, Color.White);
+                platform.Draw(sb);
             }
             foreach(Enemy enemy in enemies)
             {
-                sb.Draw(enemy.Image, enemy.ColliderObject.Bounds, Color.White);
+                enemy.Draw(sb);
             }
             foreach(Projectile bullet in projectiles)
             {
-                sb.Draw(bullet.Image, bullet.ColliderObject.Bounds, Color.White);
+                bullet.Draw(sb);
             }
             foreach(Collectible item in collectibles)
             {
-                sb.Draw(item.Image, item.ColliderObject.Bounds, Color.White);
+                item.Draw(sb);
             }
         }
     }

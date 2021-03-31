@@ -281,7 +281,7 @@ namespace SuperFruitAttack
         /// </summary>
         /// <param name="time">GameTime parameter used to check how long
         /// since the last bullet was fired</param>
-        public void FireGun(GameTime time)
+        private void FireGun(GameTime time)
         {
             MouseState mouse = Mouse.GetState();
             // increments the reload countdown
@@ -322,8 +322,10 @@ namespace SuperFruitAttack
         /// <param name="sb">SpriteBatch used for drawing the object</param>
         public override void Draw(SpriteBatch sb)
         {
+            sb.Draw(this.Image, this.ColliderObject.Bounds, Color.White);
             // For the purpose of this milestone, only direction is needed, so state machine
             // isn't made yet
+            /**
             if(pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
                 pState == PlayerState.walkLeft)
             {
@@ -354,6 +356,7 @@ namespace SuperFruitAttack
                 SpriteEffects.None,
                 0.0f);
             }
+            */
         }
     }
 }

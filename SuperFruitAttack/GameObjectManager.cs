@@ -136,9 +136,22 @@ namespace SuperFruitAttack
 
         public static void Draw(SpriteBatch sb)
         {
+            sb.Draw(player.Image, player.ColliderObject.Bounds, Color.White);
             foreach(Platform platform in platforms)
             {
-               
+                sb.Draw(platform.Image, platform.ColliderObject.Bounds, Color.White);
+            }
+            foreach(Enemy enemy in enemies)
+            {
+                sb.Draw(enemy.Image, enemy.ColliderObject.Bounds, Color.White);
+            }
+            foreach(Projectile bullet in projectiles)
+            {
+                sb.Draw(bullet.Image, bullet.ColliderObject.Bounds, Color.White);
+            }
+            foreach(Collectible item in collectibles)
+            {
+                sb.Draw(item.Image, item.ColliderObject.Bounds, Color.White);
             }
         }
     }

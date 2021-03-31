@@ -88,7 +88,7 @@ namespace SuperFruitAttack
                 case GameStages.menu:
                     if(start.IsClicked(previousMouse) == true)
                     {
-                        status = GameStages.gameplay;
+                        status = GameStages.transition;
                     }
                     else if(instructions.IsClicked(previousMouse) == true)
                     {
@@ -102,7 +102,6 @@ namespace SuperFruitAttack
                     }
                     break;
                 case GameStages.gameplay:
-                    GameObjectManager.Player.FireGun(gameTime);
                     GameObjectManager.Player.Tick(gameTime);
                     GameObjectManager.CheckCollision();
                     if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)

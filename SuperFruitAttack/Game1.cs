@@ -70,7 +70,7 @@ namespace SuperFruitAttack
                               menuBtton.Width,
                               menuBtton.Height);
 
-            p1 = new Player(100, 10, playerAvatar, new BoxCollider(30,30,playerAvatar.Width, playerAvatar.Height));
+            p1 = new Player(100, 10, playerAvatar, new BoxCollider(30,30,100,20));
             GameObjectManager.AddObject(p1);
             
             // TODO: use this.Content to load your game content here

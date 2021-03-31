@@ -40,7 +40,7 @@ namespace SuperFruitAttack
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            status = GameStages.menu;
+            status = GameStages.gameplay;
             base.Initialize();
         }
 

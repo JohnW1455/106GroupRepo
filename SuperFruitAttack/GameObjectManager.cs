@@ -12,6 +12,7 @@ using System.Diagnostics;
 namespace SuperFruitAttack
 {
     /// <summary>
+    /// Author: Elliot Gong
     /// This class manages all the gameObjects in the game.
     /// </summary>
     static class GameObjectManager
@@ -106,15 +107,20 @@ namespace SuperFruitAttack
         /// </summary>
         public static void CheckCollision()
         {
+            //I loop through the enemy objects and check if they collide with the player.
             foreach(Enemy enemy in enemies)
             {
+                //If the player collides with an enemy, the player takes damage.
                 if(enemy.CheckCollision(player) == true)
                 {
                     player.TakeDamage();
                 }
             }
+            //I loop through the collectible objects to check if they collide with the player.
             foreach(Collectible collectible in collectibles)
             {
+                //If the player collides with a collectible, they get some bonus, and the collectible
+                //is deleted and removed from GameObjectManager.
                 if(collectible.CheckCollision(player) == true)
                 {
 
@@ -130,7 +136,7 @@ namespace SuperFruitAttack
                         enemy.TakeDamage(6);
                         if(enemy.Health <= 0)
                         {
-                            enemies.Remove(enemy);
+                            RemoveObject(enemy);
                         }
                     }   
                 }

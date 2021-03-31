@@ -154,7 +154,56 @@ namespace SuperFruitAttack
                     }
                 }
             }
-            
+
+            foreach(Platform platform in platforms)
+            {
+                // Checks for player collisions with platforms
+                if (platform.ColliderObject.Bounds.Intersects(player.ColliderObject.Bounds))
+                {
+                    // Gets the intersection of player and the platform
+                    Rectangle overlap = Rectangle.Intersect(
+                        player.ColliderObject.Bounds,
+                        platform.ColliderObject.Bounds);
+
+                    // If width of overlap is less than height, perform X adjustment
+                    if (overlap.Width <= overlap.Height)
+                    {
+                        // If player X is less than platform X, move left
+                        if (player.X < platform.X)
+                        {
+                            player.X -= overlap.Width;
+                        }
+                        // If player X is greater than platform X, move right
+                        if (player.X > platform.X)
+                        {
+                            player.X += overlap.Width;
+                        }
+                    }
+                    // If height of overlap is less than width, perform Y adjustment
+                    if (overlap.Height < overlap.Width)
+                    {
+                        // If the player Y is less than the platform Y, move up
+                        if (player.Y < platform.Y)
+                        {
+                            player.Y -= overlap.Height;
+                            // Grounds the player
+                            player.IsGrounded = true;
+                        }
+                        // If this collision doesn't occur, the player is not grounded
+                        else
+                        {
+                            player.IsGrounded = false;
+                        }
+                        // If the player Y is greater than the platform Y, move down
+                        if (player.Y > platform.Y)
+                        {
+                            player.Y += platform.Y;
+                        }
+                        // Resets the player's Y velocity
+                        player.PlayerVelocity = new Vector2(0, 0);
+                    }
+                }
+            }
         }
 
         public static void Draw(SpriteBatch sb)

@@ -22,6 +22,7 @@ namespace SuperFruitAttack
         private Vector2 gravity;
         private PlayerState pState;
         private bool isGrounded;
+        private double reload;
 
         // Properties
         public int Health
@@ -41,16 +42,23 @@ namespace SuperFruitAttack
             get { return isGrounded; }
             set { isGrounded = value; }
         }
+        public Vector2 PlayerVelocity
+        {
+            get { return playerVelocity; }
+            set { playerVelocity = value; }
+        }
 
         // Constructor
-        public Player(int playerHealth, float playerMS, Texture2D image,
+        public Player(int playerHealth, int playerMS, Texture2D image,
             Collider collide) : base(image, collide)
         {
             health = playerHealth;
             moveSpeed = new Vector2(playerMS, 0);
             gravity = new Vector2(0, 0.5f);
+            playerVelocity = new Vector2(0, 0);
             pState = PlayerState.faceRight;
             jumpVelocity = new Vector2(0, -15.0f);
+            reload = 0;
         }
 
         public void TakeDamage()
@@ -232,6 +240,119 @@ namespace SuperFruitAttack
                         pState = PlayerState.faceLeft;
                     }
                     break;
+            }
+
+            // Checks input for movement
+            if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D))
+            {
+                // Moves the player left
+                this.X -= (int)moveSpeed.X;
+            }
+            else if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A))
+            {
+                // Moves the player right
+                this.X += (int)moveSpeed.X;
+            }
+
+            // Fires bullets
+            FireGun(time);
+
+            // Applies gravity
+            ApplyGravity();
+
+            // Collisions are handled in the object manager
+        }
+
+        /// <summary>
+		/// Applies gravity to the player
+		/// </summary>
+		private void ApplyGravity()
+        {
+            // Adds the acceleration to the player velocity
+            Vector2 accel = new Vector2(0f, 0.3f);
+            playerVelocity += accel;
+            // Adds the velocity to the player position
+            this.colliderObject.Position = this.colliderObject.Position + playerVelocity;
+        }
+
+        /// <summary>
+        /// Fires the players gun in the direction they
+        /// are facing. Requires the reload time to have elapsed
+        /// </summary>
+        /// <param name="time">GameTime parameter used to check how long
+        /// since the last bullet was fired</param>
+        private void FireGun(GameTime time)
+        {
+            MouseState mouse = Mouse.GetState();
+            // increments the reload countdown
+            reload += time.ElapsedGameTime.TotalSeconds;
+            // Checks to see if the user wanted to fire the gun and if the reload was over
+            if (reload > 0.2 && mouse.LeftButton == ButtonState.Pressed)
+            {
+                // Checks the state of the character
+                if (pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
+                pState == PlayerState.walkLeft)
+                {
+                    // Fires the bullet from the left
+                    GameObjectManager.AddObject(
+                        new Projectile(
+                            Game1.GetTexture("simple ball"),
+                            new CircleCollider(this.X, this.Y + (this.Height / 2), 20),
+                            true,
+                            new Vector2(-5f, 0)));
+                }
+                if (pState == PlayerState.faceRight || pState == PlayerState.jumpRight ||
+                pState == PlayerState.walkRight)
+                {
+                    // Fires the bullet from the right
+                    GameObjectManager.AddObject(
+                        new Projectile(
+                            Game1.GetTexture("simple ball"),
+                            new CircleCollider(this.X + this.Width, 
+                                               this.Y + (this.Height / 2), 20),
+                            true,
+                            new Vector2(-5f, 0)));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draws the player object facing in the right direction
+        /// </summary>
+        /// <param name="sb">SpriteBatch used for drawing the object</param>
+        public override void Draw(SpriteBatch sb)
+        {
+            // For the purpose of this milestone, only direction is needed, so state machine
+            // isn't made yet
+            if(pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
+                pState == PlayerState.walkLeft)
+            {
+                // Draws the sprite facing left
+                sb.Draw(
+                this.Image,
+                this.colliderObject.Position,
+                this.colliderObject.Bounds,
+                Color.White,
+                0.0f,
+                Vector2.Zero,
+                1.0f,
+                SpriteEffects.FlipHorizontally,
+                0.0f);
+            }
+            if (pState == PlayerState.faceRight || pState == PlayerState.jumpRight ||
+                pState == PlayerState.walkRight)
+            {
+                // Draws the sprite facing right
+                sb.Draw(
+                this.Image,
+                this.colliderObject.Position,
+                this.colliderObject.Bounds,
+                Color.White,
+                0.0f,
+                Vector2.Zero,
+                1.0f,
+                SpriteEffects.None,
+                0.0f);
             }
         }
     }

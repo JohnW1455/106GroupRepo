@@ -133,5 +133,13 @@ namespace SuperFruitAttack
                 }
             }
         }
+
+        public static void Draw(SpriteBatch sb)
+        {
+            foreach(Platform platform in platforms)
+            {
+               
+            }
+        }
     }
 }

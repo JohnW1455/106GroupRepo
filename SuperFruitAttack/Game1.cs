@@ -25,6 +25,7 @@ namespace SuperFruitAttack
         private Texture2D instructionsButton;
         private Texture2D menuBtton;
         private Texture2D playerAvatar;
+        private SpriteFont gameTitle;
         private Button start;
         private Button menu;
         private Button instructions;
@@ -49,6 +50,7 @@ namespace SuperFruitAttack
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Level.LoadTextures(Content);
+            gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
@@ -100,6 +102,7 @@ namespace SuperFruitAttack
                     }
                     break;
                 case GameStages.gameplay:
+                    GameObjectManager.CheckCollision();
                     break;
                 case GameStages.transition:
                     break;
@@ -120,12 +123,17 @@ namespace SuperFruitAttack
             switch(status)
             {
                 case GameStages.menu:
+                    _spriteBatch.DrawString(gameTitle, "Super Fruit Attack",
+                        new Vector2(_graphics.PreferredBackBufferWidth / 2 - 50,
+                                    _graphics.PreferredBackBufferHeight / 2 - 200),
+                                    Color.White);
                     start.Draw(_spriteBatch);
                     instructions.Draw(_spriteBatch);
                     break;
                 case GameStages.instructions:
                     break;
                 case GameStages.gameplay:
+
                     break;
                 case GameStages.transition:
                     break;

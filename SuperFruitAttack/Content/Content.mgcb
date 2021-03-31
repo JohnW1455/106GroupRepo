@@ -85,3 +85,10 @@
 /processorParam:TextureFormat=Color
 /build:start button.png
 
+#begin Text/Titles/Roboto36.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Text/Titles/Roboto36.spritefont
+

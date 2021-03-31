@@ -29,16 +29,12 @@ namespace SuperFruitAttack
 
         public static void NextLevel()
         {
+            GameObjectManager.Reset();
             _currentLevel++;
-        }
 
-        public static void DrawLevel(SpriteBatch spriteBatch)
-        {
-            var objects = _Levels[_currentLevel].Objects;
-
-            foreach (var obj in objects)
+            foreach (var obj in _Levels[_currentLevel - 1].Objects)
             {
-                obj.Draw(spriteBatch);
+                GameObjectManager.AddObject(obj);
             }
         }
     }

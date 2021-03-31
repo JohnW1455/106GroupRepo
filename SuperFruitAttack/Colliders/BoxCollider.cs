@@ -7,8 +7,6 @@ namespace SuperFruitAttack.Colliders
     //Purpose: Represent a box collider
     public class BoxCollider : Collider
     {
-        public Rectangle Bounds => new Rectangle(Position.ToPoint(), Size);
-        
         /// <summary>
         /// Creates a new BoxCollider
         /// </summary>
@@ -29,11 +27,6 @@ namespace SuperFruitAttack.Colliders
         protected override bool CheckCollision(CircleCollider other)
         {
             return BoxCircleCollision(this, other);
-        }
-
-        public override bool CheckCollision(Collider other)
-        {
-            return other.CheckCollision(this);
         }
     }
 }

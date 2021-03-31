@@ -32,10 +32,5 @@ namespace SuperFruitAttack.Colliders
         {
             return CircleCircleCollision(this, other);
         }
-
-        public override bool CheckCollision(Collider other)
-        {
-            return other.CheckCollision(this);
-        }
     }
 }

@@ -28,8 +28,7 @@ namespace SuperFruitAttack
         private Button start;
         private Button menu;
         private Button instructions;
-        private Player p1;
-        
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -70,11 +69,13 @@ namespace SuperFruitAttack
                               menuBtton.Width,
                               menuBtton.Height);
 
-            p1 = new Player(100, 10, playerAvatar, new BoxCollider(30,30,100,20));
-            GameObjectManager.AddObject(p1);
-            
             // TODO: use this.Content to load your game content here
-            
+            // REMOVE AFTER TESTING
+            // REMOVE AFTER TESTING
+            // REMOVE AFTER TESTING
+            // REMOVE AFTER TESTING
+            // REMOVE AFTER TESTING
+            LevelManager.NextLevel(); 
         }
 
         protected override void Update(GameTime gameTime)
@@ -102,12 +103,12 @@ namespace SuperFruitAttack
                     }
                     break;
                 case GameStages.gameplay:
-                    GameObjectManager.Player.Tick(gameTime);
+                    GameObjectManager.Tick(gameTime);
                     GameObjectManager.CheckCollision();
-                    if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
-                    {
-                        status = GameStages.gameOver;
-                    }
+                    // if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
+                    // {
+                    //     status = GameStages.gameOver;
+                    // }
                     break;
                 case GameStages.transition:
                     break;
@@ -127,7 +128,6 @@ namespace SuperFruitAttack
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            LevelManager.DrawLevel(_spriteBatch);
             // TODO: Add your drawing code here
             switch(status)
             {
@@ -144,7 +144,6 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.gameplay:
                     GameObjectManager.Draw(_spriteBatch);
-                    GameObjectManager.Player.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:
                     break;

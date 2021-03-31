@@ -37,7 +37,20 @@ namespace SuperFruitAttack.Colliders
 
         protected abstract bool CheckCollision(CircleCollider other);
 
-        public abstract bool CheckCollision(Collider other);
+        public bool CheckCollision(Collider other)
+        {
+            if (other is BoxCollider box)
+            {
+                return CheckCollision(box);
+            }
+
+            if (other is CircleCollider circleCollider)
+            {
+                return CheckCollision(circleCollider);
+            }
+
+            throw new NotSupportedException($"{other.GetType()} not supported");
+        }
 
         /// <summary>
         /// Checks to see if two Boxes are colliding

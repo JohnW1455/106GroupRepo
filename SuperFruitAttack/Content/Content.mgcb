@@ -73,6 +73,9 @@
 /processorParam:TextureFormat=Color
 /build:Images/player/simple stickman.png
 
+#begin Levels/playground.level
+/copy:Levels/playground.level
+
 #begin Levels/test.level
 /copy:Levels/test.level
 

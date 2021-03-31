@@ -160,16 +160,9 @@ namespace SuperFruitAttack
                     }
                 }
             }
-            foreach(Platform platform in platforms)
-            {
-
-            }
             
         }
-        /// <summary>
-        /// This method draws all the gameObjects on screen using the spritebatch param
-        /// </summary>
-        /// <param name="sb"></param>
+
         public static void Draw(SpriteBatch sb)
         {
             player.Draw(sb);

@@ -266,7 +266,7 @@ namespace SuperFruitAttack
         /// <summary>
 		/// Applies gravity to the player
 		/// </summary>
-		private void ApplyGravity()
+		public void ApplyGravity()
         {
             // Adds the acceleration to the player velocity
             Vector2 accel = new Vector2(0f, 0.3f);
@@ -281,7 +281,7 @@ namespace SuperFruitAttack
         /// </summary>
         /// <param name="time">GameTime parameter used to check how long
         /// since the last bullet was fired</param>
-        private void FireGun(GameTime time)
+        public void FireGun(GameTime time)
         {
             MouseState mouse = Mouse.GetState();
             // increments the reload countdown

@@ -102,7 +102,10 @@ namespace SuperFruitAttack
                     }
                     break;
                 case GameStages.gameplay:
+                    GameObjectManager.Player.FireGun(gameTime);
+                    GameObjectManager.Player.Tick(gameTime);
                     GameObjectManager.CheckCollision();
+                    
                     break;
                 case GameStages.transition:
                     break;

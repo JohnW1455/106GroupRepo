@@ -38,7 +38,7 @@ namespace SuperFruitAttack
             items = new List<GameObject>();
             platforms = new List<Platform>();
         }
-
+        
         public static Player Player => player;
         /// <summary>
         /// This method adds any type of game Object to their respective list.
@@ -94,6 +94,10 @@ namespace SuperFruitAttack
             {
                 platforms.Remove((Platform)thing);
             }
+            else if(thing is Player)
+            {
+                player = null;
+            }
         }
 
         /// <summary>
@@ -116,10 +120,25 @@ namespace SuperFruitAttack
             }
             foreach(Projectile bullet in projectiles)
             {
+                foreach(Enemy enemy in enemies)
+                {
+                    if(bullet.CheckCollision(enemy) == true && bullet.IsPlayerBullet == true)
+                    {
+                        enemy.TakeDamage(10);
+                    }
+                    if(enemy.Health == 0)
+                    {
+                        RemoveObject(enemy);
+                    }
+                }
                 if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
                 {
                     player.TakeDamage();
                     RemoveObject(bullet);
+                    if(player.Health == 0)
+                    {
+                        RemoveObject(player);
+                    }
                 } 
             }
             foreach(Projectile bullet in projectiles)
@@ -132,11 +151,12 @@ namespace SuperFruitAttack
                     }
                 }
             }
+            
         }
 
         public static void Draw(SpriteBatch sb)
         {
-            sb.Draw(player.Image, player.ColliderObject.Bounds, Color.White);
+            player.Draw(sb);
             foreach(Platform platform in platforms)
             {
                 sb.Draw(platform.Image, platform.ColliderObject.Bounds, Color.White);

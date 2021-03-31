@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:ground.png
+
 #begin Images/buttons/menu.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -49,7 +61,10 @@
 /processorParam:TextureFormat=Color
 /build:Images/player/simple stickman.png
 
-#begin potato2.png
+#begin Levels/test.level
+/copy:Levels/test.level
+
+#begin potato.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -59,7 +74,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:potato2.png
+/build:potato.png
 
 #begin simple ball.png
 /importer:TextureImporter
@@ -84,4 +99,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:start button.png
+
+#begin Text/Titles/Roboto36.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Text/Titles/Roboto36.spritefont
 

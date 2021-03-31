@@ -38,7 +38,7 @@ namespace SuperFruitAttack
         /// <param name="name">This is the object's designated name.</param>
         /// <param name="texture">This will be the object's image.</param>
         /// <returns></returns>
-        public static GameObject Create(int x, int y, string name, Texture2D texture)
+        public static GameObject Create(string name, int x, int y, Texture2D texture)
         {
             int width = texture.Width;
             int height = texture.Height;
@@ -56,10 +56,12 @@ namespace SuperFruitAttack
                 case "collectible":
                     return new Collectible(texture, box);
                 case "platform":
+                case "ground":
                     return new Platform(texture, box);
+                default:
+                    throw new ArgumentException($"{name} is not a valid GameObject type");
             }
 
-            return null;
         }
         /// <summary>
         /// This is the property for an object's image.
@@ -105,10 +107,7 @@ namespace SuperFruitAttack
         /// <param name="sb">This is the spritebatch object that'll draw the game object.</param>
         public virtual void Draw(SpriteBatch sb)
         {
-            sb.Draw(image, 
-                new Rectangle(colliderObject.Position.ToPoint(),
-                    colliderObject.Size), 
-                Color.White);
+            sb.Draw(image, colliderObject.Bounds, Color.White);
         }
         /// <summary>
         /// This is the property for an object's collider object.

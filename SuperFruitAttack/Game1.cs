@@ -12,6 +12,7 @@ using System.Diagnostics;
 namespace SuperFruitAttack
 {
     public enum GameStages { menu, instructions, gameplay, gameOver, winGame, transition};
+    public enum PlayerState { faceLeft, faceRight, walkLeft, walkRight, jumpLeft, jumpRight, dead};
     public class Game1 : Game
     {
         public const int RESOLUTION = 32;
@@ -19,11 +20,11 @@ namespace SuperFruitAttack
         private SpriteBatch _spriteBatch;
         private MouseState previousMouse;
         private GameStages status;
-        private static Dictionary<string, Texture2D> images;
         private Texture2D startButton;
         private Texture2D instructionsButton;
         private Texture2D menuBtton;
         private Texture2D playerAvatar;
+        private SpriteFont gameTitle;
         private Button start;
         private Button menu;
         private Button instructions;
@@ -32,7 +33,7 @@ namespace SuperFruitAttack
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = Resources.ROOT_DIRECTORY;
             IsMouseVisible = true;
         }
 
@@ -40,15 +41,15 @@ namespace SuperFruitAttack
         {
             // TODO: Add your initialization logic here
             status = GameStages.menu;
-            
-            images = new Dictionary<string, Texture2D>();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Level.LoadTextures(Content);
+            Resources.Init(Content);
+            LevelManager.LoadLevels();
+            gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
@@ -70,6 +71,7 @@ namespace SuperFruitAttack
                               menuBtton.Height);
 
             p1 = new Player(100, 10, playerAvatar, new BoxCollider(30,30,playerAvatar.Width, playerAvatar.Height));
+            GameObjectManager.AddObject(p1);
             
             // TODO: use this.Content to load your game content here
             
@@ -100,12 +102,21 @@ namespace SuperFruitAttack
                     }
                     break;
                 case GameStages.gameplay:
+                    GameObjectManager.Player.FireGun(gameTime);
+                    GameObjectManager.Player.Tick(gameTime);
+                    GameObjectManager.CheckCollision();
+                    if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
+                    {
+                        status = GameStages.gameOver;
+                    }
                     break;
                 case GameStages.transition:
                     break;
                 case GameStages.winGame:
+
                     break;
                 case GameStages.gameOver:
+
                     break;
             }
             previousMouse = Mouse.GetState();
@@ -116,35 +127,44 @@ namespace SuperFruitAttack
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            _spriteBatch.Begin();
+            LevelManager.DrawLevel(_spriteBatch);
             // TODO: Add your drawing code here
             switch(status)
             {
                 case GameStages.menu:
+                    _spriteBatch.DrawString(gameTitle, "Super Fruit Attack",
+                        new Vector2(_graphics.PreferredBackBufferWidth / 2 - 50,
+                                    _graphics.PreferredBackBufferHeight / 2 - 200),
+                                    Color.White);
                     start.Draw(_spriteBatch);
                     instructions.Draw(_spriteBatch);
                     break;
                 case GameStages.instructions:
+
                     break;
                 case GameStages.gameplay:
+                    GameObjectManager.Draw(_spriteBatch);
+                    GameObjectManager.Player.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:
                     break;
                 case GameStages.winGame:
                     break;
                 case GameStages.gameOver:
+                    _spriteBatch.DrawString(gameTitle, "You Died",
+                                new Vector2(_graphics.PreferredBackBufferWidth/2 - 50,
+                                _graphics.PreferredBackBufferHeight/2 - 200),
+                                Color.White);
                     break;
             }
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
 
         public void NextLevel()
         {
 
-        }
-
-        public static Texture2D GetTexture(string textureName)
-        {
-            return images[textureName];
         }
     }
 }

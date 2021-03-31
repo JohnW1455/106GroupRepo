@@ -37,7 +37,7 @@ namespace SuperFruitAttack
 
         public override void Draw(SpriteBatch sb)
         {
-            if (health <= 0)
+            if (health > 0)
             {
                 base.Draw(sb);
             }

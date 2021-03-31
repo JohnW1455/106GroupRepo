@@ -189,16 +189,16 @@ namespace SuperFruitAttack
             {
                 projectile.Tick();
             }
-            foreach(Projectile bullet in projectiles)
-            {
-                foreach(Platform platform in platforms)
-                {
-                    if(bullet.CheckCollision(platform) == true)
-                    {
-                        RemoveObject(bullet);
-                    }
-                }
-            }
+            //foreach(Projectile bullet in projectiles)
+            //{
+            //    foreach(Platform platform in platforms)
+            //    {
+            //        if(bullet.CheckCollision(platform) == true)
+            //        {
+            //            RemoveObject(bullet);
+            //        }
+            //    }
+            //}
             
         }
 

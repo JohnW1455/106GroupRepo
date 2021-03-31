@@ -29,13 +29,13 @@ namespace SuperFruitAttack
 
 
 		//Methods
-        public override bool CheckCollision(GameObject gameObject)
+        public bool CheckCollision(Player gameObject)
         {
             // First checks if the player is intersecting an obstacle
             if (base.CheckCollision(gameObject))
             {
                 Rectangle entityRect = gameObject.ColliderObject.Bounds;
-                Rectangle platRect = gameObject.ColliderObject.Bounds;
+                Rectangle platRect = this.ColliderObject.Bounds;
 
                 Rectangle resultant = Rectangle.Intersect(entityRect, platRect);
 
@@ -56,17 +56,20 @@ namespace SuperFruitAttack
 				}
 				else
 				{
+					gameObject.PlayerVelocity = new Vector2(gameObject.PlayerVelocity.X, 0);
 					// if the player is intersecting from above 
 					if ((platRect.Y - entityRect.Y) > 0)
 					{
 						// move player up
 						entityRect.Y -= resultant.Height;
+						gameObject.IsGrounded = true;
 					}
 					// if the player is intersecting from below
 					else
 					{
 						// move player down
 						entityRect.Y += resultant.Height;
+						gameObject.IsGrounded = false;
 					}
 				}
 
@@ -76,12 +79,11 @@ namespace SuperFruitAttack
 
 				return true;
 			}
+			else
+            {
+				gameObject.IsGrounded = false;
+			}
 			return false;
 		}
-
-
-
-
-
     }
 }

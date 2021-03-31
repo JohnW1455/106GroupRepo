@@ -25,7 +25,6 @@ namespace SuperFruitAttack
                 texture = _contentManager.Load<Texture2D>(name);
                 _Textures[name] = texture;
             }
-
             return texture;
         }
     }

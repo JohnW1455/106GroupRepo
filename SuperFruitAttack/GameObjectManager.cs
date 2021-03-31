@@ -12,6 +12,7 @@ using System.Diagnostics;
 namespace SuperFruitAttack
 {
     /// <summary>
+    /// Author: Elliot Gong
     /// This class manages all the gameObjects in the game.
     /// </summary>
     static class GameObjectManager
@@ -106,6 +107,7 @@ namespace SuperFruitAttack
         /// </summary>
         public static void CheckCollision()
         {
+            
             foreach(Enemy enemy in enemies)
             {
                 if(enemy.CheckCollision(player) == true)
@@ -130,7 +132,7 @@ namespace SuperFruitAttack
                         enemy.TakeDamage(6);
                         if(enemy.Health <= 0)
                         {
-                            enemies.Remove(enemy);
+                            RemoveObject(enemy);
                         }
                     }   
                 }
@@ -154,9 +156,16 @@ namespace SuperFruitAttack
                     }
                 }
             }
+            foreach(Platform platform in platforms)
+            {
+
+            }
             
         }
-
+        /// <summary>
+        /// This method draws all the gameObjects on screen using the spritebatch param
+        /// </summary>
+        /// <param name="sb"></param>
         public static void Draw(SpriteBatch sb)
         {
             player.Draw(sb);

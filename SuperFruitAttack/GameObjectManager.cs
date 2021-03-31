@@ -117,64 +117,64 @@ namespace SuperFruitAttack
         public static void CheckCollision()
         {
             //I loop through the enemy objects and check if they collide with the player.
-            // foreach(Enemy enemy in enemies)
-            // {
-            //     //If the player collides with an enemy, the player takes damage.
-            //     if(enemy.CheckCollision(player) == true)
-            //     {
-            //         player.TakeDamage();
-            //     }
-            // }
-
-            foreach (var platform in platforms)
+            for (var i = enemies.Count - 1; i >= 0; i--)
             {
-                platform.CheckCollision(player);
+                Enemy enemy = enemies[i];
+                //If the player collides with an enemy, the player takes damage.
+                if (enemy.CheckCollision(player) == true)
+                {
+                    player.TakeDamage();
+                }
+            }
+
+            for (var i = platforms.Count - 1; i >= 0; i--)
+            {
+                platforms[i].CheckCollision(player);
             }
             //I loop through the collectible objects to check if they collide with the player.
-            // foreach(Collectible collectible in collectibles)
-            // {
-            //     //If the player collides with a collectible, they get some bonus, and the collectible
-            //     //is deleted and removed from GameObjectManager.
-            //     if(collectible.CheckCollision(player) == true)
-            //     {
-            //
-            //         RemoveObject(collectible);
-            //     }
-            // }
-            // foreach(Projectile bullet in projectiles)
-            // {
-            //     foreach(Enemy enemy in enemies)
-            //     {
-            //         if(bullet.CheckCollision(enemy) == true && bullet.IsPlayerBullet == true)
-            //         {
-            //             enemy.TakeDamage(6);
-            //             if(enemy.Health <= 0)
-            //             {
-            //                 RemoveObject(enemy);
-            //             }
-            //         }   
-            //     }
-            //     if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
-            //     {
-            //         player.TakeDamage();
-            //         RemoveObject(bullet);
-            //         if(player.Health == 0)
-            //         {
-            //             RemoveObject(player);
-            //         }
-            //     } 
-            // }
-            // foreach(Projectile bullet in projectiles)
-            // {
-            //     foreach(Platform platform in platforms)
-            //     {
-            //         if(bullet.CheckCollision(platform) == true)
-            //         {
-            //             RemoveObject(bullet);
-            //         }
-            //     }
-            // }
+            for (var i = collectibles.Count - 1; i >= 0; i--)
+            {
+                //If the player collides with a collectible, they get some bonus, and the collectible
+                //is deleted and removed from GameObjectManager.
+                if(collectibles[i].CheckCollision(player) == true)
+                {
             
+                    RemoveObject(collectibles[i]);
+                }
+            }
+            foreach(Projectile bullet in projectiles)
+            {
+                for (var i = enemies.Count - 1; i >= 0; i--)
+                {
+                    if(bullet.CheckCollision(enemies[i]) == true && bullet.IsPlayerBullet == true)
+                    {
+                        enemies[i].TakeDamage(6);
+                        if(enemies[i].Health <= 0)
+                        {
+                            RemoveObject(enemies[i]);
+                        }
+                    }   
+                }
+                if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
+                {
+                    player.TakeDamage();
+                    RemoveObject(bullet);
+                    if(player.Health == 0)
+                    {
+                        RemoveObject(player);
+                    }
+                } 
+            }
+            foreach(Platform platform in platforms)
+            {
+                for (var i = projectiles.Count - 1; i >= 0; i--)
+                {
+                    if(projectiles[i].CheckCollision(platform) == true)
+                    {
+                        RemoveObject(projectiles[i]);
+                    }
+                }
+            }
         }
 
         public static void Tick(GameTime gameTime)
@@ -189,17 +189,6 @@ namespace SuperFruitAttack
             {
                 projectile.Tick();
             }
-            //foreach(Projectile bullet in projectiles)
-            //{
-            //    foreach(Platform platform in platforms)
-            //    {
-            //        if(bullet.CheckCollision(platform) == true)
-            //        {
-            //            RemoveObject(bullet);
-            //        }
-            //    }
-            //}
-            
         }
 
         public static void Draw(SpriteBatch sb)

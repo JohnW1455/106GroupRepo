@@ -59,6 +59,7 @@ namespace SuperFruitAttack
             pState = PlayerState.faceRight;
             jumpVelocity = new Vector2(0, -15.0f);
             reload = 0;
+            isGrounded = true;
         }
 
         public void TakeDamage()

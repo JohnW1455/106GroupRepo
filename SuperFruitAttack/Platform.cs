@@ -71,16 +71,10 @@ namespace SuperFruitAttack
 						entityRect.Y += resultant.Height;
 					}
 				}
-
-
 				Vector2 newPos = entityRect.Location.ToVector2();
 				gameObject.ColliderObject.Position = newPos;
 
 				return true;
-			}
-			else
-            {
-				gameObject.IsGrounded = false;
 			}
 			return false;
 		}

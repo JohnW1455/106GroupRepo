@@ -23,6 +23,7 @@ namespace SuperFruitAttack
         private PlayerState pState;
         private bool isGrounded;
         private double reload;
+        private MouseState prevMouse;
 
         // Properties
         public int Health
@@ -60,6 +61,7 @@ namespace SuperFruitAttack
             jumpVelocity = new Vector2(0, -15.0f);
             reload = 0;
             isGrounded = true;
+            prevMouse = Mouse.GetState();
         }
 
         public void TakeDamage()
@@ -272,7 +274,7 @@ namespace SuperFruitAttack
             }
 
             // Fires bullets
-            FireGun(time);
+            FireGun();
 
             // Applies gravity
             ApplyGravity();
@@ -296,15 +298,12 @@ namespace SuperFruitAttack
         /// Fires the players gun in the direction they
         /// are facing. Requires the reload time to have elapsed
         /// </summary>
-        /// <param name="time">GameTime parameter used to check how long
-        /// since the last bullet was fired</param>
-        private void FireGun(GameTime time)
+        private void FireGun()
         {
-            MouseState mouse = Mouse.GetState();
-            // increments the reload countdown
-            reload += time.ElapsedGameTime.TotalSeconds;
-            // Checks to see if the user wanted to fire the gun and if the reload was over
-            if (reload > 1 && mouse.LeftButton == ButtonState.Pressed)
+            MouseState current = Mouse.GetState();
+            // Checks to see if the user wanted to fire the gun and if it is a single press
+            if (current.LeftButton == ButtonState.Pressed && 
+                prevMouse.LeftButton == ButtonState.Released)
             {
                 // Checks the state of the character
                 if (pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
@@ -331,17 +330,51 @@ namespace SuperFruitAttack
                             new Vector2(5f, 0)));
                 }
             }
+            // Sets the prevMouse state to the current mouse
+            prevMouse = current;
         }
 
         /// <summary>
         /// Draws the player object facing in the right direction
-        /// </summary>
+        /// </summary>              
         /// <param name="sb">SpriteBatch used for drawing the object</param>
         public override void Draw(SpriteBatch sb)
         {
             sb.Draw(this.Image, this.ColliderObject.Bounds, Color.White);
             // For the purpose of this milestone, only direction is needed, so state machine
             // isn't made yet
+            /**
+            if(pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
+                pState == PlayerState.walkLeft)
+            {
+                // Draws the sprite facing left
+                sb.Draw(
+                this.Image,
+                this.colliderObject.Position,
+                this.colliderObject.Bounds,
+                Color.White,
+                0.0f,
+                Vector2.Zero,
+                1.0f,
+                SpriteEffects.FlipHorizontally,
+                0.0f);
+            }
+            if (pState == PlayerState.faceRight || pState == PlayerState.jumpRight ||
+                pState == PlayerState.walkRight)
+            {
+                // Draws the sprite facing right
+                sb.Draw(
+                this.Image,
+                this.colliderObject.Position,
+                this.colliderObject.Bounds,
+                Color.White,
+                0.0f,
+                Vector2.Zero,
+                1.0f,
+                SpriteEffects.None,
+                0.0f);
+            }
+            */
         }
     }
 }

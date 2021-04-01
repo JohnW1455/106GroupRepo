@@ -69,6 +69,8 @@ namespace SuperFruitAttack
                               _graphics.PreferredBackBufferHeight / 2 - 3 * menuBtton.Height,
                               menuBtton.Width,
                               menuBtton.Height);
+
+            // Used to print out variables during gameplay for debugging
             arial16bold = Content.Load<SpriteFont>("arial16bold");
 
             // TODO: use this.Content to load your game content here
@@ -146,11 +148,6 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.gameplay:
                     GameObjectManager.Draw(_spriteBatch);
-                    _spriteBatch.DrawString(
-                        arial16bold,
-                        $"{GameObjectManager.Player.IsGrounded}",
-                        new Vector2(100, 100),
-                        Color.Black);
                     break;
                 case GameStages.transition:
                     break;

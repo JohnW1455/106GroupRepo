@@ -28,6 +28,7 @@ namespace SuperFruitAttack
         private Button start;
         private Button menu;
         private Button instructions;
+        private SpriteFont arial16bold;
 
         public Game1()
         {
@@ -68,6 +69,9 @@ namespace SuperFruitAttack
                               _graphics.PreferredBackBufferHeight / 2 - 3 * menuBtton.Height,
                               menuBtton.Width,
                               menuBtton.Height);
+
+            // Used to print out variables during gameplay for debugging
+            arial16bold = Content.Load<SpriteFont>("arial16bold");
 
             // TODO: use this.Content to load your game content here
             // REMOVE AFTER TESTING

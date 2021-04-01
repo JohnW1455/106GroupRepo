@@ -33,6 +33,7 @@ namespace SuperFruitAttack
         public Vector2 MoveSpeed
         {
             get { return moveSpeed; }
+            set { moveSpeed = value; }
         }
         public PlayerState PState
         {

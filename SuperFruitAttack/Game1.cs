@@ -28,6 +28,7 @@ namespace SuperFruitAttack
         private Button start;
         private Button menu;
         private Button instructions;
+        private SpriteFont arial16bold;
 
         public Game1()
         {
@@ -68,6 +69,7 @@ namespace SuperFruitAttack
                               _graphics.PreferredBackBufferHeight / 2 - 3 * menuBtton.Height,
                               menuBtton.Width,
                               menuBtton.Height);
+            arial16bold = Content.Load<SpriteFont>("arial16bold");
 
             // TODO: use this.Content to load your game content here
             // REMOVE AFTER TESTING
@@ -144,6 +146,11 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.gameplay:
                     GameObjectManager.Draw(_spriteBatch);
+                    _spriteBatch.DrawString(
+                        arial16bold,
+                        $"{GameObjectManager.Player.IsGrounded}",
+                        new Vector2(100, 100),
+                        Color.Black);
                     break;
                 case GameStages.transition:
                     break;

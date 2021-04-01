@@ -69,7 +69,6 @@ namespace SuperFruitAttack
 					{
 						// move player down
 						entityRect.Y += resultant.Height;
-						gameObject.IsGrounded = false;
 					}
 				}
 

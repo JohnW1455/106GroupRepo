@@ -84,6 +84,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D)
                         && !kb.IsKeyDown(Keys.Space))
@@ -103,6 +105,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.faceLeft:
@@ -113,6 +117,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A)
                         && !kb.IsKeyDown(Keys.Space))
@@ -132,6 +138,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.walkRight:
@@ -148,6 +156,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) == kb.IsKeyDown(Keys.D) &&
                         !kb.IsKeyDown(Keys.Space))
@@ -161,6 +171,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.walkLeft:
@@ -177,6 +189,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) == kb.IsKeyDown(Keys.D) &&
                         !kb.IsKeyDown(Keys.Space))
@@ -190,6 +204,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.jumpRight:
@@ -311,7 +327,7 @@ namespace SuperFruitAttack
                             new CircleCollider(this.X + this.Width, 
                                                this.Y + (this.Height / 2), 20),
                             true,
-                            new Vector2(-5f, 0)));
+                            new Vector2(5f, 0)));
                 }
             }
         }
@@ -325,38 +341,6 @@ namespace SuperFruitAttack
             sb.Draw(this.Image, this.ColliderObject.Bounds, Color.White);
             // For the purpose of this milestone, only direction is needed, so state machine
             // isn't made yet
-            /**
-            if(pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
-                pState == PlayerState.walkLeft)
-            {
-                // Draws the sprite facing left
-                sb.Draw(
-                this.Image,
-                this.colliderObject.Position,
-                null,
-                Color.White,
-                0.0f,
-                Vector2.Zero,
-                1.0f,
-                SpriteEffects.FlipHorizontally,
-                0.0f);
-            }
-            if (pState == PlayerState.faceRight || pState == PlayerState.jumpRight ||
-                pState == PlayerState.walkRight)
-            {
-                // Draws the sprite facing right
-                sb.Draw(
-                this.Image,
-                this.colliderObject.Position,
-                null,
-                Color.White,
-                0.0f,
-                Vector2.Zero,
-                1.0f,
-                SpriteEffects.None,
-                0.0f);
-            }
-            */
         }
     }
 }

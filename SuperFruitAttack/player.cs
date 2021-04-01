@@ -59,6 +59,7 @@ namespace SuperFruitAttack
             pState = PlayerState.faceRight;
             jumpVelocity = new Vector2(0, -15.0f);
             reload = 0;
+            isGrounded = true;
         }
 
         public void TakeDamage()
@@ -84,6 +85,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D)
                         && !kb.IsKeyDown(Keys.Space))
@@ -103,6 +106,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.faceLeft:
@@ -113,6 +118,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A)
                         && !kb.IsKeyDown(Keys.Space))
@@ -132,6 +139,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.walkRight:
@@ -148,6 +157,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) == kb.IsKeyDown(Keys.D) &&
                         !kb.IsKeyDown(Keys.Space))
@@ -161,6 +172,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.walkLeft:
@@ -177,6 +190,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) == kb.IsKeyDown(Keys.D) &&
                         !kb.IsKeyDown(Keys.Space))
@@ -190,6 +205,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.jumpRight:

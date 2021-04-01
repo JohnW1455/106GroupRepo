@@ -304,7 +304,7 @@ namespace SuperFruitAttack
             // increments the reload countdown
             reload += time.ElapsedGameTime.TotalSeconds;
             // Checks to see if the user wanted to fire the gun and if the reload was over
-            if (reload > 0.2 && mouse.LeftButton == ButtonState.Pressed)
+            if (reload > 1 && mouse.LeftButton == ButtonState.Pressed)
             {
                 // Checks the state of the character
                 if (pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
@@ -314,7 +314,7 @@ namespace SuperFruitAttack
                     GameObjectManager.AddObject(
                         new Projectile(
                             Resources.GetTexture("simple ball"),
-                            new CircleCollider(this.X, this.Y + (this.Height / 2), 20),
+                            new CircleCollider(this.X, this.Y + (this.Height / 2), 2),
                             true,
                             new Vector2(-5f, 0)));
                 }
@@ -326,7 +326,7 @@ namespace SuperFruitAttack
                         new Projectile(
                             Resources.GetTexture("simple ball"),
                             new CircleCollider(this.X + this.Width, 
-                                               this.Y + (this.Height / 2), 20),
+                                               this.Y + (this.Height / 2), 2),
                             true,
                             new Vector2(5f, 0)));
                 }

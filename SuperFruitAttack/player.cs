@@ -311,7 +311,7 @@ namespace SuperFruitAttack
                             new CircleCollider(this.X + this.Width, 
                                                this.Y + (this.Height / 2), 20),
                             true,
-                            new Vector2(5f, 0)));
+                            new Vector2(-5f, 0)));
                 }
             }
         }
@@ -325,6 +325,38 @@ namespace SuperFruitAttack
             sb.Draw(this.Image, this.ColliderObject.Bounds, Color.White);
             // For the purpose of this milestone, only direction is needed, so state machine
             // isn't made yet
+            /**
+            if(pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
+                pState == PlayerState.walkLeft)
+            {
+                // Draws the sprite facing left
+                sb.Draw(
+                this.Image,
+                this.colliderObject.Position,
+                this.colliderObject.Bounds,
+                Color.White,
+                0.0f,
+                Vector2.Zero,
+                1.0f,
+                SpriteEffects.FlipHorizontally,
+                0.0f);
+            }
+            if (pState == PlayerState.faceRight || pState == PlayerState.jumpRight ||
+                pState == PlayerState.walkRight)
+            {
+                // Draws the sprite facing right
+                sb.Draw(
+                this.Image,
+                this.colliderObject.Position,
+                this.colliderObject.Bounds,
+                Color.White,
+                0.0f,
+                Vector2.Zero,
+                1.0f,
+                SpriteEffects.None,
+                0.0f);
+            }
+            */
         }
     }
 }

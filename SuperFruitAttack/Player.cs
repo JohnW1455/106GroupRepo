@@ -333,7 +333,7 @@ namespace SuperFruitAttack
                 sb.Draw(
                 this.Image,
                 this.colliderObject.Position,
-                this.colliderObject.Bounds,
+                null,
                 Color.White,
                 0.0f,
                 Vector2.Zero,
@@ -348,7 +348,7 @@ namespace SuperFruitAttack
                 sb.Draw(
                 this.Image,
                 this.colliderObject.Position,
-                this.colliderObject.Bounds,
+                null,
                 Color.White,
                 0.0f,
                 Vector2.Zero,

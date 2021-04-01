@@ -55,7 +55,7 @@ namespace SuperFruitAttack
         {
             health = playerHealth;
             moveSpeed = new Vector2(playerMS, 0);
-            gravity = new Vector2(0, 0.5f);
+            gravity = new Vector2(0, 0.9f);
             playerVelocity = new Vector2(0, 0);
             pState = PlayerState.faceRight;
             jumpVelocity = new Vector2(0, -15.0f);
@@ -288,8 +288,7 @@ namespace SuperFruitAttack
 		public void ApplyGravity()
         {
             // Adds the acceleration to the player velocity
-            Vector2 accel = new Vector2(0f, 0.3f);
-            playerVelocity += accel;
+            playerVelocity += gravity;
             // Adds the velocity to the player position
             this.colliderObject.Position = this.colliderObject.Position + playerVelocity;
         }

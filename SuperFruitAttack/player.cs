@@ -55,7 +55,7 @@ namespace SuperFruitAttack
         {
             health = playerHealth;
             moveSpeed = new Vector2(playerMS, 0);
-            gravity = new Vector2(0, 0.5f);
+            gravity = new Vector2(0, .9f);
             playerVelocity = new Vector2(0, 0);
             pState = PlayerState.faceRight;
             jumpVelocity = new Vector2(0, -15.0f);
@@ -287,9 +287,8 @@ namespace SuperFruitAttack
 		/// </summary>
 		public void ApplyGravity()
         {
-            // Adds the acceleration to the player velocity
-            Vector2 accel = new Vector2(0f, 0.3f);
-            playerVelocity += accel;
+            // Adds the gravity to the player velocity
+            playerVelocity += gravity;
             // Adds the velocity to the player position
             this.colliderObject.Position = this.colliderObject.Position + playerVelocity;
         }
@@ -343,38 +342,6 @@ namespace SuperFruitAttack
             sb.Draw(this.Image, this.ColliderObject.Bounds, Color.White);
             // For the purpose of this milestone, only direction is needed, so state machine
             // isn't made yet
-            /**
-            if(pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
-                pState == PlayerState.walkLeft)
-            {
-                // Draws the sprite facing left
-                sb.Draw(
-                this.Image,
-                this.colliderObject.Position,
-                this.colliderObject.Bounds,
-                Color.White,
-                0.0f,
-                Vector2.Zero,
-                1.0f,
-                SpriteEffects.FlipHorizontally,
-                0.0f);
-            }
-            if (pState == PlayerState.faceRight || pState == PlayerState.jumpRight ||
-                pState == PlayerState.walkRight)
-            {
-                // Draws the sprite facing right
-                sb.Draw(
-                this.Image,
-                this.colliderObject.Position,
-                this.colliderObject.Bounds,
-                Color.White,
-                0.0f,
-                Vector2.Zero,
-                1.0f,
-                SpriteEffects.None,
-                0.0f);
-            }
-            */
         }
     }
 }

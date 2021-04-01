@@ -20,16 +20,16 @@ namespace SuperFruitAttack
 
         public override void Tick(GameTime time)
         {
-            //int posCompare = GameObjectManager.Player.X - this.X;
+            int posCompare = GameObjectManager.Player.X - this.X;
 
-            //triggerTime += time.ElapsedGameTime.TotalSeconds;
+            triggerTime += time.ElapsedGameTime.TotalSeconds;
 
-            //if (triggerTime >= 2)
-            //{
-            //    GameObjectManager.AddObject(new Projectile(Resources.GetTexture("simple ball"),
-            //            new CircleCollider(this.X, this.Y, 5), false, new Vector2(5 * Math.Sign(posCompare), 0)));
-            //    triggerTime = 0;
-            //}   
+            if (triggerTime >= 2)
+            {
+                GameObjectManager.AddObject(new Projectile(Resources.GetTexture("simple ball"),
+                        new CircleCollider(this.X, this.Y, 5), false, new Vector2(5 * Math.Sign(posCompare), 0)));
+                triggerTime = 0;
+            }   
         }
     }
 }

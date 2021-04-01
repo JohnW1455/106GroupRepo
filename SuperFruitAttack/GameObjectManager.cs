@@ -142,23 +142,23 @@ namespace SuperFruitAttack
                     RemoveObject(collectibles[i]);
                 }
             }
-            foreach(Projectile bullet in projectiles)
+            for (var i = projectiles.Count - 1; i >= 0; i--)
             {
-                for (var i = enemies.Count - 1; i >= 0; i--)
+                for (var j = enemies.Count - 1; j >= 0; j--)
                 {
-                    if(bullet.CheckCollision(enemies[i]) == true && bullet.IsPlayerBullet == true)
+                    if(projectiles[i].CheckCollision(enemies[j]) == true && projectiles[i].IsPlayerBullet == true)
                     {
-                        enemies[i].TakeDamage(6);
-                        if(enemies[i].Health <= 0)
+                        enemies[j].TakeDamage(6);
+                        if(enemies[j].Health <= 0)
                         {
                             RemoveObject(enemies[i]);
                         }
                     }   
                 }
-                if(bullet.CheckCollision(player) == true && bullet.IsPlayerBullet == false)
+                if(projectiles[i].CheckCollision(player) == true && projectiles[i].IsPlayerBullet == false)
                 {
                     player.TakeDamage();
-                    RemoveObject(bullet);
+                    RemoveObject(projectiles[i]);
                     if(player.Health == 0)
                     {
                         RemoveObject(player);

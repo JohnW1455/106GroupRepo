@@ -113,6 +113,10 @@ namespace SuperFruitAttack
                     // {
                     //     status = GameStages.gameOver;
                     // }
+                    //if(GameObjectManager.Player.X >= _graphics.PreferredBackWidth)
+                    //{
+                    //     status = GameStages.transition;
+                    //}
                     break;
                 case GameStages.transition:
                     break;

@@ -30,6 +30,7 @@ namespace SuperFruitAttack
         private Button instructions;
         private SpriteFont arial16bold;
 
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -54,6 +55,8 @@ namespace SuperFruitAttack
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
             playerAvatar = Content.Load<Texture2D>("Images/Player/simple stickman");
+            
+
             start = new Button( startButton,
                                 _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2,
                                 _graphics.PreferredBackBufferHeight / 2 - 3 * startButton.Height,

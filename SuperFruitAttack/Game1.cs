@@ -29,7 +29,8 @@ namespace SuperFruitAttack
         private Button menu;
         private Button instructions;
         private SpriteFont arial16bold;
-
+        private double transitionTime;
+        private int levelCount;
 
         public Game1()
         {
@@ -42,6 +43,7 @@ namespace SuperFruitAttack
         {
             // TODO: Add your initialization logic here
             status = GameStages.gameplay;
+            transitionTime = 2;
             base.Initialize();
         }
 
@@ -122,6 +124,12 @@ namespace SuperFruitAttack
                     //}
                     break;
                 case GameStages.transition:
+                    transitionTime -= gameTime.ElapsedGameTime.TotalSeconds;
+                    if(transitionTime <= 0)
+                    {
+                        status = GameStages.gameplay;
+                        transitionTime = 2;
+                    }
                     break;
                 case GameStages.winGame:
 
@@ -173,7 +181,7 @@ namespace SuperFruitAttack
 
         public void NextLevel()
         {
-
+            levelCount++;
         }
     }
 }

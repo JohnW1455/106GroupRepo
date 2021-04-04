@@ -127,6 +127,7 @@ namespace SuperFruitAttack
                     transitionTime -= gameTime.ElapsedGameTime.TotalSeconds;
                     if(transitionTime <= 0)
                     {
+                        LevelManager.NextLevel();
                         status = GameStages.gameplay;
                         transitionTime = 2;
                     }
@@ -165,6 +166,10 @@ namespace SuperFruitAttack
                     GameObjectManager.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:
+                    _spriteBatch.DrawString(arial16bold, "Loading", 
+                                            new Vector2(_graphics.PreferredBackBufferWidth / 2 - 50,
+                                            _graphics.PreferredBackBufferHeight / 2 - 50),
+                                            Color.White);
                     break;
                 case GameStages.winGame:
                     break;
@@ -179,9 +184,6 @@ namespace SuperFruitAttack
             base.Draw(gameTime);
         }
 
-        public void NextLevel()
-        {
-            levelCount++;
-        }
+
     }
 }

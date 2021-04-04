@@ -191,10 +191,7 @@ namespace SuperFruitAttack
             }
         }
 
-        public static void ResetLevel()
-        {
-
-        }
+      
         public static void Draw(SpriteBatch sb)
         {
             player.Draw(sb);

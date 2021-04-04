@@ -28,6 +28,7 @@ namespace SuperFruitAttack
         private Button start;
         private Button menu;
         private Button instructions;
+        
         private SpriteFont arial16bold;
         private double transitionTime;
         private int levelCount;
@@ -42,7 +43,7 @@ namespace SuperFruitAttack
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            status = GameStages.gameplay;
+            status = GameStages.menu;
             transitionTime = 2;
             base.Initialize();
         }
@@ -61,17 +62,17 @@ namespace SuperFruitAttack
 
             start = new Button( startButton,
                                 _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2,
-                                _graphics.PreferredBackBufferHeight / 2 - 3 * startButton.Height,
+                                _graphics.PreferredBackBufferHeight / 2 ,
                                 startButton.Width,
                                 startButton.Height);
             instructions = new Button(instructionsButton,
                                       _graphics.PreferredBackBufferWidth / 2 - instructionsButton.Width / 2,
-                                      _graphics.PreferredBackBufferHeight / 2 - 2 * instructionsButton.Height,
+                                      _graphics.PreferredBackBufferHeight / 2 + 150,
                                       instructionsButton.Width,
                                       instructionsButton.Height);
             menu = new Button(menuBtton,
                               _graphics.PreferredBackBufferWidth / 2 - menuBtton.Width / 2,
-                              _graphics.PreferredBackBufferHeight / 2 - 3 * menuBtton.Height,
+                              _graphics.PreferredBackBufferHeight / 2 - menuBtton.Height,
                               menuBtton.Width,
                               menuBtton.Height);
 
@@ -84,7 +85,7 @@ namespace SuperFruitAttack
             // REMOVE AFTER TESTING
             // REMOVE AFTER TESTING
             // REMOVE AFTER TESTING
-            LevelManager.NextLevel(); 
+            //LevelManager.NextLevel(); 
         }
 
         protected override void Update(GameTime gameTime)
@@ -133,10 +134,16 @@ namespace SuperFruitAttack
                     }
                     break;
                 case GameStages.winGame:
-
+                    if(menu.IsClicked(previousMouse) == true )
+                    {
+                        status = GameStages.menu;
+                    }
                     break;
                 case GameStages.gameOver:
-
+                    if(menu.IsClicked(previousMouse) == true)
+                    {
+                        status = GameStages.menu;
+                    }
                     break;
             }
             previousMouse = Mouse.GetState();
@@ -160,7 +167,7 @@ namespace SuperFruitAttack
                     instructions.Draw(_spriteBatch);
                     break;
                 case GameStages.instructions:
-
+                    menu.Draw(_spriteBatch);
                     break;
                 case GameStages.gameplay:
                     GameObjectManager.Draw(_spriteBatch);
@@ -172,12 +179,14 @@ namespace SuperFruitAttack
                                             Color.White);
                     break;
                 case GameStages.winGame:
+                    menu.Draw(_spriteBatch);
                     break;
                 case GameStages.gameOver:
                     _spriteBatch.DrawString(gameTitle, "You Died",
                                 new Vector2(_graphics.PreferredBackBufferWidth/2 - 50,
                                 _graphics.PreferredBackBufferHeight/2 - 200),
                                 Color.White);
+                    menu.Draw(_spriteBatch);
                     break;
             }
             _spriteBatch.End();

@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace SuperFruitAttack
 {
-    public enum GameStages { menu, instructions, gameplay, gameOver, winGame, transition,};
+    public enum GameStages { menu, instructions, gameplay, gameOver, winGame, transition, pause};
     public enum PlayerState { faceLeft, faceRight, walkLeft, walkRight, jumpLeft, jumpRight, dead};
     public class Game1 : Game
     {
@@ -24,6 +24,7 @@ namespace SuperFruitAttack
         private Texture2D instructionsButton;
         private Texture2D menuBtton;
         private Texture2D playerAvatar;
+        private Texture2D pauseButton;
         private SpriteFont gameTitle;
         private Button start;
         private Button menu;
@@ -32,7 +33,6 @@ namespace SuperFruitAttack
         private SpriteFont arial16bold;
         private double transitionTime;
         private int levelCount;
-        private bool isPaused;
 
         public Game1()
         {
@@ -46,7 +46,6 @@ namespace SuperFruitAttack
             // TODO: Add your initialization logic here
             status = GameStages.menu;
             transitionTime = 2;
-            isPaused = false;
             base.Initialize();
         }
 
@@ -55,12 +54,18 @@ namespace SuperFruitAttack
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Resources.Init(Content);
             LevelManager.LoadLevels();
+            
             gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
+            pauseButton = Content.Load<Texture2D>("Images/buttons/pause button");
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
             playerAvatar = Content.Load<Texture2D>("Images/Player/simple stickman");
-            
+            pause = new Button(pauseButton,
+                               _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 2,
+                               _graphics.PreferredBackBufferHeight / 2,
+                               pauseButton.Width,
+                               pauseButton.Height);
 
             start = new Button( startButton,
                                 _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2,
@@ -96,7 +101,7 @@ namespace SuperFruitAttack
                 Exit();
            
             // TODO: Add your update logic here 
-            if(isPaused != true)
+            if(status != GameStages.pause)
             {
                 switch(status)
                 {
@@ -148,9 +153,11 @@ namespace SuperFruitAttack
                         {
                             status = GameStages.menu;
                         }
-                        break;
-                    
+                        break;  
                 }
+            }
+            else
+            {
 
             }
             
@@ -195,6 +202,9 @@ namespace SuperFruitAttack
                                 _graphics.PreferredBackBufferHeight/2 - 200),
                                 Color.White);
                     menu.Draw(_spriteBatch);
+                    break;
+                case GameStages.pause:
+                    pause.Draw(_spriteBatch);
                     break;
             }
             _spriteBatch.End();

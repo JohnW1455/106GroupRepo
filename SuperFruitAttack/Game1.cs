@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace SuperFruitAttack
 {
-    public enum GameStages { menu, instructions, gameplay, gameOver, winGame, transition};
+    public enum GameStages { menu, instructions, gameplay, gameOver, winGame, transition,};
     public enum PlayerState { faceLeft, faceRight, walkLeft, walkRight, jumpLeft, jumpRight, dead};
     public class Game1 : Game
     {
@@ -28,10 +28,11 @@ namespace SuperFruitAttack
         private Button start;
         private Button menu;
         private Button instructions;
-        
+        private Button pause;
         private SpriteFont arial16bold;
         private double transitionTime;
         private int levelCount;
+        private bool isPaused;
 
         public Game1()
         {
@@ -45,6 +46,7 @@ namespace SuperFruitAttack
             // TODO: Add your initialization logic here
             status = GameStages.menu;
             transitionTime = 2;
+            isPaused = false;
             base.Initialize();
         }
 
@@ -92,60 +94,66 @@ namespace SuperFruitAttack
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
-            switch(status)
+           
+            // TODO: Add your update logic here 
+            if(isPaused != true)
             {
-                case GameStages.menu:
-                    if(start.IsClicked(previousMouse) == true)
-                    {
-                        status = GameStages.transition;
-                    }
-                    else if(instructions.IsClicked(previousMouse) == true)
-                    {
-                        status = GameStages.instructions;
-                    }
-                    break;
-                case GameStages.instructions:
-                    if(menu.IsClicked(previousMouse) == true)
-                    {
-                        status = GameStages.menu;
-                    }
-                    break;
-                case GameStages.gameplay:
-                    GameObjectManager.Tick(gameTime);
-                    GameObjectManager.CheckCollision();
-                    // if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
-                    // {
-                    //     status = GameStages.gameOver;
-                    // }
-                    //if(GameObjectManager.Player.X >= _graphics.PreferredBackWidth)
-                    //{
-                    //     status = GameStages.transition;
-                    //}
-                    break;
-                case GameStages.transition:
-                    transitionTime -= gameTime.ElapsedGameTime.TotalSeconds;
-                    if(transitionTime <= 0)
-                    {
-                        LevelManager.NextLevel();
-                        status = GameStages.gameplay;
-                        transitionTime = 2;
-                    }
-                    break;
-                case GameStages.winGame:
-                    if(menu.IsClicked(previousMouse) == true )
-                    {
-                        status = GameStages.menu;
-                    }
-                    break;
-                case GameStages.gameOver:
-                    if(menu.IsClicked(previousMouse) == true)
-                    {
-                        status = GameStages.menu;
-                    }
-                    break;
+                switch(status)
+                {
+                    case GameStages.menu:
+                        if(start.IsClicked(previousMouse) == true)
+                        {
+                            status = GameStages.transition;
+                        }
+                        else if(instructions.IsClicked(previousMouse) == true)
+                        {
+                            status = GameStages.instructions;
+                        }
+                        break;
+                    case GameStages.instructions:
+                        if(menu.IsClicked(previousMouse) == true)
+                        {
+                            status = GameStages.menu;
+                        }
+                        break;
+                    case GameStages.gameplay:
+                        GameObjectManager.Tick(gameTime);
+                        GameObjectManager.CheckCollision();
+                        if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
+                        {
+                            status = GameStages.gameOver;
+                        }
+                        if(GameObjectManager.Player.X >= _graphics.PreferredBackBufferWidth - GameObjectManager.Player.Width)
+                        {
+                            status = GameStages.transition;
+                        }
+                        break;
+                    case GameStages.transition:
+                        transitionTime -= gameTime.ElapsedGameTime.TotalSeconds;
+                        if(transitionTime <= 0)
+                        {
+                            LevelManager.NextLevel();
+                            status = GameStages.gameplay;
+                            transitionTime = 2;
+                        }
+                        break;
+                    case GameStages.winGame:
+                        if(menu.IsClicked(previousMouse) == true )
+                        {
+                            status = GameStages.menu;
+                        }
+                        break;
+                    case GameStages.gameOver:
+                        if(menu.IsClicked(previousMouse) == true)
+                        {
+                            status = GameStages.menu;
+                        }
+                        break;
+                    
+                }
+
             }
+            
             previousMouse = Mouse.GetState();
             base.Update(gameTime);
         }

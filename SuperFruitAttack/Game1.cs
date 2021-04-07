@@ -11,7 +11,7 @@ using System.Diagnostics;
 
 namespace SuperFruitAttack
 {
-    public enum GameStages { menu, instructions, gameplay, gameOver, winGame, transition, pause};
+    public enum GameStages { menu, instructions, gamePlay, gameOver, winGame, transition, pause};
     public enum PlayerState { faceLeft, faceRight, walkLeft, walkRight, jumpLeft, jumpRight, dead};
     public class Game1 : Game
     {
@@ -25,11 +25,13 @@ namespace SuperFruitAttack
         private Texture2D menuBtton;
         private Texture2D playerAvatar;
         private Texture2D pauseButton;
+        private Texture2D playButton;
         private SpriteFont gameTitle;
         private Button start;
         private Button menu;
         private Button instructions;
         private Button pause;
+        private Button play;
         private SpriteFont arial16bold;
         private double transitionTime;
         private int levelCount;
@@ -54,7 +56,7 @@ namespace SuperFruitAttack
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Resources.Init(Content);
             LevelManager.LoadLevels();
-            
+            //
             gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
             pauseButton = Content.Load<Texture2D>("Images/buttons/pause button");
             startButton = Content.Load<Texture2D>("start button");
@@ -120,17 +122,27 @@ namespace SuperFruitAttack
                         {
                             status = GameStages.menu;
                         }
+                        if(start.IsClicked(previousMouse) == true)
+                        {
+                            status = GameStages.gamePlay;
+                        }
                         break;
-                    case GameStages.gameplay:
+                    case GameStages.gamePlay:
                         GameObjectManager.Tick(gameTime);
                         GameObjectManager.CheckCollision();
                         if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
                         {
                             status = GameStages.gameOver;
                         }
-                        if(GameObjectManager.Player.X >= _graphics.PreferredBackBufferWidth - GameObjectManager.Player.Width)
+                        if(LevelManager.CurrentLevel != LevelManager.LevelCount && 
+                            GameObjectManager.Player.X >= _graphics.PreferredBackBufferWidth - GameObjectManager.Player.Width)
                         {
                             status = GameStages.transition;
+                        }
+                        else if(LevelManager.CurrentLevel == LevelManager.LevelCount && 
+                            GameObjectManager.Player.X >= _graphics.PreferredBackBufferWidth - GameObjectManager.Player.Width)
+                        {
+                            status = GameStages.winGame;
                         }
                         break;
                     case GameStages.transition:
@@ -138,7 +150,7 @@ namespace SuperFruitAttack
                         if(transitionTime <= 0)
                         {
                             LevelManager.NextLevel();
-                            status = GameStages.gameplay;
+                            status = GameStages.gamePlay;
                             transitionTime = 2;
                         }
                         break;
@@ -183,8 +195,9 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.instructions:
                     menu.Draw(_spriteBatch);
+                    start.Draw(_spriteBatch);
                     break;
-                case GameStages.gameplay:
+                case GameStages.gamePlay:
                     GameObjectManager.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:

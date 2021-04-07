@@ -79,6 +79,18 @@
 #begin Levels/test.level
 /copy:Levels/test.level
 
+#begin peapod.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:peapod.png
+
 #begin player.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -20,6 +20,12 @@
 /processorParam:TextureFormat=Compressed
 /build:arial16bold.spritefont
 
+#begin boomph.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:boomph.mp3
+
 #begin carrot.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -8,6 +8,7 @@ using System.Linq;
 using SuperFruitAttack.Colliders;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Media;
 
 namespace SuperFruitAttack
 {
@@ -16,6 +17,7 @@ namespace SuperFruitAttack
     public class Game1 : Game
     {
         public const int RESOLUTION = 32;
+        public static Song ShootSound;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private MouseState previousMouse;
@@ -85,6 +87,8 @@ namespace SuperFruitAttack
 
             // Used to print out variables during gameplay for debugging
             arial16bold = Content.Load<SpriteFont>("arial16bold");
+
+            ShootSound = Content.Load<Song>("boomph");
 
             // TODO: use this.Content to load your game content here
             // REMOVE AFTER TESTING

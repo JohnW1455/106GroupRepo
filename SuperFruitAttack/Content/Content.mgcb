@@ -92,6 +92,18 @@
 /processorParam:TextureFormat=Color
 /build:Images/player/simple stickman.png
 
+#begin levelFlag.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:levelFlag.png
+
 #begin Levels/playground.level
 /copy:Levels/playground.level
 
@@ -121,6 +133,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:player.png
+
+#begin playerWall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:playerWall.png
 
 #begin potato.png
 /importer:TextureImporter

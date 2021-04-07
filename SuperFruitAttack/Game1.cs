@@ -27,13 +27,13 @@ namespace SuperFruitAttack
         private Texture2D menuBtton;
         private Texture2D playerAvatar;
         private Texture2D pauseButton;
-        private Texture2D playButton;
+        private Texture2D resumeButton;
+
         private SpriteFont gameTitle;
         private Button start;
         private Button menu;
         private Button instructions;
         private Button pause;
-        private Button play;
         private SpriteFont arial16bold;
         private double transitionTime;
         private int levelCount;
@@ -61,6 +61,7 @@ namespace SuperFruitAttack
             //
             gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
             pauseButton = Content.Load<Texture2D>("Images/buttons/pause button");
+            resumeButton = Content.Load<Texture2D>("Images/buttons/Resume");
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
@@ -128,7 +129,7 @@ namespace SuperFruitAttack
                         }
                         if(start.IsClicked(previousMouse) == true)
                         {
-                            status = GameStages.gamePlay;
+                            status = GameStages.transition;
                         }
                         break;
                     case GameStages.gamePlay:
@@ -137,6 +138,11 @@ namespace SuperFruitAttack
                         if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
                         {
                             status = GameStages.gameOver;
+                        }
+                        if(pause.IsClicked(previousMouse) == true)
+                        {
+                            status = GameStages.pause;
+                            pause.Image = resumeButton;
                         }
                         if(LevelManager.CurrentLevel != LevelManager.LevelCount && 
                             GameObjectManager.Player.X >= _graphics.PreferredBackBufferWidth - GameObjectManager.Player.Width)
@@ -148,6 +154,7 @@ namespace SuperFruitAttack
                         {
                             status = GameStages.winGame;
                         }
+
                         break;
                     case GameStages.transition:
                         transitionTime -= gameTime.ElapsedGameTime.TotalSeconds;
@@ -174,7 +181,10 @@ namespace SuperFruitAttack
             }
             else
             {
-
+                if(pause.IsClicked(previousMouse) == true)
+                {
+                    status = GameStages.gamePlay;
+                }
             }
             
             previousMouse = Mouse.GetState();

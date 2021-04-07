@@ -31,6 +31,12 @@ namespace SuperFruitAttack
             this.image = image;
             box = new Rectangle(x, y, width, height);
         }
+
+        public Texture2D Image
+        {
+            get { return image; }
+            set { image = value; }
+        }
         /// <summary>
         /// This is the overriden draw method that draws the button.
         /// </summary>

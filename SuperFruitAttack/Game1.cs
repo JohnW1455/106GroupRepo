@@ -46,6 +46,7 @@ namespace SuperFruitAttack
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            MediaPlayer.Volume = .1f;
             status = GameStages.menu;
             transitionTime = 2;
             base.Initialize();
@@ -128,13 +129,13 @@ namespace SuperFruitAttack
                     case GameStages.gameplay:
                         GameObjectManager.Tick(gameTime);
                         GameObjectManager.CheckCollision();
+                        if (GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
+                        {
+                            status = GameStages.transition;
+                        }
                         if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
                         {
                             status = GameStages.gameOver;
-                        }
-                        if(GameObjectManager.Player.X >= _graphics.PreferredBackBufferWidth - GameObjectManager.Player.Width)
-                        {
-                            status = GameStages.transition;
                         }
                         break;
                     case GameStages.transition:

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using SuperFruitAttack.Colliders;
@@ -23,6 +23,7 @@ namespace SuperFruitAttack
         private PlayerState pState;
         private bool isGrounded;
         private double reload;
+        private MouseState prevMouse;
 
         // Properties
         public int Health
@@ -32,6 +33,7 @@ namespace SuperFruitAttack
         public Vector2 MoveSpeed
         {
             get { return moveSpeed; }
+            set { moveSpeed = value; }
         }
         public PlayerState PState
         {
@@ -54,11 +56,13 @@ namespace SuperFruitAttack
         {
             health = playerHealth;
             moveSpeed = new Vector2(playerMS, 0);
-            gravity = new Vector2(0, 0.5f);
+            gravity = new Vector2(0, 0.9f);
             playerVelocity = new Vector2(0, 0);
             pState = PlayerState.faceRight;
             jumpVelocity = new Vector2(0, -15.0f);
             reload = 0;
+            isGrounded = true;
+            prevMouse = Mouse.GetState();
         }
 
         public void TakeDamage()
@@ -84,6 +88,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D)
                         && !kb.IsKeyDown(Keys.Space))
@@ -103,6 +109,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.faceLeft:
@@ -113,6 +121,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A)
                         && !kb.IsKeyDown(Keys.Space))
@@ -132,6 +142,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.walkRight:
@@ -148,6 +160,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) == kb.IsKeyDown(Keys.D) &&
                         !kb.IsKeyDown(Keys.Space))
@@ -161,6 +175,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.walkLeft:
@@ -177,6 +193,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) == kb.IsKeyDown(Keys.D) &&
                         !kb.IsKeyDown(Keys.Space))
@@ -190,6 +208,8 @@ namespace SuperFruitAttack
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
                         playerVelocity.Y = jumpVelocity.Y;
+                        // Sets IsGrounded to false
+                        isGrounded = false;
                     }
                     break;
                 case PlayerState.jumpRight:
@@ -255,7 +275,7 @@ namespace SuperFruitAttack
             }
 
             // Fires bullets
-            FireGun(time);
+            FireGun();
 
             // Applies gravity
             ApplyGravity();
@@ -269,8 +289,7 @@ namespace SuperFruitAttack
 		public void ApplyGravity()
         {
             // Adds the acceleration to the player velocity
-            Vector2 accel = new Vector2(0f, 0.3f);
-            playerVelocity += accel;
+            playerVelocity += gravity;
             // Adds the velocity to the player position
             this.colliderObject.Position = this.colliderObject.Position + playerVelocity;
         }
@@ -279,15 +298,12 @@ namespace SuperFruitAttack
         /// Fires the players gun in the direction they
         /// are facing. Requires the reload time to have elapsed
         /// </summary>
-        /// <param name="time">GameTime parameter used to check how long
-        /// since the last bullet was fired</param>
-        private void FireGun(GameTime time)
+        private void FireGun()
         {
-            MouseState mouse = Mouse.GetState();
-            // increments the reload countdown
-            reload += time.ElapsedGameTime.TotalSeconds;
-            // Checks to see if the user wanted to fire the gun and if the reload was over
-            if (reload > 0.2 && mouse.LeftButton == ButtonState.Pressed)
+            MouseState current = Mouse.GetState();
+            // Checks to see if the user wanted to fire the gun and if it is a single press
+            if (current.LeftButton == ButtonState.Pressed && 
+                prevMouse.LeftButton == ButtonState.Released)
             {
                 // Checks the state of the character
                 if (pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
@@ -297,7 +313,7 @@ namespace SuperFruitAttack
                     GameObjectManager.AddObject(
                         new Projectile(
                             Resources.GetTexture("simple ball"),
-                            new CircleCollider(this.X, this.Y + (this.Height / 2), 20),
+                            new CircleCollider(this.X, this.Y + (this.Height / 2), 2),
                             true,
                             new Vector2(-5f, 0)));
                 }
@@ -309,16 +325,18 @@ namespace SuperFruitAttack
                         new Projectile(
                             Resources.GetTexture("simple ball"),
                             new CircleCollider(this.X + this.Width, 
-                                               this.Y + (this.Height / 2), 20),
+                                               this.Y + (this.Height / 2), 2),
                             true,
                             new Vector2(5f, 0)));
                 }
             }
+            // Sets the prevMouse state to the current mouse
+            prevMouse = current;
         }
 
         /// <summary>
         /// Draws the player object facing in the right direction
-        /// </summary>
+        /// </summary>              
         /// <param name="sb">SpriteBatch used for drawing the object</param>
         public override void Draw(SpriteBatch sb)
         {

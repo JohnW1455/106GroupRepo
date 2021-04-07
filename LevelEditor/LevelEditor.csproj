@@ -100,6 +100,8 @@
     <Content Include="Content\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\levelFlag.png" />
+    <Content Include="Content\peapod.png" />
     <Content Include="Content\player.png" />
     <Content Include="Scripts\i18n\angular-locale_sl-si.js" />
     <Content Include="Scripts\i18n\angular-locale_sl.js" />

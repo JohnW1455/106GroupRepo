@@ -27,6 +27,15 @@ namespace SuperFruitAttack
             }
         }
 
+        public static int CurrentLevel
+        {
+            get { return _currentLevel; }
+        }
+        public static int LevelCount
+        {
+            get { return _Levels.Count; }
+
+        }
         public static void NextLevel()
         {
             GameObjectManager.Reset();

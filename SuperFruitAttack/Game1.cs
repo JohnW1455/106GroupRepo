@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace SuperFruitAttack
 {
-    public enum GameStages { menu, instructions, gameplay, gameOver, winGame, transition, pause};
+    public enum GameStages { menu, instructions, gamePlay, gameOver, winGame, transition, pause};
     public enum PlayerState { faceLeft, faceRight, walkLeft, walkRight, jumpLeft, jumpRight, dead};
     public class Game1 : Game
     {
@@ -27,6 +27,8 @@ namespace SuperFruitAttack
         private Texture2D menuBtton;
         private Texture2D playerAvatar;
         private Texture2D pauseButton;
+        private Texture2D resumeButton;
+
         private SpriteFont gameTitle;
         private Button start;
         private Button menu;
@@ -60,6 +62,7 @@ namespace SuperFruitAttack
             
             gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
             pauseButton = Content.Load<Texture2D>("Images/buttons/pause button");
+            resumeButton = Content.Load<Texture2D>("Images/buttons/Resume");
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
@@ -125,8 +128,12 @@ namespace SuperFruitAttack
                         {
                             status = GameStages.menu;
                         }
+                        if(start.IsClicked(previousMouse) == true)
+                        {
+                            status = GameStages.transition;
+                        }
                         break;
-                    case GameStages.gameplay:
+                    case GameStages.gamePlay:
                         GameObjectManager.Tick(gameTime);
                         GameObjectManager.CheckCollision();
                         if (GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
@@ -137,13 +144,29 @@ namespace SuperFruitAttack
                         {
                             status = GameStages.gameOver;
                         }
+                        if(pause.IsClicked(previousMouse) == true)
+                        {
+                            status = GameStages.pause;
+                            pause.Image = resumeButton;
+                        }
+                        if(LevelManager.CurrentLevel != LevelManager.LevelCount && 
+                            GameObjectManager.Player.X >= _graphics.PreferredBackBufferWidth - GameObjectManager.Player.Width)
+                        {
+                            status = GameStages.transition;
+                        }
+                        else if(LevelManager.CurrentLevel == LevelManager.LevelCount && 
+                            GameObjectManager.Player.X >= _graphics.PreferredBackBufferWidth - GameObjectManager.Player.Width)
+                        {
+                            status = GameStages.winGame;
+                        }
+
                         break;
                     case GameStages.transition:
                         transitionTime -= gameTime.ElapsedGameTime.TotalSeconds;
                         if(transitionTime <= 0)
                         {
                             LevelManager.NextLevel();
-                            status = GameStages.gameplay;
+                            status = GameStages.gamePlay;
                             transitionTime = 2;
                         }
                         break;
@@ -163,7 +186,10 @@ namespace SuperFruitAttack
             }
             else
             {
-
+                if(pause.IsClicked(previousMouse) == true)
+                {
+                    status = GameStages.gamePlay;
+                }
             }
             
             previousMouse = Mouse.GetState();
@@ -188,8 +214,9 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.instructions:
                     menu.Draw(_spriteBatch);
+                    start.Draw(_spriteBatch);
                     break;
-                case GameStages.gameplay:
+                case GameStages.gamePlay:
                     GameObjectManager.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:

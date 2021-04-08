@@ -41,6 +41,8 @@ namespace SuperFruitAttack
 
 				if (resultant.Width < resultant.Height)
 				{
+					// Sets the player's Wall Climb to true
+					gameObject.WallClimb = true;
 					// if player is intersecting from right
 					if ((platRect.X - entityRect.X) > 0)
 					{

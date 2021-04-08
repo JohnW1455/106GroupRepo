@@ -25,12 +25,6 @@ namespace SuperFruitAttack
         private bool isGrounded;
         private double reload;
         private MouseState prevMouse;
-        private bool godMode;
-        private bool wallClimb;
-
-        // Textures needed
-        private Texture2D playerRun;
-        private Texture2D playerWall;
 
         // Properties
         public int Health
@@ -56,22 +50,11 @@ namespace SuperFruitAttack
             get { return playerVelocity; }
             set { playerVelocity = value; }
         }
-        public bool GodMode
-        {
-            get { return godMode; }
-            set { godMode = value; }
-        }
-        public bool WallClimb
-        {
-            get { return wallClimb; }
-            set { wallClimb = value; }
-        }
 
         // Constructor
         public Player(int playerHealth, int playerMS, Texture2D image,
             Collider collide) : base(image, collide)
         {
-            // Initializes fields
             health = playerHealth;
             moveSpeed = new Vector2(playerMS, 0);
             gravity = new Vector2(0, .9f);
@@ -81,10 +64,6 @@ namespace SuperFruitAttack
             reload = 0;
             isGrounded = true;
             prevMouse = Mouse.GetState();
-
-            // Loads textures
-            playerWall = Resources.GetTexture("playerWall");
-            playerRun = Resources.GetTexture("playerRun");
         }
 
         public void TakeDamage()
@@ -297,19 +276,10 @@ namespace SuperFruitAttack
             }
 
             // Fires bullets
-            // Player cannot fire bullets while wall climbing, or if they were
-            // wall climbing last update cycle
-            if (!wallClimb)
-            {
-                FireGun();
-            }
+            FireGun();
 
             // Applies gravity
             ApplyGravity();
-
-            // Sets wall climb to false. If the player is wall climbing the collisions
-            // will set it back to true
-            wallClimb = false;
 
             // Collisions are handled in the object manager
         }
@@ -373,63 +343,9 @@ namespace SuperFruitAttack
         /// <param name="sb">SpriteBatch used for drawing the object</param>
         public override void Draw(SpriteBatch sb)
         {
-            // If the player is wall climbing, do the following
-            if (wallClimb)
-            {
-                // Checks the direction of the player and draws the sprite accordingly
-                if (pState == PlayerState.faceRight || pState == PlayerState.jumpRight
-                    || pState == PlayerState.walkRight)
-                {
-                    // Draws the sprite facing right
-                    sb.Draw(
-                        playerWall,
-                        this.ColliderObject.Bounds,
-                        Color.White);
-                }
-                else
-                {
-                    // Draws the sprite facing left
-                    sb.Draw(
-                        playerWall,
-                        this.ColliderObject.Bounds,
-                        null,
-                        Color.White,
-                        0.0f,
-                        Vector2.Zero,
-                        SpriteEffects.FlipHorizontally,
-                        0.0f);
-                }
-            }
-            // Otherwise, check the player's state and draw accordingly
-            else if (pState == PlayerState.faceLeft || pState == PlayerState.faceRight)
-            {
-                // Draws a sprite that stares into your soul
-                sb.Draw(
-                    this.image,
-                    this.ColliderObject.Bounds,
-                    Color.White);
-            }
-            else if (pState == PlayerState.jumpLeft || pState == PlayerState.walkLeft)
-            {
-                // Draws the run sprite facing left
-                sb.Draw(
-                    playerRun,
-                    this.ColliderObject.Bounds,
-                    Color.White);
-            }
-            else
-            {
-                // Draws the run sprite facing right
-                sb.Draw(
-                    playerRun,
-                    this.ColliderObject.Bounds,
-                    null,
-                    Color.White,
-                    0.0f,
-                    Vector2.Zero,
-                    SpriteEffects.FlipHorizontally,
-                    0.0f);
-            }
+            sb.Draw(this.Image, this.ColliderObject.Bounds, Color.White);
+            // For the purpose of this milestone, only direction is needed, so state machine
+            // isn't made yet
         }
     }
 }

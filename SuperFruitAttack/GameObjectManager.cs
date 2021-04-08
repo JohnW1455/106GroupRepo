@@ -162,7 +162,7 @@ namespace SuperFruitAttack
                         enemies[j].TakeDamage(6);
                         if(enemies[j].Health <= 0)
                         {
-                            RemoveObject(enemies[i]);
+                            RemoveObject(enemies[j]);
                         }
                     }   
                 }
@@ -170,10 +170,7 @@ namespace SuperFruitAttack
                 {
                     player.TakeDamage();
                     RemoveObject(projectiles[i]);
-                    if(player.Health == 0)
-                    {
-                        RemoveObject(player);
-                    }
+                    
                 } 
             }
             foreach(Platform platform in platforms)

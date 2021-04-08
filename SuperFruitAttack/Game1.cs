@@ -140,7 +140,7 @@ namespace SuperFruitAttack
                         {
                             status = GameStages.transition;
                         }
-                        if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
+                        if(GameObjectManager.Player.Health <= 0)
                         {
                             status = GameStages.gameOver;
                         }

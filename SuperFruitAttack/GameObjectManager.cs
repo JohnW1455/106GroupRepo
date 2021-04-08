@@ -110,7 +110,7 @@ namespace SuperFruitAttack
                 flag = null;
             }
         }
-
+       
        public static void Reset()
        {
            enemies.Clear();
@@ -159,7 +159,9 @@ namespace SuperFruitAttack
                 {
                     if(projectiles[i].CheckCollision(enemies[j]) == true && projectiles[i].IsPlayerBullet == true)
                     {
+                        
                         enemies[j].TakeDamage(6);
+                        
                         if(enemies[j].Health <= 0)
                         {
                             RemoveObject(enemies[j]);

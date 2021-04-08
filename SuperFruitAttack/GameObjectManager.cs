@@ -149,7 +149,6 @@ namespace SuperFruitAttack
                 //is deleted and removed from GameObjectManager.
                 if(collectibles[i].CheckCollision(player) == true)
                 {
-            
                     RemoveObject(collectibles[i]);
                 }
             }
@@ -161,11 +160,11 @@ namespace SuperFruitAttack
                     {
                         
                         enemies[j].TakeDamage(6);
-                        
                         if(enemies[j].Health <= 0)
                         {
                             RemoveObject(enemies[j]);
                         }
+                        RemoveObject(projectiles[i]);
                     }   
                 }
                 if(projectiles[i].CheckCollision(player) == true && projectiles[i].IsPlayerBullet == false)

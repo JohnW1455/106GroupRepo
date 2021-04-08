@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Media;
 namespace SuperFruitAttack
 {
     public enum GameStages { menu, instructions, gamePlay, gameOver, winGame, transition, pause};
-    public enum PlayerState { faceLeft, faceRight, walkLeft, walkRight, jumpLeft, jumpRight, dead};
+    public enum PlayerState { faceLeft, faceRight, walkLeft, walkRight, jumpLeft, jumpRight};
     public class Game1 : Game
     {
         public const int RESOLUTION = 32;

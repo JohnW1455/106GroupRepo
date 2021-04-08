@@ -48,6 +48,7 @@ namespace SuperFruitAttack
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            MediaPlayer.Volume = .1f;
             status = GameStages.menu;
             transitionTime = 2;
             base.Initialize();
@@ -58,7 +59,7 @@ namespace SuperFruitAttack
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Resources.Init(Content);
             LevelManager.LoadLevels();
-            //
+            
             gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
             pauseButton = Content.Load<Texture2D>("Images/buttons/pause button");
             resumeButton = Content.Load<Texture2D>("Images/buttons/Resume");
@@ -135,6 +136,10 @@ namespace SuperFruitAttack
                     case GameStages.gamePlay:
                         GameObjectManager.Tick(gameTime);
                         GameObjectManager.CheckCollision();
+                        if (GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
+                        {
+                            status = GameStages.transition;
+                        }
                         if(GameObjectManager.Player.Health == 0 || GameObjectManager.Player == null)
                         {
                             status = GameStages.gameOver;

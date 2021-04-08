@@ -56,11 +56,12 @@ namespace SuperFruitAttack
                 case "collectible":
                     return new Collectible(texture, box);
                 case "platform":
-                    return new Platform(texture, box);
                 case "ground":
                     return new Platform(texture, box);
+                case "levelflag":
+                    return new Flag(texture, box);
                 default:
-                    throw new ArgumentException($"{name} is not a valid GameObject type");
+                    throw new ArgumentException($"{name.ToLower()} is not a valid GameObject type");
             }
 
         }

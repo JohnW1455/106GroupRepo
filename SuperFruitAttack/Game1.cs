@@ -36,7 +36,7 @@ namespace SuperFruitAttack
         private Button pause;
         private SpriteFont arial16bold;
         private double transitionTime;
-        private int levelCount;
+
 
         public Game1()
         {
@@ -183,6 +183,7 @@ namespace SuperFruitAttack
             {
                 if(pause.IsClicked(previousMouse) == true)
                 {
+                    pause.Image = resumeButton;
                     status = GameStages.gamePlay;
                 }
             }
@@ -213,6 +214,7 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.gamePlay:
                     GameObjectManager.Draw(_spriteBatch);
+                    pause.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:
                     _spriteBatch.DrawString(arial16bold, "Loading", 

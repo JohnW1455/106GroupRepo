@@ -5,6 +5,7 @@ using SuperFruitAttack.Colliders;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace SuperFruitAttack
 {
@@ -33,6 +34,7 @@ namespace SuperFruitAttack
         public Vector2 MoveSpeed
         {
             get { return moveSpeed; }
+            set { moveSpeed = value; }
         }
         public PlayerState PState
         {
@@ -328,6 +330,8 @@ namespace SuperFruitAttack
                             true,
                             new Vector2(5f, 0)));
                 }
+                
+                MediaPlayer.Play(Game1.ShootSound);
             }
             // Sets the prevMouse state to the current mouse
             prevMouse = current;

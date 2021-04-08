@@ -19,6 +19,7 @@ namespace SuperFruitAttack
     {
        
         private static Player player;
+        private static Flag flag;
         //These are the lists that'll hold all the gameObjects that will be in the game.
         private static List<GameObject> items;
         private static List<Enemy> enemies;
@@ -41,6 +42,7 @@ namespace SuperFruitAttack
         }
         
         public static Player Player => player;
+        public static Flag Flag => flag;
         /// <summary>
         /// This method adds any type of game Object to their respective list.
         /// </summary>
@@ -69,6 +71,10 @@ namespace SuperFruitAttack
             else if(thing is Platform)
             {
                 platforms.Add((Platform)thing);
+            }
+            else if (thing is Flag f)
+            {
+                flag = f;
             }
         }
        /// <summary>
@@ -99,6 +105,10 @@ namespace SuperFruitAttack
             {
                 player = null;
             }
+            else if (thing is Flag)
+            {
+                flag = null;
+            }
         }
 
        public static void Reset()
@@ -108,6 +118,7 @@ namespace SuperFruitAttack
            collectibles.Clear();
            platforms.Clear();
            player = null;
+           flag = null;
        }
 
         /// <summary>
@@ -179,7 +190,7 @@ namespace SuperFruitAttack
 
         public static void Tick(GameTime gameTime)
         {
-            player?.Tick(gameTime);
+            player.Tick(gameTime);
             foreach (Enemy enemy in enemies)
             {
                 enemy.Tick(gameTime);
@@ -191,9 +202,11 @@ namespace SuperFruitAttack
             }
         }
 
+      
         public static void Draw(SpriteBatch sb)
         {
             player.Draw(sb);
+            flag.Draw(sb);
             foreach(Platform platform in platforms)
             {
                 platform.Draw(sb);

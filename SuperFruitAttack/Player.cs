@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using SuperFruitAttack.Colliders;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace SuperFruitAttack
 {
@@ -33,6 +34,7 @@ namespace SuperFruitAttack
         public Vector2 MoveSpeed
         {
             get { return moveSpeed; }
+            set { moveSpeed = value; }
         }
         public PlayerState PState
         {
@@ -55,7 +57,7 @@ namespace SuperFruitAttack
         {
             health = playerHealth;
             moveSpeed = new Vector2(playerMS, 0);
-            gravity = new Vector2(0, .9f);
+            gravity = new Vector2(0, 0.9f);
             playerVelocity = new Vector2(0, 0);
             pState = PlayerState.faceRight;
             jumpVelocity = new Vector2(0, -15.0f);
@@ -287,7 +289,7 @@ namespace SuperFruitAttack
 		/// </summary>
 		public void ApplyGravity()
         {
-            // Adds the gravity to the player velocity
+            // Adds the acceleration to the player velocity
             playerVelocity += gravity;
             // Adds the velocity to the player position
             this.colliderObject.Position = this.colliderObject.Position + playerVelocity;
@@ -328,6 +330,8 @@ namespace SuperFruitAttack
                             true,
                             new Vector2(5f, 0)));
                 }
+                
+                MediaPlayer.Play(Game1.ShootSound);
             }
             // Sets the prevMouse state to the current mouse
             prevMouse = current;

@@ -8,6 +8,7 @@ using System.Linq;
 using SuperFruitAttack.Colliders;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Windows;
 using Microsoft.Xna.Framework.Media;
 
 namespace SuperFruitAttack
@@ -201,8 +202,17 @@ namespace SuperFruitAttack
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            _spriteBatch.Begin();
+            if (GameObjectManager.Player != null)
+            {
+                _spriteBatch.Begin(transformMatrix: GameObjectManager.CameraMatrix(
+                    _graphics.PreferredBackBufferWidth,
+                    _graphics.PreferredBackBufferHeight,
+                    2000, 2000));
+            }
+            else
+            {
+                _spriteBatch.Begin();
+            }
             // TODO: Add your drawing code here
             switch(status)
             {

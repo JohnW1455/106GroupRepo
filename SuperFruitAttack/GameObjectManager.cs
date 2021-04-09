@@ -7,6 +7,8 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Windows;
+using Microsoft.Xna.Framework.Media;
 
 
 namespace SuperFruitAttack
@@ -200,6 +202,34 @@ namespace SuperFruitAttack
             }
         }
 
+        public static Matrix CameraMatrix(int screen_X, int screen_Y, int max_X, int max_Y)
+        {
+            float scaleFactor = 1.5f;
+            // Calculates the X translation
+            float translate_X = (player.X + 16) - (screen_X / (2 * scaleFactor));
+            float translate_Y = (player.Y + 16) - (screen_Y / (2 * scaleFactor));
+            // Corrects the translations so that they don't go out of bounds
+            if (translate_X < 0)
+            {
+                translate_X = 0;
+            }
+            else if (translate_X > max_X - (screen_X / scaleFactor))
+            {
+                translate_X = max_X - (screen_X / scaleFactor);
+            }
+            if (translate_Y < 0)
+            {
+                translate_Y = 0;
+            }
+            else if (translate_Y > max_Y - (screen_Y / scaleFactor))
+            {
+                translate_Y = max_Y - (screen_Y / scaleFactor);
+            }
+            Matrix translation = Matrix.CreateTranslation(-translate_X, -translate_Y, 0);
+            Matrix scaling = Matrix.CreateScale(scaleFactor, scaleFactor, 1f);
+            Matrix result = Matrix.Multiply(translation, scaling);
+            return result;
+        }
       
         public static void Draw(SpriteBatch sb)
         {

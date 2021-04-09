@@ -30,6 +30,7 @@ namespace SuperFruitAttack
         public static int CurrentLevel
         {
             get { return _currentLevel; }
+            set { _currentLevel = value; }
         }
         public static int LevelCount
         {

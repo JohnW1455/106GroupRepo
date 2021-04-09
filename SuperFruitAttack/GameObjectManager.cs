@@ -110,7 +110,7 @@ namespace SuperFruitAttack
                 flag = null;
             }
         }
-
+       
        public static void Reset()
        {
            enemies.Clear();
@@ -149,7 +149,6 @@ namespace SuperFruitAttack
                 //is deleted and removed from GameObjectManager.
                 if(collectibles[i].CheckCollision(player) == true)
                 {
-            
                     RemoveObject(collectibles[i]);
                 }
             }
@@ -159,11 +158,13 @@ namespace SuperFruitAttack
                 {
                     if(projectiles[i].CheckCollision(enemies[j]) == true && projectiles[i].IsPlayerBullet == true)
                     {
+                        
                         enemies[j].TakeDamage(6);
                         if(enemies[j].Health <= 0)
                         {
                             RemoveObject(enemies[j]);
                         }
+                        RemoveObject(projectiles[i]);
                     }   
                 }
                 if(projectiles[i].CheckCollision(player) == true && projectiles[i].IsPlayerBullet == false)

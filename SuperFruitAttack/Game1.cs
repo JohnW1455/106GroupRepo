@@ -114,7 +114,8 @@ namespace SuperFruitAttack
                 switch(status)
                 {
                     case GameStages.menu:
-                        if(start.IsClicked(previousMouse) == true)
+                        LevelManager.CurrentLevel = 0;
+                        if (start.IsClicked(previousMouse) == true)
                         {
                             status = GameStages.transition;
                         }
@@ -136,12 +137,12 @@ namespace SuperFruitAttack
                     case GameStages.gamePlay:
                         GameObjectManager.Tick(gameTime);
                         GameObjectManager.CheckCollision();
-                        if (LevelManager.CurrentLevel < LevelManager.LevelCount - 1 && 
+                        if (LevelManager.CurrentLevel < LevelManager.LevelCount && 
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                         {
                             status = GameStages.transition;
                         }
-                        else if(LevelManager.CurrentLevel == LevelManager.LevelCount - 1 &&
+                        else if(LevelManager.CurrentLevel == LevelManager.LevelCount &&
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                         {
                             status = GameStages.winGame;
@@ -155,14 +156,12 @@ namespace SuperFruitAttack
                             status = GameStages.pause;
                             pause.Image = resumeButton;
                         }
-                        
-                        
-
                         break;
                     case GameStages.transition:
                         transitionTime -= gameTime.ElapsedGameTime.TotalSeconds;
                         if(transitionTime <= 0)
                         {
+
                             LevelManager.NextLevel();
                             status = GameStages.gamePlay;
                             transitionTime = 2;
@@ -171,14 +170,15 @@ namespace SuperFruitAttack
                     case GameStages.winGame:
                         if(menu.IsClicked(previousMouse) == true )
                         {
-                            LevelManager.CurrentLevel = 1;
+                           
+                            LevelManager.RestartLevel();
                             status = GameStages.menu;
                         }
                         break;
                     case GameStages.gameOver:
                         if(menu.IsClicked(previousMouse) == true)
                         {
-                            LevelManager.CurrentLevel = 1;
+                            LevelManager.RestartLevel();
                             status = GameStages.menu;
 
                         }

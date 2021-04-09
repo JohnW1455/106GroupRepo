@@ -52,6 +52,10 @@ namespace SuperFruitAttack
         {
             GameObjectManager.Reset();
             _currentLevel = 0;
+            foreach (var obj in _Levels[_currentLevel].Objects)
+            {
+                GameObjectManager.AddObject(obj);
+            }
         }
     }
 }

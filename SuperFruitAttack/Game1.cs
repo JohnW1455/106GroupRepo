@@ -25,7 +25,6 @@ namespace SuperFruitAttack
         private Texture2D startButton;
         private Texture2D instructionsButton;
         private Texture2D menuBtton;
-        private Texture2D playerAvatar;
         private Texture2D pauseButton;
         private Texture2D resumeButton;
 
@@ -66,7 +65,6 @@ namespace SuperFruitAttack
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
-            playerAvatar = Content.Load<Texture2D>("Images/Player/simple stickman");
             pause = new Button(pauseButton,
                                _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 4,
                                _graphics.PreferredBackBufferHeight / 2,
@@ -125,8 +123,11 @@ namespace SuperFruitAttack
                         }
                         break;
                     case GameStages.instructions:
+                        menu.Y = 10;
+                        start.Y = 50;
                         if(menu.IsClicked(previousMouse) == true)
                         {
+                            start.Y = _graphics.PreferredBackBufferHeight / 2;
                             status = GameStages.menu;
                         }
                         if(start.IsClicked(previousMouse) == true)

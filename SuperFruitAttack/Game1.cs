@@ -69,26 +69,26 @@ namespace SuperFruitAttack
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
             playerAvatar = Content.Load<Texture2D>("Images/Player/simple stickman");
             pause = new Button(pauseButton,
-                               _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 2,
+                               _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 4,
                                _graphics.PreferredBackBufferHeight / 2,
-                               pauseButton.Width,
-                               pauseButton.Height);
+                               pauseButton.Width/2,
+                               pauseButton.Height/2);
 
             start = new Button( startButton,
-                                _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2,
+                                _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 4,
                                 _graphics.PreferredBackBufferHeight / 2 ,
-                                startButton.Width,
-                                startButton.Height);
+                                startButton.Width/2,
+                                startButton.Height/2);
             instructions = new Button(instructionsButton,
-                                      _graphics.PreferredBackBufferWidth / 2 - instructionsButton.Width / 2,
+                                      _graphics.PreferredBackBufferWidth / 2 - instructionsButton.Width / 4,
                                       _graphics.PreferredBackBufferHeight / 2 + 150,
-                                      instructionsButton.Width,
-                                      instructionsButton.Height);
+                                      instructionsButton.Width/2,
+                                      instructionsButton.Height/2);
             menu = new Button(menuBtton,
-                              _graphics.PreferredBackBufferWidth / 2 - menuBtton.Width / 2,
+                              _graphics.PreferredBackBufferWidth / 2 - menuBtton.Width / 4,
                               _graphics.PreferredBackBufferHeight / 2 - menuBtton.Height,
-                              menuBtton.Width,
-                              menuBtton.Height);
+                              menuBtton.Width/2,
+                              menuBtton.Height/2);
 
             // Used to print out variables during gameplay for debugging
             arial16bold = Content.Load<SpriteFont>("arial16bold");
@@ -115,7 +115,8 @@ namespace SuperFruitAttack
                 switch(status)
                 {
                     case GameStages.menu:
-                        if(start.IsClicked(previousMouse) == true)
+                        LevelManager.CurrentLevel = 0;
+                        if (start.IsClicked(previousMouse) == true)
                         {
                             status = GameStages.transition;
                         }
@@ -135,14 +136,16 @@ namespace SuperFruitAttack
                         }
                         break;
                     case GameStages.gamePlay:
+                        pause.X = _graphics.PreferredBackBufferWidth - pause.Width - 10;
+                        pause.Y = 10;
                         GameObjectManager.Tick(gameTime);
                         GameObjectManager.CheckCollision();
-                        if (LevelManager.CurrentLevel < LevelManager.LevelCount - 1 && 
+                        if (LevelManager.CurrentLevel < LevelManager.LevelCount && 
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                         {
                             status = GameStages.transition;
                         }
-                        else if(LevelManager.CurrentLevel == LevelManager.LevelCount - 1 &&
+                        else if(LevelManager.CurrentLevel == LevelManager.LevelCount &&
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                         {
                             status = GameStages.winGame;
@@ -156,9 +159,6 @@ namespace SuperFruitAttack
                             status = GameStages.pause;
                             pause.Image = resumeButton;
                         }
-                        
-                        
-
                         break;
                     case GameStages.transition:
                         transitionTime -= gameTime.ElapsedGameTime.TotalSeconds;
@@ -172,16 +172,15 @@ namespace SuperFruitAttack
                     case GameStages.winGame:
                         if(menu.IsClicked(previousMouse) == true )
                         {
-                            LevelManager.CurrentLevel = 1;
+                            LevelManager.RestartLevel();
                             status = GameStages.menu;
                         }
                         break;
                     case GameStages.gameOver:
                         if(menu.IsClicked(previousMouse) == true)
                         {
-                            LevelManager.CurrentLevel = 1;
+                            LevelManager.RestartLevel();
                             status = GameStages.menu;
-
                         }
                         break;  
                 }
@@ -254,6 +253,10 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.pause:
                     pause.Draw(_spriteBatch);
+                    _spriteBatch.DrawString(arial16bold, "PAUSED",
+                                    new Vector2(_graphics.PreferredBackBufferWidth / 2 - 50,
+                                _graphics.PreferredBackBufferHeight / 2 - 200),
+                                Color.White);
                     break;
             }
             _spriteBatch.End();

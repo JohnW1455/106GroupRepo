@@ -21,7 +21,6 @@ namespace SuperFruitAttack
         public override void Tick(GameTime time)
         {
             int posCompare = GameObjectManager.Player.X - this.X;
-
             triggerTime += time.ElapsedGameTime.TotalSeconds;
 
             if (triggerTime >= 2)

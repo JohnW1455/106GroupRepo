@@ -28,6 +28,9 @@ namespace SuperFruitAttack
         private static List<Collectible> collectibles;
         private static List<Projectile> projectiles;
         private static List<Platform> platforms;
+        private static List<GameObject> toRemove;
+        private static List<GameObject> toAdd;
+        private static bool checkingCollisions;
         /// <summary>
         /// This constructor instantiates all the gameObjects in the game, including the player.
         /// </summary>
@@ -41,6 +44,8 @@ namespace SuperFruitAttack
             enemies = new List<Enemy>();
             items = new List<GameObject>();
             platforms = new List<Platform>();
+            toAdd = new List<GameObject>();
+            toRemove = new List<GameObject>();
         }
         
         public static Player Player => player;
@@ -52,6 +57,11 @@ namespace SuperFruitAttack
         /// object manager class.</param>
         public static void AddObject(GameObject thing)
         {
+            if (checkingCollisions)
+            {
+                toAdd.Add(thing);
+                return;
+            }
             //Here, we categorize the gameObject into its respective subclass object.
             //For each type of object, we add it to its respective list.
             if (thing is Enemy)
@@ -85,6 +95,11 @@ namespace SuperFruitAttack
        /// <param name="thing">This is the specified object that'll be removed.</param>
         public static void RemoveObject(GameObject thing)
         {
+            if (checkingCollisions)
+            {
+                toRemove.Add(thing);
+                return;
+            }
             //Here, we categorize the gameObject into its respective subclass object.
             //For each type of object, we remove it from its respective list.
             if (thing is Enemy)
@@ -119,6 +134,8 @@ namespace SuperFruitAttack
            projectiles.Clear();
            collectibles.Clear();
            platforms.Clear();
+           toAdd.Clear();
+           toRemove.Clear();
            player = null;
            flag = null;
        }
@@ -129,6 +146,7 @@ namespace SuperFruitAttack
         /// </summary>
         public static void CheckCollision()
         {
+            checkingCollisions = true;
             //I loop through the enemy objects and check if they collide with the player.
             for (var i = enemies.Count - 1; i >= 0; i--)
             {
@@ -160,7 +178,6 @@ namespace SuperFruitAttack
                 {
                     if(projectiles[i].CheckCollision(enemies[j]) == true && projectiles[i].IsPlayerBullet == true)
                     {
-                        
                         enemies[j].TakeDamage(6);
                         if(enemies[j].Health <= 0)
                         {
@@ -185,6 +202,17 @@ namespace SuperFruitAttack
                         RemoveObject(projectiles[i]);
                     }
                 }
+            }
+
+            checkingCollisions = false;
+            foreach (var add in toAdd)
+            {
+                AddObject(add);
+            }
+
+            foreach (var remove in toRemove)
+            {
+                RemoveObject(remove);
             }
         }
 

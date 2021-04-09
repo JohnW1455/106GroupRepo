@@ -31,7 +31,29 @@ namespace SuperFruitAttack
             this.image = image;
             box = new Rectangle(x, y, width, height);
         }
+        public int X
+        {
+            get { return box.X; }
+            set { box.X = value; }
+        }
 
+        public int Y
+        {
+            get { return box.Y; }
+            set { box.Y = value; }
+        }
+
+        public int Width
+        {
+            get { return box.Width; }
+            set { box.Width = value; }
+        }
+
+        public int Height
+        {
+            get { return box.Height; }
+            set { box.Height = value; }
+        }
         public Texture2D Image
         {
             get { return image; }

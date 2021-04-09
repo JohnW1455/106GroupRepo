@@ -344,7 +344,7 @@ namespace SuperFruitAttack
                     GameObjectManager.AddObject(
                         new Projectile(
                             Resources.GetTexture("simple ball"),
-                            new CircleCollider(this.X, this.Y + (this.Height / 2), 2),
+                            new CircleCollider(this.X, this.Y + (this.Height / 2), 5),
                             true,
                             new Vector2(-5f, 0)));
                 }
@@ -356,7 +356,7 @@ namespace SuperFruitAttack
                         new Projectile(
                             Resources.GetTexture("simple ball"),
                             new CircleCollider(this.X + this.Width, 
-                                               this.Y + (this.Height / 2), 2),
+                                               this.Y + (this.Height / 2), 5),
                             true,
                             new Vector2(5f, 0)));
                 }

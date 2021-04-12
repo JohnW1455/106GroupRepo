@@ -261,7 +261,11 @@ namespace SuperFruitAttack
       
         public static void Draw(SpriteBatch sb)
         {
-            player.Draw(sb);
+            if(player != null)
+            {
+                player.Draw(sb);
+            }
+            
             flag.Draw(sb);
             foreach(Platform platform in platforms)
             {

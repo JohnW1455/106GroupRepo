@@ -21,8 +21,11 @@ namespace SuperFruitAttack
         public static Song ShootSound;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
         private MouseState previousMouse;
+
         private GameStages status;
+
         private Texture2D startButton;
         private Texture2D instructionsButton;
         private Texture2D menuBtton;
@@ -48,6 +51,7 @@ namespace SuperFruitAttack
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
             MediaPlayer.Volume = .1f;
             status = GameStages.menu;
             transitionTime = 2;
@@ -66,6 +70,7 @@ namespace SuperFruitAttack
             startButton = Content.Load<Texture2D>("start button");
             instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
+
             pause = new Button(pauseButton,
                                _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 4,
                                _graphics.PreferredBackBufferHeight / 2,
@@ -79,7 +84,7 @@ namespace SuperFruitAttack
                                 startButton.Height/2);
             instructions = new Button(instructionsButton,
                                       _graphics.PreferredBackBufferWidth / 2 - instructionsButton.Width / 4,
-                                      _graphics.PreferredBackBufferHeight / 2 + 150,
+                                      _graphics.PreferredBackBufferHeight / 2 + 100,
                                       instructionsButton.Width/2,
                                       instructionsButton.Height/2);
             menu = new Button(menuBtton,
@@ -119,13 +124,14 @@ namespace SuperFruitAttack
                             status = GameStages.transition;
                         }
                         else if(instructions.IsClicked(previousMouse) == true)
-                        {
+                        { 
+                            menu.Y = _graphics.PreferredBackBufferHeight / 2 - 50;
                             status = GameStages.instructions;
                         }
                         break;
                     case GameStages.instructions:
-                        menu.Y = 10;
-                        start.Y = 50;
+                        menu.Y = 30;
+                        start.Y = 120;
                         if(menu.IsClicked(previousMouse) == true)
                         {
                             start.Y = _graphics.PreferredBackBufferHeight / 2;
@@ -146,7 +152,7 @@ namespace SuperFruitAttack
                         {
                             status = GameStages.transition;
                         }
-                        else if(LevelManager.CurrentLevel == LevelManager.LevelCount &&
+                        if(LevelManager.CurrentLevel == LevelManager.LevelCount &&
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                         {
                             status = GameStages.winGame;
@@ -173,14 +179,13 @@ namespace SuperFruitAttack
                     case GameStages.winGame:
                         if(menu.IsClicked(previousMouse) == true )
                         {
-                            LevelManager.RestartLevel();
                             status = GameStages.menu;
                         }
                         break;
                     case GameStages.gameOver:
+                       
                         if(menu.IsClicked(previousMouse) == true)
                         {
-                            LevelManager.RestartLevel();
                             status = GameStages.menu;
                         }
                         break;  
@@ -194,7 +199,6 @@ namespace SuperFruitAttack
                     status = GameStages.gamePlay;
                 }
             }
-            
             previousMouse = Mouse.GetState();
             base.Update(gameTime);
         }
@@ -219,12 +223,19 @@ namespace SuperFruitAttack
                 case GameStages.menu:
                     _spriteBatch.DrawString(gameTitle, "Super Fruit Attack",
                         new Vector2(_graphics.PreferredBackBufferWidth / 2 - 50,
-                                    _graphics.PreferredBackBufferHeight / 2 - 200),
+                                    _graphics.PreferredBackBufferHeight / 2 - 150),
                                     Color.White);
                     start.Draw(_spriteBatch);
                     instructions.Draw(_spriteBatch);
                     break;
                 case GameStages.instructions:
+                    _spriteBatch.DrawString(arial16bold, "A - move left \n" +
+                                                         "D - move right \n" +
+                                                         "Space - Jump \n" +
+                                                         "Left Mouse Button - Shoot",
+                                            new Vector2(_graphics.PreferredBackBufferWidth / 2 - 60,
+                                                        _graphics.PreferredBackBufferHeight / 2 ),
+                                                        Color.White);
                     menu.Draw(_spriteBatch);
                     start.Draw(_spriteBatch);
                     break;
@@ -246,11 +257,12 @@ namespace SuperFruitAttack
                     menu.Draw(_spriteBatch);
                     break;
                 case GameStages.gameOver:
+                    menu.Draw(_spriteBatch);
                     _spriteBatch.DrawString(gameTitle, "You Died",
                                 new Vector2(_graphics.PreferredBackBufferWidth/2 - 50,
-                                _graphics.PreferredBackBufferHeight/2 - 200),
+                                _graphics.PreferredBackBufferHeight/2 - 150),
                                 Color.White);
-                    menu.Draw(_spriteBatch);
+                    
                     break;
                 case GameStages.pause:
                     pause.Draw(_spriteBatch);

@@ -211,7 +211,7 @@ namespace SuperFruitAttack
                 _spriteBatch.Begin(transformMatrix: GameObjectManager.CameraMatrix(
                     _graphics.PreferredBackBufferWidth,
                     _graphics.PreferredBackBufferHeight,
-                    2000, 2000));
+                    LevelManager.CurrentLevel.PixelWidth, LevelManager.CurrentLevel.PixelHeight));
             }
             else
             {

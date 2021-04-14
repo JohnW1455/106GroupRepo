@@ -144,7 +144,7 @@ namespace SuperFruitAttack
         /// This method checks all the objects and performs specific actions for when specific objects
         /// collide.
         /// </summary>
-        public static void CheckCollision()
+        private static void CheckCollision()
         {
             
             //I loop through the enemy objects and check if they collide with the player.
@@ -211,7 +211,6 @@ namespace SuperFruitAttack
             {
                 player.Tick(gameTime);
             }
-
             ticking = true;
             player.Tick(gameTime);
             foreach (Enemy enemy in enemies)

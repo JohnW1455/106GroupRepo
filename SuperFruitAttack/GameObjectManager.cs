@@ -211,6 +211,7 @@ namespace SuperFruitAttack
             {
                 player.Tick(gameTime);
             }
+
             ticking = true;
             player.Tick(gameTime);
             foreach (Enemy enemy in enemies)

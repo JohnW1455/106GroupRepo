@@ -36,6 +36,7 @@ namespace SuperFruitAttack
         public int Health
         {
             get { return health; }
+            set { health = value; }
         }
         public Vector2 MoveSpeed
         {
@@ -65,6 +66,12 @@ namespace SuperFruitAttack
         {
             get { return wallClimb; }
             set { wallClimb = value; }
+        }
+
+        public Vector2 JumpVelocity
+        {
+            get { return jumpVelocity; }
+            set { jumpVelocity = value; }
         }
 
         // Constructor
@@ -331,6 +338,7 @@ namespace SuperFruitAttack
         /// </summary>
         private void FireGun()
         {
+            KeyboardState shootKey = Keyboard.GetState();
             MouseState current = Mouse.GetState();
             // Checks to see if the user wanted to fire the gun and if it is a single press
             if (current.LeftButton == ButtonState.Pressed && 

@@ -30,7 +30,7 @@ namespace SuperFruitAttack
         private static List<Platform> platforms;
         private static List<GameObject> toRemove;
         private static List<GameObject> toAdd;
-        private static bool checkingCollisions;
+        private static bool ticking;
         /// <summary>
         /// This constructor instantiates all the gameObjects in the game, including the player.
         /// </summary>
@@ -57,7 +57,7 @@ namespace SuperFruitAttack
         /// object manager class.</param>
         public static void AddObject(GameObject thing)
         {
-            if (checkingCollisions)
+            if (ticking)
             {
                 toAdd.Add(thing);
                 return;
@@ -95,7 +95,7 @@ namespace SuperFruitAttack
        /// <param name="thing">This is the specified object that'll be removed.</param>
         public static void RemoveObject(GameObject thing)
         {
-            if (checkingCollisions)
+            if (ticking)
             {
                 toRemove.Add(thing);
                 return;
@@ -146,7 +146,7 @@ namespace SuperFruitAttack
         /// </summary>
         public static void CheckCollision()
         {
-            checkingCollisions = true;
+            
             //I loop through the enemy objects and check if they collide with the player.
             for (var i = enemies.Count - 1; i >= 0; i--)
             {
@@ -203,8 +203,29 @@ namespace SuperFruitAttack
                     }
                 }
             }
+        }
 
-            checkingCollisions = false;
+        public static void Tick(GameTime gameTime)
+        {
+            if(player != null)
+            {
+                player.Tick(gameTime);
+            }
+            ticking = true;
+            player.Tick(gameTime);
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Tick(gameTime);
+            }
+
+            foreach (Projectile projectile in projectiles)
+            {
+                projectile.Tick();
+            }
+            CheckCollision();
+            
+            ticking = false;
+            
             foreach (var add in toAdd)
             {
                 AddObject(add);
@@ -216,27 +237,9 @@ namespace SuperFruitAttack
             }
         }
 
-        public static void Tick(GameTime gameTime)
-        {
-            if(player != null)
-            {
-                player.Tick(gameTime);
-            }
-            
-            foreach (Enemy enemy in enemies)
-            {
-                enemy.Tick(gameTime);
-            }
-
-            foreach (Projectile projectile in projectiles)
-            {
-                projectile.Tick();
-            }
-        }
-
         public static Matrix CameraMatrix(int screen_X, int screen_Y, int max_X, int max_Y)
         {
-            float scaleFactor = 1.2f;
+            float scaleFactor = 1.15f;
             // Calculates the X translation
             float translate_X = (player.X + 16) - (screen_X / (2 * scaleFactor));
             float translate_Y = (player.Y + 16) - (screen_Y / (2 * scaleFactor));

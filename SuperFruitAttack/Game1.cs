@@ -147,12 +147,14 @@ namespace SuperFruitAttack
                         pause.Y = 10;
                         GameObjectManager.Tick(gameTime);
                         GameObjectManager.CheckCollision();
-                        if (LevelManager.CurrentLevel < LevelManager.LevelCount && 
+                       
+                        if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 
+
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                         {
                             status = GameStages.transition;
                         }
-                        if(LevelManager.CurrentLevel == LevelManager.LevelCount &&
+                        if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                         {
                             status = GameStages.winGame;
@@ -211,7 +213,7 @@ namespace SuperFruitAttack
                 _spriteBatch.Begin(transformMatrix: GameObjectManager.CameraMatrix(
                     _graphics.PreferredBackBufferWidth,
                     _graphics.PreferredBackBufferHeight,
-                    2000, 2000));
+                    LevelManager.CurrentLevel.PixelWidth, LevelManager.CurrentLevel.PixelHeight));
             }
             else
             {

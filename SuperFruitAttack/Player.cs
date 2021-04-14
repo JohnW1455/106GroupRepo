@@ -36,6 +36,7 @@ namespace SuperFruitAttack
         public int Health
         {
             get { return health; }
+            set { health = value; }
         }
         public Vector2 MoveSpeed
         {
@@ -65,6 +66,12 @@ namespace SuperFruitAttack
         {
             get { return wallClimb; }
             set { wallClimb = value; }
+        }
+
+        public Vector2 JumpVelocity
+        {
+            get { return jumpVelocity; }
+            set { jumpVelocity = value; }
         }
 
         // Constructor

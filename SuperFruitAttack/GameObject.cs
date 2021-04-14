@@ -128,7 +128,12 @@ namespace SuperFruitAttack
         /// collided.</returns>
         public virtual bool CheckCollision(GameObject otherObject)
         {
-            return colliderObject.CheckCollision(otherObject.ColliderObject);
+            if(otherObject != null)
+            {
+                return colliderObject.CheckCollision(otherObject.ColliderObject);
+            }
+            return false;
+            
         }
 
     }

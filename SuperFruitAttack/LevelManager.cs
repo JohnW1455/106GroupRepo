@@ -45,9 +45,6 @@ namespace SuperFruitAttack
             {
                 GameObjectManager.AddObject(obj);
             }
-
         }
-
-        
     }
 }

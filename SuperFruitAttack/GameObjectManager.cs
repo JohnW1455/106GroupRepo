@@ -218,7 +218,11 @@ namespace SuperFruitAttack
 
         public static void Tick(GameTime gameTime)
         {
-            player.Tick(gameTime);
+            if(player != null)
+            {
+                player.Tick(gameTime);
+            }
+            
             foreach (Enemy enemy in enemies)
             {
                 enemy.Tick(gameTime);
@@ -265,8 +269,12 @@ namespace SuperFruitAttack
             {
                 player.Draw(sb);
             }
+            if(flag != null)
+            {
+                flag.Draw(sb);
+
+            }
             
-            flag.Draw(sb);
             foreach(Platform platform in platforms)
             {
                 platform.Draw(sb);

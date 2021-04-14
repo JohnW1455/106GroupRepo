@@ -147,20 +147,25 @@ namespace SuperFruitAttack
                         pause.Y = 10;
                         GameObjectManager.Tick(gameTime);
                         GameObjectManager.CheckCollision();
-                        if (LevelManager.CurrentLevel < LevelManager.LevelCount && 
+                        if(GameObjectManager.Flag != null && GameObjectManager.Player != null)
+                        {
+                            if (LevelManager.CurrentLevel < LevelManager.LevelCount && 
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
-                        {
-                            status = GameStages.transition;
+                            {
+                                status = GameStages.transition;
+                            }
+                            if(LevelManager.CurrentLevel == LevelManager.LevelCount &&
+                                GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
+                            {
+                                status = GameStages.winGame;
+                            }
+                            if(GameObjectManager.Player.Health <= 0)
+                            {
+                                status = GameStages.gameOver;
+                            }
+
                         }
-                        if(LevelManager.CurrentLevel == LevelManager.LevelCount &&
-                            GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
-                        {
-                            status = GameStages.winGame;
-                        }
-                        if(GameObjectManager.Player.Health <= 0)
-                        {
-                            status = GameStages.gameOver;
-                        }
+                        
                         if(pause.IsClicked(previousMouse) == true)
                         {
                             status = GameStages.pause;
@@ -195,7 +200,7 @@ namespace SuperFruitAttack
             {
                 if(pause.IsClicked(previousMouse) == true)
                 {
-                    pause.Image = resumeButton;
+                    pause.Image = pauseButton;
                     status = GameStages.gamePlay;
                 }
             }

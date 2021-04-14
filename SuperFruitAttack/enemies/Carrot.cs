@@ -23,7 +23,7 @@ namespace SuperFruitAttack
             int posCompare = GameObjectManager.Player.X - this.X;
             triggerTime += time.ElapsedGameTime.TotalSeconds;
 
-            if (triggerTime >= 2)
+            if (triggerTime >= 2 && posCompare != 0)
             {
                 GameObjectManager.AddObject(new Projectile(Resources.GetTexture("simple ball"),
                         new CircleCollider(this.X, this.Y, 5), false, new Vector2(5 * Math.Sign(posCompare), 0)));

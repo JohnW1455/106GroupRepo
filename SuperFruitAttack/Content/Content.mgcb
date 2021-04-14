@@ -122,6 +122,9 @@
 /processorParam:TextureFormat=Color
 /build:levelFlag.png
 
+#begin Levels/0.level
+/copy:Levels/0.level
+
 #begin Levels/playground.level
 /copy:Levels/playground.level
 

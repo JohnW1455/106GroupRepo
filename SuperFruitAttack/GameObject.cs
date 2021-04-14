@@ -136,5 +136,9 @@ namespace SuperFruitAttack
             
         }
 
+        public GameObject Copy()
+        {
+            return Create(image.Name, X, Y, image);
+        }
     }
 }

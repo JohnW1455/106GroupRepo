@@ -236,7 +236,7 @@ namespace SuperFruitAttack
 
         public static Matrix CameraMatrix(int screen_X, int screen_Y, int max_X, int max_Y)
         {
-            float scaleFactor = 1.5f;
+            float scaleFactor = 1.2f;
             // Calculates the X translation
             float translate_X = (player.X + 16) - (screen_X / (2 * scaleFactor));
             float translate_Y = (player.Y + 16) - (screen_Y / (2 * scaleFactor));

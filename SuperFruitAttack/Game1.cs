@@ -118,7 +118,7 @@ namespace SuperFruitAttack
                 switch(status)
                 {
                     case GameStages.menu:
-                        LevelManager.CurrentLevel = 0;
+                        LevelManager.CurrentLevelNumber = 0;
                         if (start.IsClicked(previousMouse) == true)
                         {
                             status = GameStages.transition;
@@ -147,25 +147,20 @@ namespace SuperFruitAttack
                         pause.Y = 10;
                         GameObjectManager.Tick(gameTime);
                         GameObjectManager.CheckCollision();
-                        if(GameObjectManager.Flag != null && GameObjectManager.Player != null)
-                        {
-                            if (LevelManager.CurrentLevel < LevelManager.LevelCount && 
+                        if (LevelManager.CurrentLevel < LevelManager.LevelCount && 
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
-                            {
-                                status = GameStages.transition;
-                            }
-                            if(LevelManager.CurrentLevel == LevelManager.LevelCount &&
-                                GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
-                            {
-                                status = GameStages.winGame;
-                            }
-                            if(GameObjectManager.Player.Health <= 0)
-                            {
-                                status = GameStages.gameOver;
-                            }
-
+                        {
+                            status = GameStages.transition;
                         }
-                        
+                        if(LevelManager.CurrentLevel == LevelManager.LevelCount &&
+                            GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
+                        {
+                            status = GameStages.winGame;
+                        }
+                        if(GameObjectManager.Player.Health <= 0)
+                        {
+                            status = GameStages.gameOver;
+                        }
                         if(pause.IsClicked(previousMouse) == true)
                         {
                             status = GameStages.pause;

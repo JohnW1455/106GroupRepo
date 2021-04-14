@@ -14,7 +14,7 @@ namespace SuperFruitAttack
 
         protected bool isActive;
 
-        protected string colEffect;
+        
 
         
 
@@ -26,11 +26,7 @@ namespace SuperFruitAttack
             set { isActive = value; }
         }
 
-        public string ColEffect
-        {
-            get { return colEffect; }
-            set { colEffect = value; }
-        }
+        
         
 
         //Constructor
@@ -40,28 +36,7 @@ namespace SuperFruitAttack
             //by default the collectible will be active
             IsActive = true;
 
-            Random rand = new Random();
-            int whichPower = rand.Next(2); //only either 0, or 1 for now for proof of concept
-
-            switch(whichPower)
-            {
-                case 0:
-                    ColEffect = "speedBoost";
-                    break;
-
-                case 1:
-                    ColEffect = "slowDown";
-                    
-                    break;
-
-                case 2://case to be used later
-                    ColEffect = "rappidFire";
-                    break;
-
-                case 3://case to be used later
-                    ColEffect = "lowGravity";
-                    break;
-            }
+            
 
 
         }
@@ -70,45 +45,12 @@ namespace SuperFruitAttack
         //Methods
 
 
-        public string TextMessage()
-        {
-            return "The mystery effect is " + ColEffect;
-        }
+        
 
         
-        public void OnCollect(Player player)
+        public virtual void OnCollect(Player player)
         {
-            int oldSpeed;
-            switch (colEffect)
-            {
-                case "speedBoost":
-
-                    oldSpeed = (int)player.MoveSpeed.X;
-                    player.MoveSpeed = new Vector2(oldSpeed+5, 0);
-                    break;
-
-                case "slowDown":
-                    oldSpeed = (int)player.MoveSpeed.X;
-                    if (oldSpeed > 5)
-                    {
-                        player.MoveSpeed = new Vector2(oldSpeed - 5, 0);
-                    }
-                    else if (oldSpeed > 1)
-                    {
-                        player.MoveSpeed = new Vector2(2, 0);
-                    }
-
-                    break;
-
-                case "lowGravity"://to be used later
-
-                    break;
-
-                case "rappidFire"://to be used later
-
-                    break;
-
-            }
+            
         }
 
         public override void Draw(SpriteBatch sb)

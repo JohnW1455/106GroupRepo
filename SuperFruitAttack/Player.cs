@@ -338,6 +338,7 @@ namespace SuperFruitAttack
         /// </summary>
         private void FireGun()
         {
+            KeyboardState shootKey = Keyboard.GetState();
             MouseState current = Mouse.GetState();
             // Checks to see if the user wanted to fire the gun and if it is a single press
             if (current.LeftButton == ButtonState.Pressed && 

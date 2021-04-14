@@ -206,7 +206,7 @@ namespace SuperFruitAttack
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            if (GameObjectManager.Player != null)
+            if (status == GameStages.gamePlay)
             {
                 _spriteBatch.Begin(transformMatrix: GameObjectManager.CameraMatrix(
                     _graphics.PreferredBackBufferWidth,
@@ -262,7 +262,6 @@ namespace SuperFruitAttack
                                 new Vector2(_graphics.PreferredBackBufferWidth/2 - 50,
                                 _graphics.PreferredBackBufferHeight/2 - 150),
                                 Color.White);
-                    
                     break;
                 case GameStages.pause:
                     pause.Draw(_spriteBatch);

@@ -131,5 +131,9 @@ namespace SuperFruitAttack
             return colliderObject.CheckCollision(otherObject.ColliderObject);
         }
 
+        public GameObject Copy()
+        {
+            return Create(image.Name, X, Y, image);
+        }
     }
 }

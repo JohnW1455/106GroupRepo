@@ -43,7 +43,7 @@ namespace SuperFruitAttack
             _currentLevel++;
             foreach (var obj in _Levels[_currentLevel - 1].Objects)
             {
-                GameObjectManager.AddObject(obj);
+                GameObjectManager.AddObject(obj is Platform ? obj : obj.Copy());
             }
 
         }

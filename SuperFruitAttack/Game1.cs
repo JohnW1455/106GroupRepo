@@ -118,7 +118,7 @@ namespace SuperFruitAttack
                 switch(status)
                 {
                     case GameStages.menu:
-                        LevelManager.CurrentLevel = 0;
+                        LevelManager.CurrentLevelNumber = 0;
                         if (start.IsClicked(previousMouse) == true)
                         {
                             status = GameStages.transition;
@@ -147,12 +147,12 @@ namespace SuperFruitAttack
                         pause.Y = 10;
                         GameObjectManager.Tick(gameTime);
                         GameObjectManager.CheckCollision();
-                        if (LevelManager.CurrentLevel < LevelManager.LevelCount && 
+                        if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                         {
                             status = GameStages.transition;
                         }
-                        if(LevelManager.CurrentLevel == LevelManager.LevelCount &&
+                        if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                         {
                             status = GameStages.winGame;
@@ -206,7 +206,7 @@ namespace SuperFruitAttack
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            if (GameObjectManager.Player != null)
+            if (status == GameStages.gamePlay)
             {
                 _spriteBatch.Begin(transformMatrix: GameObjectManager.CameraMatrix(
                     _graphics.PreferredBackBufferWidth,
@@ -262,7 +262,6 @@ namespace SuperFruitAttack
                                 new Vector2(_graphics.PreferredBackBufferWidth/2 - 50,
                                 _graphics.PreferredBackBufferHeight/2 - 150),
                                 Color.White);
-                    
                     break;
                 case GameStages.pause:
                     pause.Draw(_spriteBatch);

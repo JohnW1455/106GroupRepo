@@ -10,7 +10,9 @@ namespace SuperFruitAttack
     {
         private static readonly List<Level> _Levels = new List<Level>();
 
-        private static int _currentLevel;
+        private static int _currentLevelNumber;
+
+        public static Level CurrentLevel => _Levels[_currentLevelNumber - 1];
 
         public static void LoadLevels()
         {
@@ -27,10 +29,10 @@ namespace SuperFruitAttack
             }
         }
 
-        public static int CurrentLevel
+        public static int CurrentLevelNumber
         {
-            get { return _currentLevel; }
-            set { _currentLevel = value; }
+            get { return _currentLevelNumber; }
+            set { _currentLevelNumber = value; }
         }
         public static int LevelCount
         {
@@ -40,10 +42,10 @@ namespace SuperFruitAttack
         public static void NextLevel()
         {
             GameObjectManager.Reset();
-            _currentLevel++;
-            foreach (var obj in _Levels[_currentLevel - 1].Objects)
+            _currentLevelNumber++;
+            foreach (var obj in CurrentLevel.Objects)
             {
-                GameObjectManager.AddObject(obj);
+                GameObjectManager.AddObject(obj is Platform ? obj : obj.Copy());
             }
 
         }

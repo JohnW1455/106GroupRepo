@@ -224,8 +224,9 @@ namespace SuperFruitAttack
                 enemy.Tick(gameTime);
             }
 
-            foreach (Projectile projectile in projectiles)
+            for (var index = projectiles.Count - 1; index >= 0; index--)
             {
+                Projectile projectile = projectiles[index];
                 projectile.Tick();
             }
         }

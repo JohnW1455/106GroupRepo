@@ -150,10 +150,9 @@ namespace SuperFruitAttack
                     case GameStages.gameMode:
                         if(godSetting.IsClicked(previousMouse) == true)
                         {
-                            GameObjectManager.Player.Health = 1000;
                             status = GameStages.transition;
                         }
-                        else if(godSetting.IsClicked(previousMouse))
+                        else if(normalSetting.IsClicked(previousMouse))
                         {
                             status = GameStages.transition;
                         }
@@ -179,6 +178,7 @@ namespace SuperFruitAttack
                         pause.X = _graphics.PreferredBackBufferWidth - pause.Width - 10;
                         pause.Y = 10;
                         GameObjectManager.Tick(gameTime);
+                        GameObjectManager.CheckCollision();
                         if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 
 
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
@@ -205,6 +205,7 @@ namespace SuperFruitAttack
                         if(transitionTime <= 0)
                         {
                             LevelManager.NextLevel();
+                            GameObjectManager.Player.Health = 1000;
                             status = GameStages.gamePlay;
                             transitionTime = 2;
                         }

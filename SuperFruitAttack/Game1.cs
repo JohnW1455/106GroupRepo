@@ -130,6 +130,11 @@ namespace SuperFruitAttack
                         }
                         break;
                     case GameStages.gameMode:
+                        /*if(godSetting.IsClicked(previousMouse) == true)
+                        {
+                            GameObjectManager.Player.GodMode = true;
+                            status = GameStages.transition;
+                        }*/
                         if(normalSetting.IsClicked(previousMouse))
                         {
                             status = GameStages.transition;
@@ -149,7 +154,7 @@ namespace SuperFruitAttack
                         }
                         if(start.IsClicked(previousMouse) == true)
                         {
-                            status = GameStages.transition;
+                            status = GameStages.gameMode;
                         }
                         break;
                     case GameStages.gamePlay:
@@ -216,6 +221,11 @@ namespace SuperFruitAttack
                     pause.Image = pauseButton;
                     status = GameStages.gamePlay;
                 }
+                if(menu.IsClicked(previousMouse) == true)
+                {
+                    status = GameStages.menu;
+                }
+
             }
             previousKey = Keyboard.GetState();
             previousMouse = Mouse.GetState();
@@ -260,6 +270,23 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.gamePlay:
                     GameObjectManager.Draw(_spriteBatch);
+                    _spriteBatch.End();
+                    _spriteBatch.Begin();
+                    switch (GameObjectManager.Player.Health)
+                    {
+                        case 4:
+                            _spriteBatch.Draw(Resources.GetTexture("hpFull"), new Vector2(30,10), Color.White);
+                            break;
+                        case 3:
+                            _spriteBatch.Draw(Resources.GetTexture("hpThird"), new Vector2(30, 20), Color.White); 
+                            break;
+                        case 2:
+                            _spriteBatch.Draw(Resources.GetTexture("hpHalf"), new Vector2(30, 10), Color.White);
+                            break;
+                        case 1:
+                            _spriteBatch.Draw(Resources.GetTexture("hpQuart"), new Vector2(30, 10), Color.White);
+                            break;
+                    }
                     pause.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:
@@ -283,6 +310,7 @@ namespace SuperFruitAttack
                                 Color.White);
                     break;
                 case GameStages.pause:
+                    menu.Draw(_spriteBatch);
                     pause.Draw(_spriteBatch);
                     _spriteBatch.DrawString(arial16bold, "PAUSED",
                                     new Vector2(_graphics.PreferredBackBufferWidth / 2 - 50,

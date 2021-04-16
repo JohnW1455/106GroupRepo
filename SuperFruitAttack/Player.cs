@@ -388,7 +388,7 @@ namespace SuperFruitAttack
         public override void Draw(SpriteBatch sb)
         {
             // If the player is un-damageable this frame
-            if (godMode || invincible != 0)
+            if (godMode || invincible > 0)
             {
                 // If the player is wall climbing, do the following
                 if (wallClimb)
@@ -401,7 +401,7 @@ namespace SuperFruitAttack
                         sb.Draw(
                             playerWall,
                             this.ColliderObject.Bounds,
-                            Color.Gold);
+                            Color.Maroon);
                     }
                     else
                     {
@@ -410,7 +410,7 @@ namespace SuperFruitAttack
                             playerWall,
                             this.ColliderObject.Bounds,
                             null,
-                            Color.Gold,
+                            Color.Maroon,
                             0.0f,
                             Vector2.Zero,
                             SpriteEffects.FlipHorizontally,
@@ -424,7 +424,7 @@ namespace SuperFruitAttack
                     sb.Draw(
                         this.image,
                         this.ColliderObject.Bounds,
-                        Color.Gold);
+                        Color.Maroon);
                 }
                 else if (pState == PlayerState.jumpLeft || pState == PlayerState.walkLeft)
                 {
@@ -432,7 +432,7 @@ namespace SuperFruitAttack
                     sb.Draw(
                         playerRun,
                         this.ColliderObject.Bounds,
-                        Color.Gold);
+                        Color.Maroon);
                 }
                 else
                 {
@@ -441,7 +441,7 @@ namespace SuperFruitAttack
                         playerRun,
                         this.ColliderObject.Bounds,
                         null,
-                        Color.Gold,
+                        Color.Maroon,
                         0.0f,
                         Vector2.Zero,
                         SpriteEffects.FlipHorizontally,

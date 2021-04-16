@@ -48,5 +48,7 @@ namespace SuperFruitAttack
                 GameObjectManager.AddObject(obj is Platform ? obj : obj.Copy());
             }
         }
+
+
     }
 }

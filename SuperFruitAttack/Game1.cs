@@ -21,7 +21,6 @@ namespace SuperFruitAttack
     public class Game1 : Game
     {
         public const int RESOLUTION = 32;
-        public static Song ShootSound;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -39,7 +38,6 @@ namespace SuperFruitAttack
 
         private SpriteFont gameTitle;
         private Button normalSetting;
-        private Button godSetting;
         private Button start;
         private Button menu;
         private Button instructions;
@@ -58,8 +56,7 @@ namespace SuperFruitAttack
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            MediaPlayer.Volume = .1f;
+            
             status = GameStages.menu;
             transitionTime = 2;
             base.Initialize();
@@ -79,11 +76,6 @@ namespace SuperFruitAttack
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
             godMode = Content.Load<Texture2D>("Images/buttons/god mode");
             normalMode = Content.Load<Texture2D>("Images/buttons/normal mode");
-            godSetting = new Button(godMode,
-                                    _graphics.PreferredBackBufferWidth / 2 - godMode.Width - 20,
-                               _graphics.PreferredBackBufferHeight / 2,
-                               godMode.Width,
-                               godMode.Height);
             normalSetting = new Button(normalMode,
                                 _graphics.PreferredBackBufferWidth / 2 + 20,
                                _graphics.PreferredBackBufferHeight / 2,
@@ -113,16 +105,6 @@ namespace SuperFruitAttack
 
             // Used to print out variables during gameplay for debugging
             arial16bold = Content.Load<SpriteFont>("arial16bold");
-
-            ShootSound = Content.Load<Song>("boomph");
-
-            // TODO: use this.Content to load your game content here
-            // REMOVE AFTER TESTING
-            // REMOVE AFTER TESTING
-            // REMOVE AFTER TESTING
-            // REMOVE AFTER TESTING
-            // REMOVE AFTER TESTING
-            //LevelManager.NextLevel(); 
         }
 
         protected override void Update(GameTime gameTime)
@@ -148,12 +130,7 @@ namespace SuperFruitAttack
                         }
                         break;
                     case GameStages.gameMode:
-                        if(godSetting.IsClicked(previousMouse) == true)
-                        {
-                            GameObjectManager.Player.GodMode = true;
-                            status = GameStages.transition;
-                        }
-                        else if(godSetting.IsClicked(previousMouse))
+                        if(normalSetting.IsClicked(previousMouse))
                         {
                             status = GameStages.transition;
                         }
@@ -179,6 +156,7 @@ namespace SuperFruitAttack
                         pause.X = _graphics.PreferredBackBufferWidth - pause.Width - 10;
                         pause.Y = 10;
                         GameObjectManager.Tick(gameTime);
+                        GameObjectManager.CheckCollision();
                         if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 
 
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
@@ -313,7 +291,6 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.gameMode:
                     menu.Draw(_spriteBatch);
-                    godSetting.Draw(_spriteBatch);
                     normalSetting.Draw(_spriteBatch);
                     break;
             }

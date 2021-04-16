@@ -23,11 +23,11 @@ namespace SuperFruitAttack
         private Vector2 gravity;
         private PlayerState pState;
         private bool isGrounded;
-        private double reload;
         private MouseState prevMouse;
         private KeyboardState prevKey;
         private bool godMode;
         private bool wallClimb;
+        private int invincible;
         
         // Textures needed
         private Texture2D playerRun;
@@ -86,8 +86,8 @@ namespace SuperFruitAttack
             playerVelocity = new Vector2(0, 0);
             pState = PlayerState.faceRight;
             jumpVelocity = new Vector2(0, -15.0f);
-            reload = 0;
             isGrounded = true;
+            invincible = 0;
             prevMouse = Mouse.GetState();
             prevKey = Keyboard.GetState();
             // Loads textures
@@ -97,10 +97,12 @@ namespace SuperFruitAttack
 
         public void TakeDamage()
         {
-            // Only damages the player when they are not in god mode
-            if (!godMode)
+            // Only damages the player when they are not in god mode and not invincible
+            if (!godMode && invincible == 0)
             {
                 health--;
+                // Activates invincibilty for 30 ticks
+                invincible = 30;
             }
         }
 
@@ -322,6 +324,12 @@ namespace SuperFruitAttack
             // Sets wall climb to false. If the player is wall climbing the collisions
             // will set it back to true
             wallClimb = false;
+
+            // Decrements invincibility frames if the int is greater than 0
+            if (invincible != 0)
+            {
+                invincible--;
+            }
 
             // Collisions are handled in the object manager
         }

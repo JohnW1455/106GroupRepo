@@ -110,18 +110,6 @@
 /processorParam:TextureFormat=Color
 /build:Images/buttons/god mode.png
 
-#begin Images/buttons/hpThird.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/buttons/hpThird.png
-
 #begin Images/buttons/menu.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -298,18 +286,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:start button.png
-
-#begin Text/hpThird.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Text/hpThird.png
 
 #begin Text/Titles/Roboto36.spritefont
 /importer:FontDescriptionImporter

@@ -201,7 +201,6 @@ namespace SuperFruitAttack
                         if(transitionTime <= 0)
                         {
                             LevelManager.NextLevel();
-                            GameObjectManager.Player.Health = 1000;
                             status = GameStages.gamePlay;
                             transitionTime = 2;
                         }

@@ -23,11 +23,11 @@ namespace SuperFruitAttack
         private Vector2 gravity;
         private PlayerState pState;
         private bool isGrounded;
-        private double reload;
         private MouseState prevMouse;
         private KeyboardState prevKey;
         private bool godMode;
         private bool wallClimb;
+        private int invincible;
         
         // Textures needed
         private Texture2D playerRun;
@@ -86,8 +86,8 @@ namespace SuperFruitAttack
             playerVelocity = new Vector2(0, 0);
             pState = PlayerState.faceRight;
             jumpVelocity = new Vector2(0, -15.0f);
-            reload = 0;
             isGrounded = true;
+            invincible = 0;
             prevMouse = Mouse.GetState();
             prevKey = Keyboard.GetState();
             // Loads textures
@@ -97,10 +97,12 @@ namespace SuperFruitAttack
 
         public void TakeDamage()
         {
-            // Only damages the player when they are not in god mode
-            if (!godMode)
+            // Only damages the player when they are not in god mode and not invincible
+            if (!godMode && invincible == 0)
             {
                 health--;
+                // Activates invincibilty for 30 ticks
+                invincible = 30;
             }
         }
 
@@ -328,6 +330,12 @@ namespace SuperFruitAttack
             // will set it back to true
             wallClimb = false;
 
+            // Decrements invincibility frames if the int is greater than 0
+            if (invincible != 0)
+            {
+                invincible--;
+            }
+
             // Collisions are handled in the object manager
         }
 
@@ -387,24 +395,119 @@ namespace SuperFruitAttack
         /// <param name="sb">SpriteBatch used for drawing the object</param>
         public override void Draw(SpriteBatch sb)
         {
-            // If the player is wall climbing, do the following
-            if (wallClimb)
+            // If the player is un-damageable this frame
+            if (godMode || invincible != 0)
             {
-                // Checks the direction of the player and draws the sprite accordingly
-                if (pState == PlayerState.faceRight || pState == PlayerState.jumpRight
-                    || pState == PlayerState.walkRight)
+                // If the player is wall climbing, do the following
+                if (wallClimb)
                 {
-                    // Draws the sprite facing right
+                    // Checks the direction of the player and draws the sprite accordingly
+                    if (pState == PlayerState.faceRight || pState == PlayerState.jumpRight
+                        || pState == PlayerState.walkRight)
+                    {
+                        // Draws the sprite facing right
+                        sb.Draw(
+                            playerWall,
+                            this.ColliderObject.Bounds,
+                            Color.Gold);
+                    }
+                    else
+                    {
+                        // Draws the sprite facing left
+                        sb.Draw(
+                            playerWall,
+                            this.ColliderObject.Bounds,
+                            null,
+                            Color.Gold,
+                            0.0f,
+                            Vector2.Zero,
+                            SpriteEffects.FlipHorizontally,
+                            0.0f);
+                    }
+                }
+                // Otherwise, check the player's state and draw accordingly
+                else if (pState == PlayerState.faceLeft || pState == PlayerState.faceRight)
+                {
+                    // Draws a sprite that stares into your soul
                     sb.Draw(
-                        playerWall,
+                        this.image,
+                        this.ColliderObject.Bounds,
+                        Color.Gold);
+                }
+                else if (pState == PlayerState.jumpLeft || pState == PlayerState.walkLeft)
+                {
+                    // Draws the run sprite facing left
+                    sb.Draw(
+                        playerRun,
+                        this.ColliderObject.Bounds,
+                        Color.Gold);
+                }
+                else
+                {
+                    // Draws the run sprite facing right
+                    sb.Draw(
+                        playerRun,
+                        this.ColliderObject.Bounds,
+                        null,
+                        Color.Gold,
+                        0.0f,
+                        Vector2.Zero,
+                        SpriteEffects.FlipHorizontally,
+                        0.0f);
+                }
+            }
+            // If the player is damageable for this current frame
+            else
+            {
+                // If the player is wall climbing, do the following
+                if (wallClimb)
+                {
+                    // Checks the direction of the player and draws the sprite accordingly
+                    if (pState == PlayerState.faceRight || pState == PlayerState.jumpRight
+                        || pState == PlayerState.walkRight)
+                    {
+                        // Draws the sprite facing right
+                        sb.Draw(
+                            playerWall,
+                            this.ColliderObject.Bounds,
+                            Color.White);
+                    }
+                    else
+                    {
+                        // Draws the sprite facing left
+                        sb.Draw(
+                            playerWall,
+                            this.ColliderObject.Bounds,
+                            null,
+                            Color.White,
+                            0.0f,
+                            Vector2.Zero,
+                            SpriteEffects.FlipHorizontally,
+                            0.0f);
+                    }
+                }
+                // Otherwise, check the player's state and draw accordingly
+                else if (pState == PlayerState.faceLeft || pState == PlayerState.faceRight)
+                {
+                    // Draws a sprite that stares into your soul
+                    sb.Draw(
+                        this.image,
+                        this.ColliderObject.Bounds,
+                        Color.White);
+                }
+                else if (pState == PlayerState.jumpLeft || pState == PlayerState.walkLeft)
+                {
+                    // Draws the run sprite facing left
+                    sb.Draw(
+                        playerRun,
                         this.ColliderObject.Bounds,
                         Color.White);
                 }
                 else
                 {
-                    // Draws the sprite facing left
+                    // Draws the run sprite facing right
                     sb.Draw(
-                        playerWall,
+                        playerRun,
                         this.ColliderObject.Bounds,
                         null,
                         Color.White,
@@ -413,36 +516,6 @@ namespace SuperFruitAttack
                         SpriteEffects.FlipHorizontally,
                         0.0f);
                 }
-            }
-            // Otherwise, check the player's state and draw accordingly
-            else if (pState == PlayerState.faceLeft || pState == PlayerState.faceRight)
-            {
-                // Draws a sprite that stares into your soul
-                sb.Draw(
-                    this.image,
-                    this.ColliderObject.Bounds,
-                    Color.White);
-            }
-            else if (pState == PlayerState.jumpLeft || pState == PlayerState.walkLeft)
-            {
-                // Draws the run sprite facing left
-                sb.Draw(
-                    playerRun,
-                    this.ColliderObject.Bounds,
-                    Color.White);
-            }
-            else
-            {
-                // Draws the run sprite facing right
-                sb.Draw(
-                    playerRun,
-                    this.ColliderObject.Bounds,
-                    null,
-                    Color.White,
-                    0.0f,
-                    Vector2.Zero,
-                    SpriteEffects.FlipHorizontally,
-                    0.0f);
             }
             prevKey = Keyboard.GetState();
         }

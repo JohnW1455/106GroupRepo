@@ -38,7 +38,6 @@ namespace SuperFruitAttack
 
         private SpriteFont gameTitle;
         private Button normalSetting;
-        private Button godSetting;
         private Button start;
         private Button menu;
         private Button instructions;
@@ -77,11 +76,6 @@ namespace SuperFruitAttack
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
             godMode = Content.Load<Texture2D>("Images/buttons/god mode");
             normalMode = Content.Load<Texture2D>("Images/buttons/normal mode");
-            godSetting = new Button(godMode,
-                                    _graphics.PreferredBackBufferWidth / 2 - godMode.Width - 20,
-                               _graphics.PreferredBackBufferHeight / 2,
-                               godMode.Width,
-                               godMode.Height);
             normalSetting = new Button(normalMode,
                                 _graphics.PreferredBackBufferWidth / 2 + 20,
                                _graphics.PreferredBackBufferHeight / 2,
@@ -138,7 +132,7 @@ namespace SuperFruitAttack
                     case GameStages.gameMode:
                         if(godSetting.IsClicked(previousMouse) == true)
                         {
-                           
+                            GameObjectManager.Player.GodMode = true;
                             status = GameStages.transition;
                         }
                         else if(normalSetting.IsClicked(previousMouse))
@@ -308,7 +302,6 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.gameMode:
                     menu.Draw(_spriteBatch);
-                    godSetting.Draw(_spriteBatch);
                     normalSetting.Draw(_spriteBatch);
                     break;
             }

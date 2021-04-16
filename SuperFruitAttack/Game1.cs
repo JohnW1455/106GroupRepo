@@ -150,6 +150,7 @@ namespace SuperFruitAttack
                     case GameStages.gameMode:
                         if(godSetting.IsClicked(previousMouse) == true)
                         {
+                            GameObjectManager.Player.Health = 1000;
                             status = GameStages.transition;
                         }
                         else if(normalSetting.IsClicked(previousMouse))
@@ -191,6 +192,11 @@ namespace SuperFruitAttack
                             status = GameStages.winGame;
                         }
                         if(GameObjectManager.Player.Health <= 0)
+                        {
+                            status = GameStages.gameOver;
+                        }
+                        if(GameObjectManager.Player.ColliderObject.Bounds.Y < 
+                            LevelManager.CurrentLevel.Height)
                         {
                             status = GameStages.gameOver;
                         }

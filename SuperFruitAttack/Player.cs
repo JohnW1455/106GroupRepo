@@ -97,7 +97,11 @@ namespace SuperFruitAttack
 
         public void TakeDamage()
         {
-            health--;
+            // Only damages the player when they are not in god mode
+            if (!godMode)
+            {
+                health--;
+            }
         }
 
         public void Tick(GameTime time)

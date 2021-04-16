@@ -194,6 +194,11 @@ namespace SuperFruitAttack
                         {
                             status = GameStages.gameOver;
                         }
+                        if(GameObjectManager.Player.ColliderObject.Bounds.Y < 
+                            LevelManager.CurrentLevel.Height)
+                        {
+                            status = GameStages.gameOver;
+                        }
                         if(pause.IsClicked(previousMouse) == true)
                         {
                             status = GameStages.pause;

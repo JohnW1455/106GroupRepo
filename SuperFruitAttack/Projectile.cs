@@ -14,7 +14,16 @@ namespace SuperFruitAttack
         protected Vector2 velocity;
         protected Collider collider;
 
-        public Projectile(Texture2D pic, Collider collider, bool pBullet, Vector2 vel)
+        private static readonly Texture2D _Texture = Resources.GetTexture("simple ball");
+
+        public static Projectile Create(int x, int y, Vector2 direction, bool playerBullet)
+        {
+            return new Projectile(_Texture, 
+                new CircleCollider(x, y, 5), playerBullet, 
+                direction * 8);
+        }
+
+        private Projectile(Texture2D pic, Collider collider, bool pBullet, Vector2 vel)
             : base(pic, collider)
         {
             this.collider = collider;

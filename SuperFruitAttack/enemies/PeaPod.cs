@@ -24,8 +24,9 @@ namespace SuperFruitAttack
 
             if (triggerTime >= 2)
             {
-                GameObjectManager.AddObject(new Projectile(Resources.GetTexture("simple ball"),
-                        new CircleCollider(this.X, this.Y, 5), false, new Vector2(0, 5)));
+                GameObjectManager.AddObject(
+                    Projectile.Create(X, Y, 
+                        new Vector2(0, 1), false));
                 triggerTime = 0;
             }
         }

@@ -360,30 +360,22 @@ namespace SuperFruitAttack
             if (SingleKeyPress(Keys.Space) == true)
             {
                 // Checks the state of the character
+                int direction = 1;
                 if (pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
                 pState == PlayerState.walkLeft)
                 {
                     // Fires the bullet from the left
-                    GameObjectManager.AddObject(
-                        new Projectile(
-                            Resources.GetTexture("simple ball"),
-                            new CircleCollider(this.X, this.Y + (this.Height / 2), 5),
-                            true,
-                            new Vector2(-5f, 0)));
+                    direction = -1;
                 }
                 if (pState == PlayerState.faceRight || pState == PlayerState.jumpRight ||
                 pState == PlayerState.walkRight)
                 {
-                    // Fires the bullet from the right
-                    GameObjectManager.AddObject(
-                        new Projectile(
-                            Resources.GetTexture("simple ball"),
-                            new CircleCollider(this.X + this.Width, 
-                                               this.Y + (this.Height / 2), 5),
-                            true,
-                            new Vector2(5f, 0)));
+                    direction = 1;
                 }
                 
+                GameObjectManager.AddObject(
+                    Projectile.Create(X, Y, 
+                        new Vector2(direction, 0), true));
             }
             // Sets the prevMouse state to the current mouse
             

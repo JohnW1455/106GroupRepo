@@ -50,6 +50,18 @@
 /processorParam:TextureFormat=Color
 /build:ground.png
 
+#begin Images/buttons/god mode.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/buttons/god mode.png
+
 #begin Images/buttons/menu.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -61,6 +73,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/buttons/menu.png
+
+#begin Images/buttons/normal mode.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/buttons/normal mode.png
 
 #begin Images/buttons/pause button.png
 /importer:TextureImporter

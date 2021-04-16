@@ -25,9 +25,10 @@ namespace SuperFruitAttack
         private bool isGrounded;
         private double reload;
         private MouseState prevMouse;
+        private KeyboardState prevKey;
         private bool godMode;
         private bool wallClimb;
-
+        
         // Textures needed
         private Texture2D playerRun;
         private Texture2D playerWall;
@@ -88,7 +89,7 @@ namespace SuperFruitAttack
             reload = 0;
             isGrounded = true;
             prevMouse = Mouse.GetState();
-
+            prevKey = Keyboard.GetState();
             // Loads textures
             playerWall = Resources.GetTexture("playerWall");
             playerRun = Resources.GetTexture("playerRun");
@@ -111,7 +112,7 @@ namespace SuperFruitAttack
             {
                 case PlayerState.faceRight:
                     if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D)
-                        && kb.IsKeyDown(Keys.Space))
+                        && kb.IsKeyDown(Keys.W))
                     {
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;
@@ -121,18 +122,18 @@ namespace SuperFruitAttack
                         isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D)
-                        && !kb.IsKeyDown(Keys.Space))
+                        && !kb.IsKeyDown(Keys.W))
                     {
                         // Switches to walking left
                         pState = PlayerState.walkLeft;
                     }
                     else if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A)
-                        && !kb.IsKeyDown(Keys.Space))
+                        && !kb.IsKeyDown(Keys.W))
                     {
                         // Switches to walking right
                         pState = PlayerState.walkRight;
                     }
-                    else if (kb.IsKeyDown(Keys.Space))
+                    else if (kb.IsKeyDown(Keys.W))
                     {
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
@@ -144,7 +145,7 @@ namespace SuperFruitAttack
                     break;
                 case PlayerState.faceLeft:
                     if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A)
-                        && kb.IsKeyDown(Keys.Space))
+                        && kb.IsKeyDown(Keys.W))
                     {
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
@@ -154,18 +155,18 @@ namespace SuperFruitAttack
                         isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A)
-                        && !kb.IsKeyDown(Keys.Space))
+                        && !kb.IsKeyDown(Keys.W))
                     {
                         // Switches to walking right
                         pState = PlayerState.walkRight;
                     }
                     else if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D)
-                        && !kb.IsKeyDown(Keys.Space))
+                        && !kb.IsKeyDown(Keys.W))
                     {
                         // Switches to walking left
                         pState = PlayerState.walkLeft;
                     }
-                    else if (kb.IsKeyDown(Keys.Space))
+                    else if (kb.IsKeyDown(Keys.W))
                     {
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;
@@ -177,13 +178,13 @@ namespace SuperFruitAttack
                     break;
                 case PlayerState.walkRight:
                     if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D)
-                        && !kb.IsKeyDown(Keys.Space))
+                        && !kb.IsKeyDown(Keys.W))
                     {
                         // Switches to walking left
                         pState = PlayerState.walkLeft;
                     }
                     else if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D)
-                        && kb.IsKeyDown(Keys.Space))
+                        && kb.IsKeyDown(Keys.W))
                     {
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;
@@ -193,12 +194,12 @@ namespace SuperFruitAttack
                         isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) == kb.IsKeyDown(Keys.D) &&
-                        !kb.IsKeyDown(Keys.Space))
+                        !kb.IsKeyDown(Keys.W))
                     {
                         // Switches to facing right
                         pState = PlayerState.faceRight;
                     }
-                    else if (kb.IsKeyDown(Keys.Space))
+                    else if (kb.IsKeyDown(Keys.W))
                     {
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
@@ -210,13 +211,13 @@ namespace SuperFruitAttack
                     break;
                 case PlayerState.walkLeft:
                     if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A)
-                        && !kb.IsKeyDown(Keys.Space))
+                        && !kb.IsKeyDown(Keys.W))
                     {
                         // Switches to walking right
                         pState = PlayerState.walkRight;
                     }
                     else if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A)
-                        && kb.IsKeyDown(Keys.Space))
+                        && kb.IsKeyDown(Keys.W))
                     {
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
@@ -226,12 +227,12 @@ namespace SuperFruitAttack
                         isGrounded = false;
                     }
                     else if (kb.IsKeyDown(Keys.A) == kb.IsKeyDown(Keys.D) &&
-                        !kb.IsKeyDown(Keys.Space))
+                        !kb.IsKeyDown(Keys.W))
                     {
                         // Switches to facing left
                         pState = PlayerState.faceLeft;
                     }
-                    else if (kb.IsKeyDown(Keys.Space))
+                    else if (kb.IsKeyDown(Keys.W))
                     {
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;
@@ -338,11 +339,8 @@ namespace SuperFruitAttack
         /// </summary>
         private void FireGun()
         {
-            KeyboardState shootKey = Keyboard.GetState();
-            MouseState current = Mouse.GetState();
             // Checks to see if the user wanted to fire the gun and if it is a single press
-            if (current.LeftButton == ButtonState.Pressed && 
-                prevMouse.LeftButton == ButtonState.Released)
+            if (SingleKeyPress(Keys.Space) == true)
             {
                 // Checks the state of the character
                 if (pState == PlayerState.faceLeft || pState == PlayerState.jumpLeft ||
@@ -372,7 +370,7 @@ namespace SuperFruitAttack
                 MediaPlayer.Play(Game1.ShootSound);
             }
             // Sets the prevMouse state to the current mouse
-            prevMouse = current;
+            
         }
 
         /// <summary>
@@ -438,6 +436,12 @@ namespace SuperFruitAttack
                     SpriteEffects.FlipHorizontally,
                     0.0f);
             }
+            prevKey = Keyboard.GetState();
+        }
+
+        private bool SingleKeyPress(Keys key)
+        {
+            return Keyboard.GetState().IsKeyDown(key) && prevKey.IsKeyUp(key);
         }
     }
 }

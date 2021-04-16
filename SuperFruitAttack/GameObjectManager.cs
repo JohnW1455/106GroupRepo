@@ -205,13 +205,14 @@ namespace SuperFruitAttack
             }
         }
 
+            foreach (var remove in toRemove)
+            {
+                RemoveObject(remove);
+            }
+        }
+
         public static void Tick(GameTime gameTime)
         {
-            if(player != null)
-            {
-                player.Tick(gameTime);
-            }
-            ticking = true;
             player.Tick(gameTime);
             foreach (Enemy enemy in enemies)
             {
@@ -221,19 +222,6 @@ namespace SuperFruitAttack
             foreach (Projectile projectile in projectiles)
             {
                 projectile.Tick();
-            }
-            CheckCollision();
-            
-            ticking = false;
-            
-            foreach (var add in toAdd)
-            {
-                AddObject(add);
-            }
-
-            foreach (var remove in toRemove)
-            {
-                RemoveObject(remove);
             }
         }
 

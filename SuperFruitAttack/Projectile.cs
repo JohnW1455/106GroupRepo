@@ -31,7 +31,7 @@ namespace SuperFruitAttack
         public void Tick()
         {
             collider.Position += velocity;
-            if (collider.Position.X < GameObjectManager.Player.X - 1690 || collider.Position.X > GameObjectManager.Player.X + 1690)
+            if (collider.Position.X < GameObjectManager.Player.X - 690 || collider.Position.X > GameObjectManager.Player.X + 690)
             {
                 GameObjectManager.RemoveObject(this);
             }

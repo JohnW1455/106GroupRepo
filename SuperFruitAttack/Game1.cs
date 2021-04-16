@@ -13,6 +13,9 @@ using Microsoft.Xna.Framework.Media;
 
 namespace SuperFruitAttack
 {
+    /* Authors: Nathan Caron, Elliot Gong
+     * Purpose: Handle game transition and stages.
+     * Date: 4/2/2021*/
     public enum GameStages { menu, instructions, gamePlay, gameOver, winGame, transition, pause};
     public enum PlayerState { faceLeft, faceRight, walkLeft, walkRight, jumpLeft, jumpRight};
     public class Game1 : Game
@@ -23,7 +26,7 @@ namespace SuperFruitAttack
         private SpriteBatch _spriteBatch;
 
         private MouseState previousMouse;
-
+        private KeyboardState previousKey;
         private GameStages status;
 
         private Texture2D startButton;
@@ -199,6 +202,7 @@ namespace SuperFruitAttack
                     status = GameStages.gamePlay;
                 }
             }
+            previousKey = Keyboard.GetState();
             previousMouse = Mouse.GetState();
             base.Update(gameTime);
         }

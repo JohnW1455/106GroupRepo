@@ -157,7 +157,6 @@ namespace SuperFruitAttack
                     player.TakeDamage();
                 }
             }
-
             for (var i = platforms.Count - 1; i >= 0; i--)
             {
                 platforms[i].CheckCollision(player);
@@ -224,24 +223,12 @@ namespace SuperFruitAttack
                 enemy.Tick(gameTime);
             }
 
-            for (var index = projectiles.Count - 1; index >= 0; index--)
-            for(int i = 0; i < projectiles.Count; i++)
+            for (int i = 0; i < projectiles.Count; i++)
             {
-                projectile.Tick();
-            }
-            CheckCollision();
-            
-            ticking = false;
-            
-            foreach (var add in toAdd)
-            {
-                AddObject(add);
+                projectiles[i].Tick();
             }
 
-            foreach (var remove in toRemove)
-            {
-                RemoveObject(remove);
-            }
+            
         }
 
         public static Matrix CameraMatrix(int screen_X, int screen_Y, int max_X, int max_Y)

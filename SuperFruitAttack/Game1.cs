@@ -260,6 +260,23 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.gamePlay:
                     GameObjectManager.Draw(_spriteBatch);
+                    _spriteBatch.End();
+                    _spriteBatch.Begin();
+                    switch (GameObjectManager.Player.Health)
+                    {
+                        case 4:
+                            _spriteBatch.Draw(Resources.GetTexture("hpFull"), new Vector2(30,10), Color.White);
+                            break;
+                        case 3:
+                            _spriteBatch.Draw(Resources.GetTexture("hpThird"), new Vector2(30, 20), Color.White); 
+                            break;
+                        case 2:
+                            _spriteBatch.Draw(Resources.GetTexture("hpHalf"), new Vector2(30, 10), Color.White);
+                            break;
+                        case 1:
+                            _spriteBatch.Draw(Resources.GetTexture("hpQuart"), new Vector2(30, 10), Color.White);
+                            break;
+                    }
                     pause.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:

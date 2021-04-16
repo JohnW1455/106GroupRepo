@@ -308,6 +308,11 @@ namespace SuperFruitAttack
                 this.X += (int)moveSpeed.X;
             }
 
+            if (SingleKeyPress(Keys.G))
+            {
+                godMode = !godMode;
+            }
+
             // Fires bullets
             // Player cannot fire bullets while wall climbing, or if they were
             // wall climbing last update cycle

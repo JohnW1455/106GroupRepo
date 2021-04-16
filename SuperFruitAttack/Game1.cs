@@ -130,12 +130,12 @@ namespace SuperFruitAttack
                         }
                         break;
                     case GameStages.gameMode:
-                        if(godSetting.IsClicked(previousMouse) == true)
+                        /*if(godSetting.IsClicked(previousMouse) == true)
                         {
                             GameObjectManager.Player.GodMode = true;
                             status = GameStages.transition;
-                        }
-                        else if(normalSetting.IsClicked(previousMouse))
+                        }*/
+                        if(normalSetting.IsClicked(previousMouse))
                         {
                             status = GameStages.transition;
                         }

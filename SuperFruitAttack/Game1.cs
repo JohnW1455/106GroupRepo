@@ -150,7 +150,7 @@ namespace SuperFruitAttack
                     case GameStages.gameMode:
                         if(godSetting.IsClicked(previousMouse) == true)
                         {
-                            GameObjectManager.Player.Health = 1000;
+                            GameObjectManager.Player.GodMode = true;
                             status = GameStages.transition;
                         }
                         else if(godSetting.IsClicked(previousMouse))

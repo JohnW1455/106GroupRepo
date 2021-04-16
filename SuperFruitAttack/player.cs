@@ -366,8 +366,6 @@ namespace SuperFruitAttack
                             true,
                             new Vector2(5f, 0)));
                 }
-                
-                MediaPlayer.Play(Game1.ShootSound);
             }
             // Sets the prevMouse state to the current mouse
             

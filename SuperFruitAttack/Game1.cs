@@ -21,7 +21,6 @@ namespace SuperFruitAttack
     public class Game1 : Game
     {
         public const int RESOLUTION = 32;
-        public static Song ShootSound;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -58,8 +57,7 @@ namespace SuperFruitAttack
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            MediaPlayer.Volume = .1f;
+            
             status = GameStages.menu;
             transitionTime = 2;
             base.Initialize();
@@ -113,16 +111,6 @@ namespace SuperFruitAttack
 
             // Used to print out variables during gameplay for debugging
             arial16bold = Content.Load<SpriteFont>("arial16bold");
-
-            ShootSound = Content.Load<Song>("boomph");
-
-            // TODO: use this.Content to load your game content here
-            // REMOVE AFTER TESTING
-            // REMOVE AFTER TESTING
-            // REMOVE AFTER TESTING
-            // REMOVE AFTER TESTING
-            // REMOVE AFTER TESTING
-            //LevelManager.NextLevel(); 
         }
 
         protected override void Update(GameTime gameTime)
@@ -153,7 +141,7 @@ namespace SuperFruitAttack
                             GameObjectManager.Player.Health = 1000;
                             status = GameStages.transition;
                         }
-                        else if(godSetting.IsClicked(previousMouse))
+                        else if(normalSetting.IsClicked(previousMouse))
                         {
                             status = GameStages.transition;
                         }
@@ -179,6 +167,7 @@ namespace SuperFruitAttack
                         pause.X = _graphics.PreferredBackBufferWidth - pause.Width - 10;
                         pause.Y = 10;
                         GameObjectManager.Tick(gameTime);
+                        GameObjectManager.CheckCollision();
                         if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 
 
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))

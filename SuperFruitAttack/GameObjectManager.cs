@@ -144,7 +144,7 @@ namespace SuperFruitAttack
         /// This method checks all the objects and performs specific actions for when specific objects
         /// collide.
         /// </summary>
-        private static void CheckCollision()
+        public static void CheckCollision()
         {
             
             //I loop through the enemy objects and check if they collide with the player.
@@ -172,9 +172,9 @@ namespace SuperFruitAttack
                     RemoveObject(collectibles[i]);
                 }
             }
-            for (var i = projectiles.Count - 1; i >= 0; i--)
+            for (var i = projectiles.Count - 1; i > 0; i--)
             {
-                for (var j = enemies.Count - 1; j >= 0; j--)
+                for (var j = enemies.Count - 1; j > 0; j--)
                 {
                     if(projectiles[i].CheckCollision(enemies[j]) == true && projectiles[i].IsPlayerBullet == true)
                     {
@@ -205,12 +205,6 @@ namespace SuperFruitAttack
             }
         }
 
-            foreach (var remove in toRemove)
-            {
-                RemoveObject(remove);
-            }
-        }
-
         public static void Tick(GameTime gameTime)
         {
             player.Tick(gameTime);
@@ -218,10 +212,9 @@ namespace SuperFruitAttack
             {
                 enemy.Tick(gameTime);
             }
-
-            foreach (Projectile projectile in projectiles)
+            for(int i = 0; i < projectiles.Count; i++)
             {
-                projectile.Tick();
+                projectiles[i].Tick();
             }
         }
 

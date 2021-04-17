@@ -167,16 +167,16 @@ namespace SuperFruitAttack
                             }
                             if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
-                            {
-                                status = GameStages.winGame;
-                            }
-                            if(GameObjectManager.Player.Health <= 0)
-                            {
-                                status = GameStages.gameOver;
-                            }
-                            if(GameObjectManager.Player.ColliderObject.Bounds.Y < 
+                        {
+                            status = GameStages.winGame;
+                        }
+                        if(GameObjectManager.Player.Health <= 0)
+                        {
+                            status = GameStages.gameOver;
+                        }
+                        if(GameObjectManager.Player.ColliderObject.Bounds.Y < 
                             LevelManager.CurrentLevel.Height)
-                            {
+                        {
                             // Drops player health to 0 to prevent possible bugs
                                 GameObjectManager.Player.Health = 0;
                                 status = GameStages.gameOver;

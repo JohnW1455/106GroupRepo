@@ -217,7 +217,11 @@ namespace SuperFruitAttack
 
         public static void Tick(GameTime gameTime)
         {
-            player.Tick(gameTime);
+            if(player!= null)
+            {
+                player.Tick(gameTime);
+            }
+            
             foreach (Enemy enemy in enemies)
             {
                 enemy.Tick(gameTime);

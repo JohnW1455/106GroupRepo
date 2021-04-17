@@ -130,11 +130,7 @@ namespace SuperFruitAttack
                         }
                         break;
                     case GameStages.gameMode:
-                        /*if(godSetting.IsClicked(previousMouse) == true)
-                        {
-                            GameObjectManager.Player.GodMode = true;
-                            status = GameStages.transition;
-                        }*/
+                      
                         if(normalSetting.IsClicked(previousMouse))
                         {
                             status = GameStages.transition;
@@ -162,28 +158,31 @@ namespace SuperFruitAttack
                         pause.Y = 10;
                         GameObjectManager.Tick(gameTime);
                         GameObjectManager.CheckCollision();
-                        if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 
-
+                        if(GameObjectManager.Player != null)
+                        {
+                            if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
-                        {
-                            status = GameStages.transition;
-                        }
-                        if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
+                            {
+                                status = GameStages.transition;
+                            }
+                            if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
-                        {
-                            status = GameStages.winGame;
-                        }
-                        if(GameObjectManager.Player.Health <= 0)
-                        {
-                            status = GameStages.gameOver;
-                        }
-                        if(GameObjectManager.Player.ColliderObject.Bounds.Y < 
+                            {
+                                status = GameStages.winGame;
+                            }
+                            if(GameObjectManager.Player.Health <= 0)
+                            {
+                                status = GameStages.gameOver;
+                            }
+                            if(GameObjectManager.Player.ColliderObject.Bounds.Y < 
                             LevelManager.CurrentLevel.Height)
-                        {
+                            {
                             // Drops player health to 0 to prevent possible bugs
-                            GameObjectManager.Player.Health = 0;
-                            status = GameStages.gameOver;
+                                GameObjectManager.Player.Health = 0;
+                                status = GameStages.gameOver;
+                            }
                         }
+                        
                         if(pause.IsClicked(previousMouse) == true)
                         {
                             status = GameStages.pause;
@@ -223,6 +222,7 @@ namespace SuperFruitAttack
                 }
                 if(menu.IsClicked(previousMouse) == true)
                 {
+                    LevelManager.CurrentLevelNumber = 0;
                     status = GameStages.menu;
                 }
 
@@ -235,12 +235,12 @@ namespace SuperFruitAttack
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            if (status == GameStages.gamePlay)
+            if (status == GameStages.gamePlay && GameObjectManager.Player != null)
             {
-                _spriteBatch.Begin(transformMatrix: GameObjectManager.CameraMatrix(
-                    _graphics.PreferredBackBufferWidth,
-                    _graphics.PreferredBackBufferHeight,
-                    LevelManager.CurrentLevel.PixelWidth, LevelManager.CurrentLevel.PixelHeight));
+                 _spriteBatch.Begin(transformMatrix: GameObjectManager.CameraMatrix(
+                 _graphics.PreferredBackBufferWidth,
+                 _graphics.PreferredBackBufferHeight,
+                 LevelManager.CurrentLevel.PixelWidth, LevelManager.CurrentLevel.PixelHeight));
             }
             else
             {
@@ -272,21 +272,26 @@ namespace SuperFruitAttack
                     GameObjectManager.Draw(_spriteBatch);
                     _spriteBatch.End();
                     _spriteBatch.Begin();
-                    switch (GameObjectManager.Player.Health)
+                    if(GameObjectManager.Player != null)
                     {
-                        case 4:
-                            _spriteBatch.Draw(Resources.GetTexture("hpFull"), new Vector2(30,10), Color.White);
-                            break;
-                        case 3:
-                            _spriteBatch.Draw(Resources.GetTexture("hpThird"), new Vector2(30, 20), Color.White); 
-                            break;
-                        case 2:
-                            _spriteBatch.Draw(Resources.GetTexture("hpHalf"), new Vector2(30, 10), Color.White);
-                            break;
-                        case 1:
-                            _spriteBatch.Draw(Resources.GetTexture("hpQuart"), new Vector2(30, 10), Color.White);
-                            break;
+                        switch (GameObjectManager.Player.Health)
+                        {
+                            case 4:
+                                _spriteBatch.Draw(Resources.GetTexture("hpFull"), new Vector2(30,10), Color.White);
+                                break;
+                            case 3:
+                                _spriteBatch.Draw(Resources.GetTexture("hpThird"), new Vector2(30, 20), Color.White); 
+                                break;
+                            case 2:
+                                _spriteBatch.Draw(Resources.GetTexture("hpHalf"), new Vector2(30, 10), Color.White);
+                                break;
+                            case 1:
+                                _spriteBatch.Draw(Resources.GetTexture("hpQuart"), new Vector2(30, 10), Color.White);
+                                break;
+                        }
+
                     }
+                    
                     pause.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:

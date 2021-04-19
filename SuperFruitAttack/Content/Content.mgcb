@@ -197,12 +197,6 @@
 #begin Levels/0.level
 /copy:Levels/0.level
 
-#begin Levels/playground.level
-/copy:Levels/playground.level
-
-#begin Levels/playground2.level
-/copy:Levels/playground2.level
-
 #begin peapod.png
 /importer:TextureImporter
 /processor:TextureProcessor

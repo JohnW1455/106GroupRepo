@@ -140,13 +140,13 @@ namespace SuperFruitAttack
                         GameObjectManager.Tick(gameTime);
                         if(GameObjectManager.Player != null)
                         {
-                            if (LevelManager.CurrentLevelNumber < 3 && 
-                            GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
+                            if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 
+                                GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                             {
                                 status = GameStages.transition;
                             }
-                            if(LevelManager.CurrentLevelNumber == 3 &&
-                            GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
+                            if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
+                               GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                             {
                                 status = GameStages.winGame;
                             }
@@ -154,8 +154,8 @@ namespace SuperFruitAttack
                             {
                                 status = GameStages.gameOver;
                             }
-                            if(GameObjectManager.Player.ColliderObject.Bounds.Y < 
-                                LevelManager.CurrentLevel.Height)
+                            if(GameObjectManager.Player.ColliderObject.Bounds.Y >= 
+                               LevelManager.CurrentLevel.PixelHeight)
                             {
                                 // Drops player health to 0 to prevent possible bugs
                                     GameObjectManager.Player.Health = 0;

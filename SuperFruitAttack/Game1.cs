@@ -16,7 +16,7 @@ namespace SuperFruitAttack
     /* Authors: Nathan Caron, Elliot Gong
      * Purpose: Handle game transition and stages.
      * Date: 4/2/2021*/
-    public enum GameStages { menu, instructions, gamePlay, gameOver, winGame, transition, pause};
+    public enum GameStages { menu, instructions, gamePlay, gameOver, winGame, transition, pause, gameMode};
     public enum PlayerState { faceLeft, faceRight, walkLeft, walkRight, jumpLeft, jumpRight};
     public class Game1 : Game
     {
@@ -121,6 +121,12 @@ namespace SuperFruitAttack
                             status = GameStages.instructions;
                         }
                         break;
+                    case GameStages.gameMode:
+                        if(menu.IsClicked(previousMouse))
+                        {
+                            status = GameStages.menu;
+                        }
+                        break;
                     case GameStages.instructions:
                         menu.Y = 30;
                         start.Y = 120;
@@ -137,6 +143,7 @@ namespace SuperFruitAttack
                     case GameStages.gamePlay:
                         pause.X = _graphics.PreferredBackBufferWidth - pause.Width - 10;
                         pause.Y = 10;
+                        GameObjectManager.CheckCollision();
                         GameObjectManager.Tick(gameTime);
                         if(GameObjectManager.Player != null)
                         {
@@ -145,33 +152,21 @@ namespace SuperFruitAttack
                             {
                                 status = GameStages.transition;
                             }
-
                             if(LevelManager.CurrentLevelNumber == 3 &&
                             GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
-                            if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
-                               GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
-
-                            {
-                                status = GameStages.winGame;
-                            }
-                            if(GameObjectManager.Player.Health <= 0)
-                            {
+                        {
+                            status = GameStages.winGame;
+                        }
+                        if(GameObjectManager.Player.Health <= 0)
+                        {
                             status = GameStages.gameOver;
-                            }
-                            if(GameObjectManager.Player.ColliderObject.Bounds.Y >= 
-                            LevelManager.CurrentLevel.PixelHeight)
-                            {
+                        }
+                        if(GameObjectManager.Player.ColliderObject.Bounds.Y < 
+                            LevelManager.CurrentLevel.Height)
+                        {
                             // Drops player health to 0 to prevent possible bugs
                                 GameObjectManager.Player.Health = 0;
-
                                 status = GameStages.gameOver;
-                            }
-                            if(GameObjectManager.Player.ColliderObject.Bounds.Y >= 
-                               LevelManager.CurrentLevel.PixelHeight)
-                            {
-                                // Drops player health to 0 to prevent possible bugs
-                                    GameObjectManager.Player.Health = 0;
-                                    status = GameStages.gameOver;
                             }
                         }
                         

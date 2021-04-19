@@ -46,9 +46,9 @@ namespace SuperFruitAttack
             switch (name.ToLower())
             {
                 case "potato":
-                    return new Potato(texture, 1, 5, box);
+                    return new Potato(texture, 4, 5, box);
                 case "carrot":
-                    return new Carrot(texture, 4, 0, box);
+                    return new Carrot(texture, 1, 0, box);
                 case "peapod":
                     return new PeaPod(texture, 1000, 0, box);
                 case "player":

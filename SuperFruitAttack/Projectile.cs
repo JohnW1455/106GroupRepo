@@ -37,7 +37,7 @@ namespace SuperFruitAttack
             set { isPlayerBullet = value; }
         }
 
-        public void Tick()
+        public void Tick(GameTime gameTime)
         {
             collider.Position += velocity;
             if (collider.Position.X < GameObjectManager.Player.X - 690 || collider.Position.X > GameObjectManager.Player.X + 690)

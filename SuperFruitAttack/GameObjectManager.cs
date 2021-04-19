@@ -30,7 +30,7 @@ namespace SuperFruitAttack
         private static List<Platform> platforms;
         private static List<GameObject> toRemove;
         private static List<GameObject> toAdd;
-        private static bool checkingCollisions;
+        private static bool ticking;
         /// <summary>
         /// This constructor instantiates all the gameObjects in the game, including the player.
         /// </summary>
@@ -57,7 +57,7 @@ namespace SuperFruitAttack
         /// object manager class.</param>
         public static void AddObject(GameObject thing)
         {
-            if (checkingCollisions)
+            if (ticking)
             {
                 toAdd.Add(thing);
                 return;
@@ -95,7 +95,7 @@ namespace SuperFruitAttack
        /// <param name="thing">This is the specified object that'll be removed.</param>
         public static void RemoveObject(GameObject thing)
         {
-            if (checkingCollisions)
+            if (ticking)
             {
                 toRemove.Add(thing);
                 return;
@@ -144,95 +144,90 @@ namespace SuperFruitAttack
         /// This method checks all the objects and performs specific actions for when specific objects
         /// collide.
         /// </summary>
-        public static void CheckCollision()
+        private static void CheckCollision()
         {
-            checkingCollisions = true;
-            //I loop through the enemy objects and check if they collide with the player.
-            for (var i = enemies.Count - 1; i >= 0; i--)
+            foreach (Platform platform in platforms)
             {
-                Enemy enemy = enemies[i];
-                //If the player collides with an enemy, the player takes damage.
-                if (enemy.CheckCollision(player) == true)
+                foreach (Projectile projectile in projectiles)
                 {
-                    player.TakeDamage();
+                    if (projectile.CheckCollision(platform))
+                        RemoveObject(projectile);
                 }
+
+                platform.CheckCollision(player);
             }
-            for (var i = platforms.Count - 1; i >= 0; i--)
+
+            foreach (Projectile projectile in projectiles)
             {
-                platforms[i].CheckCollision(player);
-            }
-            //I loop through the collectible objects to check if they collide with the player.
-            for (var i = collectibles.Count - 1; i >= 0; i--)
-            {
-                //If the player collides with a collectible, they get some bonus, and the collectible
-                //is deleted and removed from GameObjectManager.
-                if(collectibles[i].CheckCollision(player) == true)
+                foreach (Enemy enemy in enemies)
                 {
-                    RemoveObject(collectibles[i]);
-                }
-            }
-            for (var i = projectiles.Count - 1; i > 0; i--)
-            {
-                for (var j = enemies.Count - 1; j > 0; j--)
-                {
-                    if(projectiles[i].CheckCollision(enemies[j]) == true && projectiles[i].IsPlayerBullet == true)
+                    if (!projectile.IsPlayerBullet)
+                        break;
+
+                    if (projectile.CheckCollision(enemy))
                     {
-                        enemies[j].TakeDamage(6);
-                        if(enemies[j].Health <= 0)
-                        {
-                            RemoveObject(enemies[j]);
-                        }
-                        RemoveObject(projectiles[i]);
-                    }   
-                }
-                if(projectiles[i].CheckCollision(player) == true && projectiles[i].IsPlayerBullet == false)
-                {
-                    player.TakeDamage();
-                    RemoveObject(projectiles[i]);
-                    
-                } 
-            }
-            foreach(Platform platform in platforms)
-            {
-                for (var i = projectiles.Count - 1; i >= 0; i--)
-                {
-                    if(projectiles[i].CheckCollision(platform) == true)
-                    {
-                        RemoveObject(projectiles[i]);
+                        enemy.TakeDamage(1);
+                        RemoveObject(projectile);
                     }
                 }
+                
+                if (projectile.IsPlayerBullet)
+                    continue;
+                
+                if (projectile.CheckCollision(player))
+                {
+                    player.TakeDamage();
+                    RemoveObject(projectile);
+                }
             }
 
-            checkingCollisions = false;
-            foreach (var add in toAdd)
+            foreach (Enemy enemy in enemies)
             {
-                AddObject(add);
-            }
-
-            foreach (var remove in toRemove)
-            {
-                RemoveObject(remove);
+                if (enemy.CheckCollision(player))
+                {
+                    player.TakeDamage();
+                }
             }
         }
 
         public static void Tick(GameTime gameTime)
         {
-            if(player!= null)
-            {
-                player.Tick(gameTime);
-            }
+            ticking = true;
             
+            player?.Tick(gameTime);
+
             foreach (Enemy enemy in enemies)
             {
                 enemy.Tick(gameTime);
             }
 
-            for (int i = 0; i < projectiles.Count; i++)
+            foreach (Projectile projectile in projectiles)
             {
-                projectiles[i].Tick();
+                projectile.Tick(gameTime);
+            }
+            
+            CheckCollision();
+
+            foreach (Enemy enemy in enemies)
+            {
+                if (enemy.Health <= 0)
+                    RemoveObject(enemy);
             }
 
+            ticking = false;
             
+            foreach (GameObject add in toAdd)
+            {
+                AddObject(add);
+            }
+
+            foreach (GameObject remove in toRemove)
+            {
+                RemoveObject(remove);
+            }
+            
+            toAdd.Clear();
+            toRemove.Clear();
         }
 
         public static Matrix CameraMatrix(int screen_X, int screen_Y, int max_X, int max_Y)

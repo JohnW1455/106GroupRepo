@@ -22,7 +22,7 @@ namespace SuperFruitAttack
         }
 
         // called when the enemy takes damage
-        public void TakeDamage(int dmg)
+        public virtual void TakeDamage(int dmg)
         {
             health -= dmg;
         }
@@ -34,14 +34,5 @@ namespace SuperFruitAttack
         }
         
         public abstract void Tick(GameTime time);
-
-        public override void Draw(SpriteBatch sb)
-        {
-            if (health > 0)
-            {
-                base.Draw(sb);
-            }
-        }
-
     }
 }

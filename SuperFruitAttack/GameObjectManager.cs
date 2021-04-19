@@ -202,7 +202,6 @@ namespace SuperFruitAttack
                     }
                 }
             }
-
             checkingCollisions = false;
             foreach (var add in toAdd)
             {

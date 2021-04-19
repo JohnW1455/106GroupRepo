@@ -174,8 +174,8 @@ namespace SuperFruitAttack
                         {
                             status = GameStages.gameOver;
                         }
-                        if(GameObjectManager.Player.ColliderObject.Bounds.Y < 
-                            LevelManager.CurrentLevel.Height)
+                        if(GameObjectManager.Player.ColliderObject.Bounds.Y >= 
+                            LevelManager.CurrentLevel.PixelHeight)
                         {
                             // Drops player health to 0 to prevent possible bugs
                                 GameObjectManager.Player.Health = 0;

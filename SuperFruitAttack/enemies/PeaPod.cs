@@ -18,6 +18,11 @@ namespace SuperFruitAttack
 
         }
 
+        public override void TakeDamage(int dmg)
+        {
+            // peapod takes no damage
+        }
+
         public override void Tick(GameTime time)
         {
             triggerTime += time.ElapsedGameTime.TotalSeconds;

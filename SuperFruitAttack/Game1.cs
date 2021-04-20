@@ -138,7 +138,6 @@ namespace SuperFruitAttack
                         pause.X = _graphics.PreferredBackBufferWidth - pause.Width - 10;
                         pause.Y = 10;
                         GameObjectManager.Tick(gameTime);
-                        GameObjectManager.CheckCollision();
                         if(GameObjectManager.Player != null)
                         {
                             if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 

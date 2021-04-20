@@ -18,7 +18,7 @@ namespace SuperFruitAttack
         // Fields 
         private int health;
         private Vector2 moveSpeed;
-        private Vector2 playerVelocity;
+        private Vector2 playerVelocity; 
         private Vector2 jumpVelocity;
         private Vector2 gravity;
         private PlayerState pState;

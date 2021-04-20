@@ -17,7 +17,7 @@ namespace SuperFruitAttack
         public static void LoadLevels()
         {
             var paths = Directory.EnumerateFiles(
-                "Levels/", 
+                $"{Resources.ROOT_DIRECTORY}/Levels/", 
                 "*.level", 
                 SearchOption.TopDirectoryOnly).ToArray();
 

@@ -15,7 +15,7 @@ namespace SuperFruitAttack
     //          in game.
     public class Player : GameObject
     {
-        // Fields
+        // Fields 
         private int health;
         private Vector2 moveSpeed;
         private Vector2 playerVelocity;

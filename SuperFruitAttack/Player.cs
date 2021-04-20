@@ -111,6 +111,9 @@ namespace SuperFruitAttack
             // Gets the current Keyboard State
             KeyboardState kb = Keyboard.GetState();
 
+            if (wallClimb)
+                isGrounded = true;
+            
             // Runs the PlayerState FSM
             // NOTE: Jumps happen on state switch so the game doesn't need to check for
             //       single key presses or count jumps
@@ -324,7 +327,10 @@ namespace SuperFruitAttack
             }
 
             // Applies gravity
-            ApplyGravity();
+            if (!wallClimb)
+            {
+                ApplyGravity();
+            }
 
             // Sets wall climb to false. If the player is wall climbing the collisions
             // will set it back to true

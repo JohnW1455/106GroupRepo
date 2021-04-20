@@ -324,12 +324,13 @@ namespace SuperFruitAttack
             if (!wallClimb)
             {
                 FireGun();
-            }
-
-            // Applies gravity
-            if (!wallClimb)
-            {
+                // Applies gravity
                 ApplyGravity();
+            }
+            else
+            {
+                // If the player is wall climbing, set them to grounded
+                isGrounded = true;
             }
 
             // Sets wall climb to false. If the player is wall climbing the collisions

@@ -143,8 +143,8 @@ namespace SuperFruitAttack
         /// <summary>
         /// This method checks all the objects and performs specific actions for when specific objects
         /// collide.
-        /// </summary>
-        private static void CheckCollision()
+        /// </summary> 
+        public static void CheckCollision()
         {
             foreach (Platform platform in platforms)
             {

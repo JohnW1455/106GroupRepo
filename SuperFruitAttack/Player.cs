@@ -15,10 +15,10 @@ namespace SuperFruitAttack
     //          in game.
     public class Player : GameObject
     {
-        // Fields
+        // Fields 
         private int health;
         private Vector2 moveSpeed;
-        private Vector2 playerVelocity;
+        private Vector2 playerVelocity; 
         private Vector2 jumpVelocity;
         private Vector2 gravity;
         private PlayerState pState;
@@ -111,6 +111,9 @@ namespace SuperFruitAttack
             // Gets the current Keyboard State
             KeyboardState kb = Keyboard.GetState();
 
+            if (wallClimb)
+                isGrounded = true;
+            
             // Runs the PlayerState FSM
             // NOTE: Jumps happen on state switch so the game doesn't need to check for
             //       single key presses or count jumps
@@ -321,10 +324,14 @@ namespace SuperFruitAttack
             if (!wallClimb)
             {
                 FireGun();
+                // Applies gravity
+                ApplyGravity();
             }
-
-            // Applies gravity
-            ApplyGravity();
+            else
+            {
+                // If the player is wall climbing, set them to grounded
+                isGrounded = true;
+            }
 
             // Sets wall climb to false. If the player is wall climbing the collisions
             // will set it back to true

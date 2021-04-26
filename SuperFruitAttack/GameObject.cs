@@ -55,7 +55,7 @@ namespace SuperFruitAttack
                     return new Player(4, 5, texture, box);
                 case "collectible":
                     return new Collectible(texture, box);
-                case "platform":
+                case "wall":
                 case "ground":
                     return new Platform(texture, box);
                 case "levelflag":

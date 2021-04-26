@@ -381,7 +381,7 @@ namespace SuperFruitAttack
                 }
                 
                 GameObjectManager.AddObject(
-                    Projectile.Create(X, Y, 
+                    Projectile.Create(X + Width/2, Y + Height/2, 
                         new Vector2(direction, 0), true));
             }
             // Sets the prevMouse state to the current mouse

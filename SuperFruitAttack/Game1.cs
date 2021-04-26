@@ -33,7 +33,7 @@ namespace SuperFruitAttack
         private Texture2D menuBtton;
         private Texture2D pauseButton;
         private Texture2D resumeButton;
-        private Texture2D title;
+        private Texture2D normalMode;
 
         private SpriteFont gameTitle;
         private Button start;
@@ -67,33 +67,33 @@ namespace SuperFruitAttack
             LevelManager.LoadLevels();
             
             gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
-            pauseButton = Content.Load<Texture2D>("Images/buttons/pause");
+            pauseButton = Content.Load<Texture2D>("Images/buttons/pause button");
             resumeButton = Content.Load<Texture2D>("Images/buttons/Resume");
-            startButton = Content.Load<Texture2D>("Images/buttons/play");
-            instructionsButton = Content.Load<Texture2D>("Images/buttons/instructions");
+            startButton = Content.Load<Texture2D>("start button");
+            instructionsButton = Content.Load<Texture2D>("Images/instructions");
             menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
-            title = Content.Load<Texture2D>("Images/text/title");
+            normalMode = Content.Load<Texture2D>("Images/buttons/normal mode");
             pause = new Button(pauseButton,
-                               _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 2,
+                               _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 4,
                                _graphics.PreferredBackBufferHeight / 2,
-                               pauseButton.Width,
-                               pauseButton.Height);
+                               pauseButton.Width/2,
+                               pauseButton.Height/2);
 
             start = new Button( startButton,
-                                _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2,
+                                _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 4,
                                 _graphics.PreferredBackBufferHeight / 2 ,
-                                startButton.Width,
-                                startButton.Height);
+                                startButton.Width/2,
+                                startButton.Height/2);
             instructions = new Button(instructionsButton,
-                                      _graphics.PreferredBackBufferWidth / 2 - instructionsButton.Width / 2,
+                                      _graphics.PreferredBackBufferWidth / 2 - instructionsButton.Width / 4,
                                       _graphics.PreferredBackBufferHeight / 2 + 100,
-                                      instructionsButton.Width,
-                                      instructionsButton.Height);
+                                      instructionsButton.Width/2,
+                                      instructionsButton.Height/2);
             menu = new Button(menuBtton,
-                              _graphics.PreferredBackBufferWidth / 2 - menuBtton.Width / 2,
+                              _graphics.PreferredBackBufferWidth / 2 - menuBtton.Width / 4,
                               _graphics.PreferredBackBufferHeight / 2 - menuBtton.Height,
-                              menuBtton.Width,
-                              menuBtton.Height);
+                              menuBtton.Width/2,
+                              menuBtton.Height/2);
 
             // Used to print out variables during gameplay for debugging
             arial16bold = Content.Load<SpriteFont>("arial16bold");
@@ -140,12 +140,12 @@ namespace SuperFruitAttack
                         GameObjectManager.Tick(gameTime);
                         if(GameObjectManager.Player != null)
                         {
-                            if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 
+                            if (LevelManager.CurrentLevelNumber < 3 && 
                                 GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                             {
                                 status = GameStages.transition;
                             }
-                            if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
+                            if(LevelManager.CurrentLevelNumber == 3 &&
                                GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                             {
                                 status = GameStages.winGame;
@@ -231,14 +231,11 @@ namespace SuperFruitAttack
             }
             switch(status)
             {
-                
                 case GameStages.menu:
-                    GraphicsDevice.Clear(Color.SpringGreen);
-                    _spriteBatch.Draw(title, new Rectangle(_graphics.PreferredBackBufferWidth / 2 - title.Width / 4,
-                                                           _graphics.PreferredBackBufferHeight / 2 - title.Height /2 - 40,
-                                                           title.Width/2,
-                                                           title.Height/2),
-                                                           Color.White);
+                    _spriteBatch.DrawString(gameTitle, "Super Fruit Attack",
+                        new Vector2(_graphics.PreferredBackBufferWidth / 2 - 50,
+                                    _graphics.PreferredBackBufferHeight / 2 - 150),
+                                    Color.White);
                     start.Draw(_spriteBatch);
                     instructions.Draw(_spriteBatch);
                     break;
@@ -246,8 +243,7 @@ namespace SuperFruitAttack
                     _spriteBatch.DrawString(arial16bold, "A - move left \n" +
                                                          "D - move right \n" +
                                                          "Space - Jump \n" +
-                                                         "Left Mouse Button - Shoot" +
-                                                         "G - Toggle God Mode",
+                                                         "Left Mouse Button - Shoot",
                                             new Vector2(_graphics.PreferredBackBufferWidth / 2 - 60,
                                                         _graphics.PreferredBackBufferHeight / 2 ),
                                                         Color.White);

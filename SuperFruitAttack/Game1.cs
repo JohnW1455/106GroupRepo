@@ -68,10 +68,10 @@ namespace SuperFruitAttack
             
             gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
             pauseButton = Content.Load<Texture2D>("Images/buttons/pause");
-            resumeButton = Content.Load<Texture2D>("Images/buttons/Resume");
+            resumeButton = Content.Load<Texture2D>("Images/Resume");
             startButton = Content.Load<Texture2D>("Images/buttons/play");
             instructionsButton = Content.Load<Texture2D>("Images/buttons/instructions");
-            menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
+            menuBtton = Content.Load<Texture2D>("Images/menu");
             title = Content.Load<Texture2D>("Images/text/title");
             pause = new Button(pauseButton,
                                _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 2,

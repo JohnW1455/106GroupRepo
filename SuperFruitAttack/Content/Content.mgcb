@@ -13,30 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../../../OneDrive/Documents/Paint 3D/super fruit attack/menu.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../OneDrive/Documents/Paint 3D/super fruit attack/menu.png;Images/buttons/menu.png
-
-#begin ../../../../../OneDrive/Documents/Paint 3D/super fruit attack/resume.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../OneDrive/Documents/Paint 3D/super fruit attack/resume.png;Images/buttons/resume.png
-
 #begin arial16bold.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -206,6 +182,18 @@
 /processorParam:TextureFormat=Color
 /build:Images/instructions.png
 
+#begin Images/menu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/menu.png
+
 #begin Images/player/simple stickman.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -217,6 +205,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/player/simple stickman.png
+
+#begin Images/resume.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/resume.png
 
 #begin Images/text/title.png
 /importer:TextureImporter

@@ -30,7 +30,7 @@ namespace SuperFruitAttack
             if (triggerTime >= 2)
             {
                 GameObjectManager.AddObject(
-                    Projectile.Create(X, Y, 
+                    Projectile.Create(X + Width/2, Y + Height, 
                         new Vector2(0, 1), false));
                 triggerTime = 0;
             }

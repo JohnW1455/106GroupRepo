@@ -214,18 +214,21 @@ namespace SuperFruitAttack
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(
+                Resources.GetTexture("background"), 
+                new Rectangle(0, 0, 
+                    _graphics.PreferredBackBufferWidth, 
+                    _graphics.PreferredBackBufferHeight),
+                Color.White);
             if (status == GameStages.gamePlay && GameObjectManager.Player != null)
             {
+                _spriteBatch.End();
                  _spriteBatch.Begin(transformMatrix: GameObjectManager.CameraMatrix(
                  _graphics.PreferredBackBufferWidth,
                  _graphics.PreferredBackBufferHeight,
                  LevelManager.CurrentLevel.PixelWidth, LevelManager.CurrentLevel.PixelHeight));
             }
-            else
-            {
-                _spriteBatch.Begin();
-            }
-            // TODO: Add your drawing code here
             switch(status)
             {
                 

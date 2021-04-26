@@ -10,6 +10,7 @@ namespace SuperFruitAttack
 {
     class Projectile : GameObject
     {
+        private const int radius = 6;
         protected bool isPlayerBullet;
         protected Vector2 velocity;
         protected Collider collider;
@@ -19,7 +20,7 @@ namespace SuperFruitAttack
         public static Projectile Create(int x, int y, Vector2 direction, bool playerBullet)
         {
             return new Projectile(_Texture, 
-                new CircleCollider(x, y, 5), playerBullet, 
+                new CircleCollider(x - radius, y - radius, radius), playerBullet, 
                 direction * 8);
         }
 

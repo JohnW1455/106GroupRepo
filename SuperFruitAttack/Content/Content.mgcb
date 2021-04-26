@@ -13,6 +13,30 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ../../../../../OneDrive/Documents/Paint 3D/super fruit attack/menu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../OneDrive/Documents/Paint 3D/super fruit attack/menu.png;Images/buttons/menu.png
+
+#begin ../../../../../OneDrive/Documents/Paint 3D/super fruit attack/resume.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../OneDrive/Documents/Paint 3D/super fruit attack/resume.png;Images/buttons/resume.png
+
 #begin arial16bold.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -122,7 +146,7 @@
 /processorParam:TextureFormat=Color
 /build:Images/buttons/god mode.png
 
-#begin Images/buttons/menu.png
+#begin Images/buttons/instructions.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -132,7 +156,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/buttons/menu.png
+/build:Images/buttons/instructions.png
 
 #begin Images/buttons/normal mode.png
 /importer:TextureImporter
@@ -146,7 +170,7 @@
 /processorParam:TextureFormat=Color
 /build:Images/buttons/normal mode.png
 
-#begin Images/buttons/pause button.png
+#begin Images/buttons/pause.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -156,9 +180,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/buttons/pause button.png
+/build:Images/buttons/pause.png
 
-#begin Images/buttons/Resume.png
+#begin Images/buttons/play.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -168,7 +192,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/buttons/Resume.png
+/build:Images/buttons/play.png
 
 #begin Images/instructions.png
 /importer:TextureImporter
@@ -193,6 +217,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/player/simple stickman.png
+
+#begin Images/text/title.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/text/title.png
 
 #begin levelFlag.png
 /importer:TextureImporter

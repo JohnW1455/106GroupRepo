@@ -19,7 +19,7 @@ namespace SuperFruitAttack
         public static Projectile Create(int x, int y, Vector2 direction, bool playerBullet)
         {
             return new Projectile(_Texture, 
-                new CircleCollider(x, y, 5), playerBullet, 
+                new CircleCollider(x, y, 8), playerBullet, 
                 direction * 8);
         }
 

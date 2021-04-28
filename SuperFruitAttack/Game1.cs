@@ -144,12 +144,12 @@ namespace SuperFruitAttack
                         GameObjectManager.Tick(gameTime);
                         if(GameObjectManager.Player != null)
                         {
-                            if (LevelManager.CurrentLevelNumber < 3 && 
+                            if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 
                                 GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                             {
                                 status = GameStages.transition;
                             }
-                            if(LevelManager.CurrentLevelNumber == 3 &&
+                            if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
                                GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                             {
                                 status = GameStages.winGame;

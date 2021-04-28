@@ -80,8 +80,8 @@ namespace SuperFruitAttack
             pause = new Button(pauseButton,
                                _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 2,
                                _graphics.PreferredBackBufferHeight / 2,
-                               pauseButton.Width,
-                               pauseButton.Height);
+                               pauseButton.Width/2,
+                               pauseButton.Height/2);
 
             start = new Button( startButton,
                                 _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2,

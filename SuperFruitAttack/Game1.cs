@@ -78,26 +78,26 @@ namespace SuperFruitAttack
          
 
             pause = new Button(pauseButton,
-                               _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 4,
+                               _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 2,
                                _graphics.PreferredBackBufferHeight / 2,
-                               pauseButton.Width/2,
-                               pauseButton.Height/2);
+                               pauseButton.Width,
+                               pauseButton.Height);
 
             start = new Button( startButton,
-                                _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 4,
+                                _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2,
                                 _graphics.PreferredBackBufferHeight / 2 ,
-                                startButton.Width/2,
-                                startButton.Height/2);
+                                startButton.Width,
+                                startButton.Height);
             instructions = new Button(instructionsButton,
-                                      _graphics.PreferredBackBufferWidth / 2 - instructionsButton.Width / 4,
+                                      _graphics.PreferredBackBufferWidth / 2 - instructionsButton.Width / 2,
                                       _graphics.PreferredBackBufferHeight / 2 + 100,
-                                      instructionsButton.Width/2,
-                                      instructionsButton.Height/2);
+                                      instructionsButton.Width,
+                                      instructionsButton.Height);
             menu = new Button(menuBtton,
-                              _graphics.PreferredBackBufferWidth / 2 - menuBtton.Width / 4,
+                              _graphics.PreferredBackBufferWidth / 2 - menuBtton.Width / 2,
                               _graphics.PreferredBackBufferHeight / 2 - menuBtton.Height,
-                              menuBtton.Width/2,
-                              menuBtton.Height/2);
+                              menuBtton.Width,
+                              menuBtton.Height);
 
             // Used to print out variables during gameplay for debugging
             arial16bold = Content.Load<SpriteFont>("arial16bold");

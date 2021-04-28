@@ -290,17 +290,17 @@ namespace SuperFruitAttack
                     break;
                 case GameStages.winGame:
                     _spriteBatch.DrawString(gameTitle, "You Win",
-                                new Vector2(_graphics.PreferredBackBufferWidth / 2 - 50,
+                                new Vector2(_graphics.PreferredBackBufferWidth / 2 - 100,
                                 _graphics.PreferredBackBufferHeight / 2 - 200),
-                                Color.White);
+                                Color.Gold);
                     menu.Draw(_spriteBatch);
                     break;
                 case GameStages.gameOver:
                     menu.Draw(_spriteBatch);
                     _spriteBatch.DrawString(gameTitle, "You Died",
-                                new Vector2(_graphics.PreferredBackBufferWidth/2 - 50,
-                                _graphics.PreferredBackBufferHeight/2 - 150),
-                                Color.White);
+                                new Vector2(_graphics.PreferredBackBufferWidth/2 - 100,
+                                _graphics.PreferredBackBufferHeight/2 - 200),
+                                Color.DarkRed);
                     break;
                 case GameStages.pause:
                     menu.Draw(_spriteBatch);

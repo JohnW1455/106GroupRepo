@@ -26,6 +26,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Levels\" />
     <Folder Include="Levels" />
   </ItemGroup>
 </Project>

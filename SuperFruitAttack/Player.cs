@@ -68,7 +68,6 @@ namespace SuperFruitAttack
             get { return wallClimb; }
             set { wallClimb = value; }
         }
-
         public Vector2 JumpVelocity
         {
             get { return jumpVelocity; }
@@ -111,9 +110,6 @@ namespace SuperFruitAttack
             // Gets the current Keyboard State
             KeyboardState kb = Keyboard.GetState();
 
-            if (wallClimb)
-                isGrounded = true;
-            
             // Runs the PlayerState FSM
             // NOTE: Jumps happen on state switch so the game doesn't need to check for
             //       single key presses or count jumps
@@ -193,7 +189,7 @@ namespace SuperFruitAttack
                         pState = PlayerState.walkLeft;
                     }
                     else if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D)
-                        && kb.IsKeyDown(Keys.W))
+                        && kb.IsKeyDown(Keys.W) && (godMode || !wallClimb))
                     {
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;
@@ -208,7 +204,7 @@ namespace SuperFruitAttack
                         // Switches to facing right
                         pState = PlayerState.faceRight;
                     }
-                    else if (kb.IsKeyDown(Keys.W))
+                    else if (kb.IsKeyDown(Keys.W) && (godMode || !wallClimb))
                     {
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
@@ -226,7 +222,7 @@ namespace SuperFruitAttack
                         pState = PlayerState.walkRight;
                     }
                     else if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A)
-                        && kb.IsKeyDown(Keys.W))
+                        && kb.IsKeyDown(Keys.W) && (godMode || !wallClimb))
                     {
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
@@ -241,7 +237,7 @@ namespace SuperFruitAttack
                         // Switches to facing left
                         pState = PlayerState.faceLeft;
                     }
-                    else if (kb.IsKeyDown(Keys.W))
+                    else if (kb.IsKeyDown(Keys.W) && (godMode || !wallClimb))
                     {
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;
@@ -324,12 +320,17 @@ namespace SuperFruitAttack
             if (!wallClimb)
             {
                 FireGun();
-                // Applies gravity
+            }
+            // Applies gravity
+            // If the player is in god mode and applying gravity would kill them, don't
+            if (!(godMode && playerVelocity.Y + this.Y + 32 > LevelManager.CurrentLevel.PixelHeight))
+            {
                 ApplyGravity();
             }
             else
             {
-                // If the player is wall climbing, set them to grounded
+                // Forcefully sets isGrounded to true so that you can't get softlocked
+                // in pits
                 isGrounded = true;
             }
 

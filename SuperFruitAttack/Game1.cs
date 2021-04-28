@@ -33,7 +33,7 @@ namespace SuperFruitAttack
         private Texture2D menuBtton;
         private Texture2D pauseButton;
         private Texture2D resumeButton;
-        private Texture2D normalMode;
+        private Texture2D title;
 
         private SpriteFont gameTitle;
         private Button start;
@@ -67,12 +67,16 @@ namespace SuperFruitAttack
             LevelManager.LoadLevels();
             
             gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
-            pauseButton = Content.Load<Texture2D>("Images/buttons/pause button");
-            resumeButton = Content.Load<Texture2D>("Images/buttons/Resume");
-            startButton = Content.Load<Texture2D>("start button");
-            instructionsButton = Content.Load<Texture2D>("Images/instructions");
-            menuBtton = Content.Load<Texture2D>("Images/buttons/menu");
-            normalMode = Content.Load<Texture2D>("Images/buttons/normal mode");
+
+            pauseButton = Content.Load<Texture2D>("Images/buttons/pause");
+            resumeButton = Content.Load<Texture2D>("Images/resume");
+            startButton = Content.Load<Texture2D>("Images/buttons/play");
+            instructionsButton = Content.Load<Texture2D>("Images/buttons/instructions");
+            menuBtton = Content.Load<Texture2D>("Images/menu");
+            title = Content.Load<Texture2D>("Images/title");
+
+         
+
             pause = new Button(pauseButton,
                                _graphics.PreferredBackBufferWidth / 2 - pauseButton.Width / 4,
                                _graphics.PreferredBackBufferHeight / 2,
@@ -140,12 +144,12 @@ namespace SuperFruitAttack
                         GameObjectManager.Tick(gameTime);
                         if(GameObjectManager.Player != null)
                         {
-                            if (LevelManager.CurrentLevelNumber < 3 && 
+                            if (LevelManager.CurrentLevelNumber < LevelManager.LevelCount && 
                                 GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                             {
                                 status = GameStages.transition;
                             }
-                            if(LevelManager.CurrentLevelNumber == 3 &&
+                            if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
                                GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                             {
                                 status = GameStages.winGame;
@@ -232,10 +236,11 @@ namespace SuperFruitAttack
             switch(status)
             {
                 case GameStages.menu:
-                    _spriteBatch.DrawString(gameTitle, "Super Fruit Attack",
-                        new Vector2(_graphics.PreferredBackBufferWidth / 2 - 50,
-                                    _graphics.PreferredBackBufferHeight / 2 - 150),
-                                    Color.White);
+                    _spriteBatch.Draw(title, new Rectangle(_graphics.PreferredBackBufferWidth / 2 - title.Width / 4,
+                                                           _graphics.PreferredBackBufferHeight / 2 - title.Height / 2 - 40,
+                                                           title.Width / 2,
+                                                           title.Height / 2),
+                                                           Color.White);
                     start.Draw(_spriteBatch);
                     instructions.Draw(_spriteBatch);
                     break;

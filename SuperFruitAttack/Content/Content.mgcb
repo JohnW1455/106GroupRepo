@@ -122,6 +122,18 @@
 /processorParam:TextureFormat=Color
 /build:Images/buttons/god mode.png
 
+#begin Images/buttons/instructions.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/buttons/instructions.png
+
 #begin Images/buttons/menu.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -146,7 +158,7 @@
 /processorParam:TextureFormat=Color
 /build:Images/buttons/normal mode.png
 
-#begin Images/buttons/pause button.png
+#begin Images/buttons/pause.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -156,9 +168,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/buttons/pause button.png
+/build:Images/buttons/pause.png
 
-#begin Images/buttons/Resume.png
+#begin Images/buttons/play.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -168,7 +180,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/buttons/Resume.png
+/build:Images/buttons/play.png
 
 #begin Images/instructions.png
 /importer:TextureImporter
@@ -182,6 +194,18 @@
 /processorParam:TextureFormat=Color
 /build:Images/instructions.png
 
+#begin Images/menu.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/menu.png
+
 #begin Images/player/simple stickman.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -193,6 +217,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/player/simple stickman.png
+
+#begin Images/resume.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/resume.png
+
+#begin Images/title.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/title.png
 
 #begin levelFlag.png
 /importer:TextureImporter

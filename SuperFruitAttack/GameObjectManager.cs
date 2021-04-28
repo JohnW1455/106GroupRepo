@@ -146,15 +146,15 @@ namespace SuperFruitAttack
         /// </summary> 
         public static void CheckCollision()
         {
-            foreach (Platform platform in platforms)
+            for (int i = platforms.Count - 1; i >= 0; i--)
             {
                 foreach (Projectile projectile in projectiles)
                 {
-                    if (projectile.CheckCollision(platform))
+                    if (projectile.CheckCollision(platforms[i]))
                         RemoveObject(projectile);
                 }
 
-                platform.CheckCollision(player);
+                platforms[i].CheckCollision(player);
             }
 
             foreach (Projectile projectile in projectiles)

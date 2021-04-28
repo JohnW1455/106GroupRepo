@@ -325,7 +325,11 @@ namespace SuperFruitAttack
             {
                 FireGun();
                 // Applies gravity
-                ApplyGravity();
+                // If the player is in god mode and applying gravity would kill them, don't
+                if (!(godMode && playerVelocity.Y + this.Y + 32 > LevelManager.CurrentLevel.PixelHeight))
+                {
+                    ApplyGravity();
+                }
             }
             else
             {

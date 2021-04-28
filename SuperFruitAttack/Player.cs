@@ -189,7 +189,7 @@ namespace SuperFruitAttack
                         pState = PlayerState.walkLeft;
                     }
                     else if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D)
-                        && kb.IsKeyDown(Keys.W) && !wallClimb)
+                        && kb.IsKeyDown(Keys.W) && (godMode || !wallClimb))
                     {
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;
@@ -204,7 +204,7 @@ namespace SuperFruitAttack
                         // Switches to facing right
                         pState = PlayerState.faceRight;
                     }
-                    else if (kb.IsKeyDown(Keys.W) && !wallClimb)
+                    else if (kb.IsKeyDown(Keys.W) && (godMode || !wallClimb))
                     {
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
@@ -222,7 +222,7 @@ namespace SuperFruitAttack
                         pState = PlayerState.walkRight;
                     }
                     else if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A)
-                        && kb.IsKeyDown(Keys.W) && !wallClimb)
+                        && kb.IsKeyDown(Keys.W) && (godMode || !wallClimb))
                     {
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
@@ -237,7 +237,7 @@ namespace SuperFruitAttack
                         // Switches to facing left
                         pState = PlayerState.faceLeft;
                     }
-                    else if (kb.IsKeyDown(Keys.W) && !wallClimb)
+                    else if (kb.IsKeyDown(Keys.W) && (godMode || !wallClimb))
                     {
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;

@@ -247,8 +247,8 @@ namespace SuperFruitAttack
                 case GameStages.instructions:
                     _spriteBatch.DrawString(arial16bold, "A - move left \n" +
                                                          "D - move right \n" +
-                                                         "Space - Jump \n" +
-                                                         "Left Mouse Button - Shoot",
+                                                         "W - Jump \n" +
+                                                         "Space - Shoot",
                                             new Vector2(_graphics.PreferredBackBufferWidth / 2 - 60,
                                                         _graphics.PreferredBackBufferHeight / 2 ),
                                                         Color.White);

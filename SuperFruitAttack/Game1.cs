@@ -248,10 +248,11 @@ namespace SuperFruitAttack
                     _spriteBatch.DrawString(arial16bold, "A - move left \n" +
                                                          "D - move right \n" +
                                                          "W - Jump \n" +
-                                                         "Space - Shoot",
+                                                         "Space - Shoot \n" +
+                                                         "Activate GodMode - G",
                                             new Vector2(_graphics.PreferredBackBufferWidth / 2 - 60,
-                                                        _graphics.PreferredBackBufferHeight / 2 ),
-                                                        Color.White);
+                                                        _graphics.PreferredBackBufferHeight / 2  - 30),
+                                                        Color.Black);
                     menu.Draw(_spriteBatch);
                     start.Draw(_spriteBatch);
                     break;
@@ -264,16 +265,16 @@ namespace SuperFruitAttack
                         switch (GameObjectManager.Player.Health)
                         {
                             case 4:
-                                _spriteBatch.Draw(Resources.GetTexture("hpFull"), new Vector2(30,10), Color.White);
+                                _spriteBatch.Draw(Resources.GetTexture("hpFull"), new Vector2(15, 10), Color.White);
                                 break;
                             case 3:
-                                _spriteBatch.Draw(Resources.GetTexture("hpThird"), new Vector2(30, 20), Color.White); 
+                                _spriteBatch.Draw(Resources.GetTexture("hpThird"), new Vector2(15, 10), Color.White); 
                                 break;
                             case 2:
-                                _spriteBatch.Draw(Resources.GetTexture("hpHalf"), new Vector2(30, 10), Color.White);
+                                _spriteBatch.Draw(Resources.GetTexture("hpHalf"), new Vector2(15, 10), Color.White);
                                 break;
                             case 1:
-                                _spriteBatch.Draw(Resources.GetTexture("hpQuart"), new Vector2(30, 10), Color.White);
+                                _spriteBatch.Draw(Resources.GetTexture("hpQuart"), new Vector2(15, 10), Color.White);
                                 break;
                         }
 

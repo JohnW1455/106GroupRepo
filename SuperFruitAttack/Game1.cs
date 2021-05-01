@@ -121,13 +121,13 @@ namespace SuperFruitAttack
                         }
                         else if(instructions.IsClicked(previousMouse) == true)
                         { 
-                            menu.Y = _graphics.PreferredBackBufferHeight / 2 - 50;
+                            menu.Y = 30;
+                            start.Y = 120;
                             status = GameStages.instructions;
                         }
                         break;
                     case GameStages.instructions:
-                        menu.Y = 30;
-                        start.Y = 120;
+                        
                         if(menu.IsClicked(previousMouse) == true)
                         {
                             start.Y = _graphics.PreferredBackBufferHeight / 2;
@@ -135,6 +135,7 @@ namespace SuperFruitAttack
                         }
                         if(start.IsClicked(previousMouse) == true)
                         {
+                            menu.Y = _graphics.PreferredBackBufferHeight / 2 + 30;
                             status = GameStages.transition;
                         }
                         break;
@@ -152,10 +153,12 @@ namespace SuperFruitAttack
                             if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
                                GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                             {
+                                menu.Y = _graphics.PreferredBackBufferHeight / 2;
                                 status = GameStages.winGame;
                             }
                             if(GameObjectManager.Player.Health <= 0)
                             {
+                                menu.Y = _graphics.PreferredBackBufferHeight / 2 + 30;
                                 status = GameStages.gameOver;
                             }
                             if(GameObjectManager.Player.ColliderObject.Bounds.Y >= 
@@ -185,6 +188,7 @@ namespace SuperFruitAttack
                     case GameStages.winGame:
                         if(menu.IsClicked(previousMouse) == true )
                         {
+                            start.Y = _graphics.PreferredBackBufferHeight / 2;
                             status = GameStages.menu;
                         }
                         break;
@@ -192,6 +196,7 @@ namespace SuperFruitAttack
                        
                         if(menu.IsClicked(previousMouse) == true)
                         {
+                            start.Y = _graphics.PreferredBackBufferHeight / 2;
                             status = GameStages.menu;
                         }
                         break;  
@@ -248,11 +253,20 @@ namespace SuperFruitAttack
                     _spriteBatch.DrawString(arial16bold, "A - move left \n" +
                                                          "D - move right \n" +
                                                          "W - Jump \n" +
-                                                         "Space - Shoot \n" +
-                                                         "Activate GodMode - G",
+                                                         "Enter - Shoot \n" +
+                                                         "G - Activate God-Mode \n",
                                             new Vector2(_graphics.PreferredBackBufferWidth / 2 - 60,
                                                         _graphics.PreferredBackBufferHeight / 2  - 30),
                                                         Color.Black);
+                    _spriteBatch.DrawString(arial16bold, "*When God-Mode is active, your character\n"
+                                                          + "          appear dimmer.\n" +
+                                                          "To Wallclimb, jump onto a wall, hold the\n" +
+                                                          "movement key facing in the direction of\n" +
+                                                          "wall, and jump off and move in the \n" +
+                                                          "opposite direction.",
+                                           new Vector2(_graphics.PreferredBackBufferWidth / 2 - 120,
+                                                       _graphics.PreferredBackBufferHeight / 2 + 95),
+                                                       Color.Black); ; ; 
                     menu.Draw(_spriteBatch);
                     start.Draw(_spriteBatch);
                     break;
@@ -291,7 +305,7 @@ namespace SuperFruitAttack
                 case GameStages.winGame:
                     _spriteBatch.DrawString(gameTitle, "You Win",
                                 new Vector2(_graphics.PreferredBackBufferWidth / 2 - 100,
-                                _graphics.PreferredBackBufferHeight / 2 - 200),
+                                _graphics.PreferredBackBufferHeight / 2 - 90),
                                 Color.Gold);
                     menu.Draw(_spriteBatch);
                     break;
@@ -299,7 +313,7 @@ namespace SuperFruitAttack
                     menu.Draw(_spriteBatch);
                     _spriteBatch.DrawString(gameTitle, "You Died",
                                 new Vector2(_graphics.PreferredBackBufferWidth/2 - 100,
-                                _graphics.PreferredBackBufferHeight/2 - 200),
+                                _graphics.PreferredBackBufferHeight/2 - 90),
                                 Color.DarkRed);
                     break;
                 case GameStages.pause:

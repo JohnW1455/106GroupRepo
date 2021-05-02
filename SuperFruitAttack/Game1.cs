@@ -253,7 +253,7 @@ namespace SuperFruitAttack
                     _spriteBatch.DrawString(arial16bold, "A - move left \n" +
                                                          "D - move right \n" +
                                                          "W - Jump \n" +
-                                                         "Enter - Shoot \n" +
+                                                         "J - Shoot \n" +
                                                          "G - Activate God-Mode \n",
                                             new Vector2(_graphics.PreferredBackBufferWidth / 2 - 60,
                                                         _graphics.PreferredBackBufferHeight / 2  - 30),

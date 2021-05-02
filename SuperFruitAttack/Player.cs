@@ -365,7 +365,7 @@ namespace SuperFruitAttack
         private void FireGun()
         {
             // Checks to see if the user wanted to fire the gun and if it is a single press
-            if (SingleKeyPress(Keys.Enter) == true)
+            if (SingleKeyPress(Keys.J) == true)
             {
                 // Checks the state of the character
                 int direction = 1;

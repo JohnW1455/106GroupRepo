@@ -172,6 +172,7 @@ namespace SuperFruitAttack
                         
                         if(pause.IsClicked(previousMouse) == true)
                         {
+                            menu.Y = _graphics.PreferredBackBufferHeight / 2;
                             status = GameStages.pause;
                             pause.Image = resumeButton;
                         }
@@ -211,6 +212,7 @@ namespace SuperFruitAttack
                 }
                 if(menu.IsClicked(previousMouse) == true)
                 {
+                    pause.Image = pauseButton;
                     status = GameStages.menu;
                 }
 

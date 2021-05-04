@@ -117,7 +117,7 @@ namespace SuperFruitAttack
             // Gets the current Keyboard State
             KeyboardState kb = Keyboard.GetState();
 
-            float jumpMultiplier = HasPowerUp(PowerUp.JumpBoost) ? 1.1f : 1;
+            float jumpMultiplier = HasPowerUp(PowerUp.JumpBoost) ? 1.3f : 1;
             // Runs the PlayerState FSM
             // NOTE: Jumps happen on state switch so the game doesn't need to check for
             //       single key presses or count jumps

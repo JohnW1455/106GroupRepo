@@ -78,6 +78,8 @@ namespace SuperFruitAttack
             set { jumpVelocity = value; }
         }
 
+        private static readonly SpriteFont _arial16 = Resources.GetSpriteFont("arial16Bold");
+
         // Constructor
         public Player(int playerHealth, int playerMS, Texture2D image,
             Collider collide) : base(image, collide)
@@ -570,5 +572,33 @@ namespace SuperFruitAttack
         }
         
         public int GetDamage() => HasPowerUp(PowerUp.DoubleDamage) ? 2 : 1;
+
+        public void DrawPowerUps(SpriteBatch spriteBatch)
+        {
+            var textIndex = 0;
+            var powerUpIndex = -1;
+            foreach (var time in powerUps)
+            {
+                powerUpIndex++;
+                if (time == 0)
+                    continue;
+
+                var text = $"{(PowerUp) powerUpIndex}: {time / 1000}";
+                if (time == -1)
+                {
+                    text = $"{(PowerUp) powerUpIndex}";
+                }
+                
+                var textHeight = _arial16.MeasureString(text).Y;
+                spriteBatch.DrawString(
+                    _arial16,
+                    text,
+                    new Vector2(0, 70 + textHeight * textIndex),
+                    Color.DarkRed
+                );
+
+                textIndex++;
+            }
+        }
     }
 }

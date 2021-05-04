@@ -27,5 +27,10 @@ namespace SuperFruitAttack
             }
             return texture;
         }
+
+        public static SpriteFont GetSpriteFont(string name)
+        {
+            return _contentManager.Load<SpriteFont>(name);
+        }
     }
 }

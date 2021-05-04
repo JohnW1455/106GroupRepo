@@ -294,8 +294,9 @@ namespace SuperFruitAttack
                                 break;
                         }
 
+                        GameObjectManager.Player.DrawPowerUps(_spriteBatch);
                     }
-                    
+
                     pause.Draw(_spriteBatch);
                     break;
                 case GameStages.transition:

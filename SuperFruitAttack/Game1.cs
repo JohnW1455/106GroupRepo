@@ -138,11 +138,13 @@ namespace SuperFruitAttack
                         
                         if(menu.IsClicked(previousMouse) == true)
                         {
+                            start.X = _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2;
                             start.Y = _graphics.PreferredBackBufferHeight / 2;
                             status = GameStages.menu;
                         }
                         if(start.IsClicked(previousMouse) == true)
                         {
+                            
                             menu.Y = _graphics.PreferredBackBufferHeight / 2 + 30;
                             status = GameStages.transition;
                         }
@@ -161,12 +163,14 @@ namespace SuperFruitAttack
                             if(LevelManager.CurrentLevelNumber == LevelManager.LevelCount &&
                                GameObjectManager.Flag.CheckCollision(GameObjectManager.Player))
                             {
+                                menu.X = _graphics.PreferredBackBufferWidth / 2 - menuBtton.Width / 2;
                                 menu.Y = _graphics.PreferredBackBufferHeight / 2;
                                 status = GameStages.winGame;
                             }
                             if(GameObjectManager.Player.Health <= 0)
                             {
-                                menu.Y = _graphics.PreferredBackBufferHeight / 2 + 30;
+                                menu.X = _graphics.PreferredBackBufferWidth / 2 - menuBtton.Width / 2;
+                                menu.Y = _graphics.PreferredBackBufferHeight / 2;
                                 status = GameStages.gameOver;
                             }
                             if(GameObjectManager.Player.ColliderObject.Bounds.Y >= 
@@ -180,6 +184,7 @@ namespace SuperFruitAttack
                         
                         if(pause.IsClicked(previousMouse) == true)
                         {
+                            menu.X = _graphics.PreferredBackBufferWidth / 2 - menuBtton.Width / 2;
                             menu.Y = _graphics.PreferredBackBufferHeight / 2;
                             status = GameStages.pause;
                             pause.Image = resumeButton;
@@ -197,6 +202,7 @@ namespace SuperFruitAttack
                     case GameStages.winGame:
                         if(menu.IsClicked(previousMouse) == true )
                         {
+                            start.X = _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2;
                             start.Y = _graphics.PreferredBackBufferHeight / 2;
                             status = GameStages.menu;
                         }
@@ -205,6 +211,7 @@ namespace SuperFruitAttack
                        
                         if(menu.IsClicked(previousMouse) == true)
                         {
+                            start.X = _graphics.PreferredBackBufferWidth / 2 - startButton.Width / 2;
                             start.Y = _graphics.PreferredBackBufferHeight / 2;
                             status = GameStages.menu;
                         }

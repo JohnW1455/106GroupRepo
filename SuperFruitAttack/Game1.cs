@@ -34,7 +34,10 @@ namespace SuperFruitAttack
         private Texture2D pauseButton;
         private Texture2D resumeButton;
         private Texture2D title;
-
+        private Texture2D peaEnemy;
+        private Texture2D carrotEnemy;
+        private Texture2D potatoEnemy;
+        private Texture2D powerUp;
         private SpriteFont gameTitle;
         private Button start;
         private Button menu;
@@ -67,7 +70,10 @@ namespace SuperFruitAttack
             LevelManager.LoadLevels();
             
             gameTitle = Content.Load<SpriteFont>("Text/Titles/Roboto36");
-
+            powerUp = Content.Load<Texture2D>("powerUp");
+            peaEnemy = Content.Load<Texture2D>("peapod");
+            carrotEnemy = Content.Load<Texture2D>("carrot");
+            potatoEnemy = Content.Load<Texture2D>("potato");
             pauseButton = Content.Load<Texture2D>("Images/buttons/pause");
             resumeButton = Content.Load<Texture2D>("Images/resume");
             startButton = Content.Load<Texture2D>("Images/buttons/play");
@@ -120,9 +126,11 @@ namespace SuperFruitAttack
                             status = GameStages.transition;
                         }
                         else if(instructions.IsClicked(previousMouse) == true)
-                        { 
+                        {
+                            menu.X = _graphics.PreferredBackBufferWidth / 2 - 150;
                             menu.Y = 30;
-                            start.Y = 120;
+                            start.X = _graphics.PreferredBackBufferHeight / 2 + 150;
+                            start.Y = 30;
                             status = GameStages.instructions;
                         }
                         break;
@@ -252,22 +260,54 @@ namespace SuperFruitAttack
                     instructions.Draw(_spriteBatch);
                     break;
                 case GameStages.instructions:
-                    _spriteBatch.DrawString(arial16bold, "A - move left \n" +
-                                                         "D - move right \n" +
-                                                         "W - Jump \n" +
-                                                         "J - Shoot \n" +
-                                                         "G - Activate God-Mode \n",
-                                            new Vector2(_graphics.PreferredBackBufferWidth / 2 - 60,
-                                                        _graphics.PreferredBackBufferHeight / 2  - 30),
+                    _spriteBatch.Draw(peaEnemy, new Rectangle(_graphics.PreferredBackBufferWidth / 2 - 115,
+                                                                        _graphics.PreferredBackBufferHeight / 2 + 18,
+                                                                        peaEnemy.Width + 10,
+                                                                        peaEnemy.Height + 10),
+                                                                        Color.White);
+                    _spriteBatch.Draw(carrotEnemy,new Rectangle(_graphics.PreferredBackBufferWidth / 2 - 50,
+                                                                       _graphics.PreferredBackBufferHeight / 2 + 60,
+                                                                       peaEnemy.Width + 10,
+                                                                       peaEnemy.Height + 10),
+                                                                       Color.White);
+                    _spriteBatch.Draw(potatoEnemy, new Rectangle(_graphics.PreferredBackBufferWidth / 2 - 70,
+                                                                       _graphics.PreferredBackBufferHeight / 2 + 110,
+                                                                       peaEnemy.Width + 10,
+                                                                       peaEnemy.Height + 10),
+                                                                       Color.White);
+                    _spriteBatch.Draw(powerUp, new Rectangle(_graphics.PreferredBackBufferWidth / 2 + 125,
+                                                                       _graphics.PreferredBackBufferHeight / 2 + 50,
+                                                                       65,
+                                                                       65),
+                                                                       Color.White);
+                    _spriteBatch.DrawString(arial16bold, "Collect powerups to gain \n" +
+                                                         "      a stat boost.",
+                                                         new Vector2(_graphics.PreferredBackBufferWidth / 2 + 40,
+                                                         _graphics.PreferredBackBufferHeight / 2 - 30),
+                                                         Color.Black);
+                    _spriteBatch.DrawString(arial16bold, "There are 3 enemy types:\n\n" +
+                                                         "peapod(shoots downward)\n\n" +
+                                                         "carrot(shoots in player's direction)\n\n" +
+                                                         "potato(wanders back and forth)",
+                                                         new Vector2(15,
+                                                         _graphics.PreferredBackBufferHeight / 2 - 30),
+                                                         Color.Black);
+                    _spriteBatch.DrawString(arial16bold, "A - move left, " +
+                                                         "D - move right, " +
+                                                         "W - Jump, " +
+                                                         "J - Shoot, " +
+                                                         "G - Activate God-Mode ",
+                                            new Vector2(50,
+                                                        160),
                                                         Color.Black);
-                    _spriteBatch.DrawString(arial16bold, "*When God-Mode is active, your character\n"
-                                                          + "          appear dimmer.\n" +
-                                                          "To Wallclimb, jump onto a wall, hold the\n" +
+                    _spriteBatch.DrawString(arial16bold, "*When God-Mode is active, your character"
+                                                          + "appear dimmer.*\n" +
+                                                          "To Wallclimb, jump onto a wall, hold the " +
                                                           "movement key facing in the direction of\n" +
-                                                          "wall, and jump off and move in the \n" +
+                                                          "wall, and jump off and move in the " +
                                                           "opposite direction.",
-                                           new Vector2(_graphics.PreferredBackBufferWidth / 2 - 120,
-                                                       _graphics.PreferredBackBufferHeight / 2 + 95),
+                                           new Vector2(15,
+                                                       _graphics.PreferredBackBufferHeight - 80),
                                                        Color.Black); ; ; 
                     menu.Draw(_spriteBatch);
                     start.Draw(_spriteBatch);

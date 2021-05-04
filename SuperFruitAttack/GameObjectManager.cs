@@ -166,7 +166,7 @@ namespace SuperFruitAttack
 
                     if (projectile.CheckCollision(enemy))
                     {
-                        enemy.TakeDamage(1);
+                        enemy.TakeDamage(player.GetDamage());
                         RemoveObject(projectile);
                     }
                 }
@@ -186,6 +186,15 @@ namespace SuperFruitAttack
                 if (enemy.CheckCollision(player))
                 {
                     player.TakeDamage();
+                }
+            }
+
+            foreach (Collectible collectible in collectibles)
+            {
+                if (collectible.CheckCollision(player))
+                {
+                    collectible.OnCollect(player);
+                    RemoveObject(collectible);
                 }
             }
         }

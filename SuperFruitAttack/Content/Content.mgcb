@@ -327,7 +327,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:powerUp.png
+/build:powerUp.png;collectable.png
 
 #begin simple ball.png
 /importer:TextureImporter

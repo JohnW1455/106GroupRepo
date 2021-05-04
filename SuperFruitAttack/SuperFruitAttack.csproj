@@ -29,4 +29,7 @@
     <Folder Include="Content\Levels\" />
     <Folder Include="Levels" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="PowerUp.cs" />
+  </ItemGroup>
 </Project>

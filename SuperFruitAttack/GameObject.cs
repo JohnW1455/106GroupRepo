@@ -53,7 +53,7 @@ namespace SuperFruitAttack
                     return new PeaPod(texture, 1000, 0, box);
                 case "player":
                     return new Player(4, 5, texture, box);
-                case "collectible":
+                case "collectable":
                     return new Collectible(texture, box);
                 case "wall":
                 case "ground":

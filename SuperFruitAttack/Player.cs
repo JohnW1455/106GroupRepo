@@ -15,6 +15,8 @@ namespace SuperFruitAttack
     //          in game.
     public class Player : GameObject
     {
+        private const int _TOTAL_POWER_UPS = 4;
+        
         // Fields 
         private int health;
         private Vector2 moveSpeed;
@@ -32,6 +34,8 @@ namespace SuperFruitAttack
         // Textures needed
         private Texture2D playerRun;
         private Texture2D playerWall;
+
+        private int[] powerUps;
 
         // Properties
         public int Health
@@ -92,6 +96,7 @@ namespace SuperFruitAttack
             // Loads textures
             playerWall = Resources.GetTexture("playerWall");
             playerRun = Resources.GetTexture("playerRun");
+            powerUps = new int[_TOTAL_POWER_UPS];
         }
 
         public void TakeDamage()
@@ -110,6 +115,7 @@ namespace SuperFruitAttack
             // Gets the current Keyboard State
             KeyboardState kb = Keyboard.GetState();
 
+            float jumpMultiplier = HasPowerUp(PowerUp.JumpBoost) ? 1.1f : 1;
             // Runs the PlayerState FSM
             // NOTE: Jumps happen on state switch so the game doesn't need to check for
             //       single key presses or count jumps
@@ -122,7 +128,7 @@ namespace SuperFruitAttack
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
-                        playerVelocity.Y = jumpVelocity.Y;
+                        playerVelocity.Y = jumpVelocity.Y * jumpMultiplier;
                         // Sets IsGrounded to false
                         isGrounded = false;
                     }
@@ -143,7 +149,7 @@ namespace SuperFruitAttack
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
-                        playerVelocity.Y = jumpVelocity.Y;
+                        playerVelocity.Y = jumpVelocity.Y * jumpMultiplier;
                         // Sets IsGrounded to false
                         isGrounded = false;
                     }
@@ -155,7 +161,7 @@ namespace SuperFruitAttack
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
-                        playerVelocity.Y = jumpVelocity.Y;
+                        playerVelocity.Y = jumpVelocity.Y * jumpMultiplier;
                         // Sets IsGrounded to false
                         isGrounded = false;
                     }
@@ -176,7 +182,7 @@ namespace SuperFruitAttack
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
-                        playerVelocity.Y = jumpVelocity.Y;
+                        playerVelocity.Y = jumpVelocity.Y * jumpMultiplier;
                         // Sets IsGrounded to false
                         isGrounded = false;
                     }
@@ -194,7 +200,7 @@ namespace SuperFruitAttack
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
-                        playerVelocity.Y = jumpVelocity.Y;
+                        playerVelocity.Y = jumpVelocity.Y * jumpMultiplier;
                         // Sets IsGrounded to false
                         isGrounded = false;
                     }
@@ -209,7 +215,7 @@ namespace SuperFruitAttack
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
-                        playerVelocity.Y = jumpVelocity.Y;
+                        playerVelocity.Y = jumpVelocity.Y * jumpMultiplier;
                         // Sets IsGrounded to false
                         isGrounded = false;
                     }
@@ -227,7 +233,7 @@ namespace SuperFruitAttack
                         // Switches to jumping right
                         pState = PlayerState.jumpRight;
                         // Causes the player to jump
-                        playerVelocity.Y = jumpVelocity.Y;
+                        playerVelocity.Y = jumpVelocity.Y * jumpMultiplier;
                         // Sets IsGrounded to false
                         isGrounded = false;
                     }
@@ -242,7 +248,7 @@ namespace SuperFruitAttack
                         // Switches to jumping left
                         pState = PlayerState.jumpLeft;
                         // Causes the player to jump
-                        playerVelocity.Y = jumpVelocity.Y;
+                        playerVelocity.Y = jumpVelocity.Y * jumpMultiplier;
                         // Sets IsGrounded to false
                         isGrounded = false;
                     }
@@ -298,15 +304,16 @@ namespace SuperFruitAttack
             }
 
             // Checks input for movement
+            float speedMultiplier = HasPowerUp(PowerUp.SpeedBoost) ? 1.5f : 1;
             if (kb.IsKeyDown(Keys.A) && !kb.IsKeyDown(Keys.D))
             {
                 // Moves the player left
-                this.X -= (int)moveSpeed.X;
+                this.X -= (int)(moveSpeed.X * speedMultiplier);
             }
             else if (kb.IsKeyDown(Keys.D) && !kb.IsKeyDown(Keys.A))
             {
                 // Moves the player right
-                this.X += (int)moveSpeed.X;
+                this.X += (int)(moveSpeed.X * speedMultiplier);
             }
 
             if (SingleKeyPress(Keys.G))
@@ -343,6 +350,8 @@ namespace SuperFruitAttack
             {
                 invincible--;
             }
+            
+            TickPowerUps(time);
 
             // Collisions are handled in the object manager
         }
@@ -524,5 +533,42 @@ namespace SuperFruitAttack
         {
             return Keyboard.GetState().IsKeyDown(key) && prevKey.IsKeyUp(key);
         }
+        
+        private void TickPowerUps(GameTime gameTime)
+        {
+            for (var i = 0; i < powerUps.Length; i++)
+            {
+                var time = powerUps[i];
+
+                if (time == -1 || time == 0)
+                    continue;
+
+                time -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (time < 0)
+                    time = 0;
+
+                powerUps[i] = time;
+            }
+        }
+
+        public void ApplyPowerUp(PowerUp powerUp, int durationMs)
+        {
+            if (powerUp == PowerUp.HealthUp)
+            {
+                if (health < 4)
+                    health++;
+
+                return;
+            }
+            
+            powerUps[(int) powerUp] = durationMs;
+        }
+        
+        private bool HasPowerUp(PowerUp powerUp)
+        {
+            return powerUps[(int) powerUp] != 0;
+        }
+        
+        public int GetDamage() => HasPowerUp(PowerUp.DoubleDamage) ? 2 : 1;
     }
 }

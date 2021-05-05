@@ -31,6 +31,8 @@ namespace SuperFruitAttack
             this.image = image;
             box = new Rectangle(x, y, width, height);
         }
+
+        //Here are properties for the button class's fields.
         public int X
         {
             get { return box.X; }

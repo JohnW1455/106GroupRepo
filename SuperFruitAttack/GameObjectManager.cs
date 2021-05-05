@@ -127,7 +127,10 @@ namespace SuperFruitAttack
                 flag = null;
             }
         }
-       
+       /// <summary>
+       /// This method resets all the game objects by deleting them from the list fields 
+       /// as well as making the player and flag objects null.
+       /// </summary>
        public static void Reset()
        {
            enemies.Clear();
@@ -146,6 +149,8 @@ namespace SuperFruitAttack
         /// </summary> 
         public static void CheckCollision()
         {
+            //We check collisions with projectiles and game platforms. 
+            //All projectiles delete when they collide with a platform.
             for (int i = platforms.Count - 1; i >= 0; i--)
             {
                 foreach (Projectile projectile in projectiles)
@@ -156,31 +161,35 @@ namespace SuperFruitAttack
 
                 platforms[i].CheckCollision(player);
             }
-
+            //We check collisions with projectiles and enemies by looping through
+            //the projectile and enemy lists.
             foreach (Projectile projectile in projectiles)
             {
                 foreach (Enemy enemy in enemies)
                 {
+                    //if a projectile is an enemy bullet and it collides with an enemy, nothing happens.
                     if (!projectile.IsPlayerBullet)
                         break;
-
+                    //If a player projectile collides with an enemy, the enemy takes damage
+                    //and the projectile is removed.
                     if (projectile.CheckCollision(enemy))
                     {
                         enemy.TakeDamage(player.GetDamage());
                         RemoveObject(projectile);
                     }
                 }
-                
+                //If the projectile is a player bullet and collides with the player, nothing happens.
                 if (projectile.IsPlayerBullet)
                     continue;
-                
+                //If a projectile is not a player bullet, the player takes damage and the projectile
+                //is deleted.
                 if (projectile.CheckCollision(player))
                 {
                     player.TakeDamage();
                     RemoveObject(projectile);
                 }
             }
-
+            //If the enemy collides with the player, the player takes damage.
             foreach (Enemy enemy in enemies)
             {
                 if (enemy.CheckCollision(player))
@@ -188,7 +197,8 @@ namespace SuperFruitAttack
                     player.TakeDamage();
                 }
             }
-
+            //If the player collides with a collectible, the player gains a stat bonus and
+            //the collectible disappears.
             foreach (Collectible collectible in collectibles)
             {
                 if (collectible.CheckCollision(player))
@@ -198,13 +208,17 @@ namespace SuperFruitAttack
                 }
             }
         }
-
+        /// <summary>
+        /// This method runs all the game objects' tick methods
+        /// that'll be called every update cycle in the game.
+        /// </summary>
+        /// <param name="gameTime">This is the time parameter that's used in the game1 update method.</param>
         public static void Tick(GameTime gameTime)
         {
             ticking = true;
-            
+            //We call the checkcollision method in this method to make things easier.
             player?.Tick(gameTime);
-
+            //We iterate through the enemies and call their tick methods.
             foreach (Enemy enemy in enemies)
             {
                 enemy.Tick(gameTime);
@@ -224,12 +238,12 @@ namespace SuperFruitAttack
             }
 
             ticking = false;
-            
+            //For each game object that'll be added, we add them into the game object manager.
             foreach (GameObject add in toAdd)
             {
                 AddObject(add);
             }
-
+            //For each game object that'll be removed, we delete them into the game object manager.
             foreach (GameObject remove in toRemove)
             {
                 RemoveObject(remove);
@@ -238,7 +252,14 @@ namespace SuperFruitAttack
             toAdd.Clear();
             toRemove.Clear();
         }
-
+        /// <summary>
+        /// This method simulates a scrolling matrix.
+        /// </summary>
+        /// <param name="screen_X">This is the top left x coordinate of the screen.</param>
+        /// <param name="screen_Y">This is the top left y coordinate of the screen.</param>
+        /// <param name="max_X">This is the screen's width.</param>
+        /// <param name="max_Y">This is the screen's height.</param>
+        /// <returns></returns>
         public static Matrix CameraMatrix(int screen_X, int screen_Y, int max_X, int max_Y)
         {
             float scaleFactor = 1.15f;
@@ -267,9 +288,13 @@ namespace SuperFruitAttack
             Matrix result = Matrix.Multiply(translation, scaling);
             return result;
         }
-      
+         /// <summary>
+         /// This method draws all the game objects in the manager's lists.
+         /// </summary>
+         /// <param name="sb">This is the spritebatch object that'll be used to draw the game objects.</param>
         public static void Draw(SpriteBatch sb)
         {
+            //if the player and flag objects exist, we draw them.
             if(player != null)
             {
                 player.Draw(sb);
@@ -279,7 +304,7 @@ namespace SuperFruitAttack
                 flag.Draw(sb);
 
             }
-            
+            //We iterate through all the game object lists and draw each of their game objects.
             foreach(Platform platform in platforms)
             {
                 platform.Draw(sb);

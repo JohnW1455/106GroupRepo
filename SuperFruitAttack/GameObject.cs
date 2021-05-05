@@ -135,7 +135,10 @@ namespace SuperFruitAttack
             return false;
             
         }
-
+        /// <summary>
+        /// This method creates a copy of the game object this method is called on.
+        /// </summary>
+        /// <returns>returns a copy of the game object.</returns>
         public GameObject Copy()
         {
             return Create(image.Name, X, Y, image);

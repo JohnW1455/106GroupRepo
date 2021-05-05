@@ -8,6 +8,9 @@ using SuperFruitAttack.Colliders;
 
 namespace SuperFruitAttack
 {
+	/* Author: Jack Doyle
+	 * Purpose: Create a class that simulates a game platform
+	 * Date: 3/27/2021*/
     class Platform : GameObject
     {
 		//fields

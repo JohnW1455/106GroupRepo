@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SuperFruitAttack
 {
+    /* Author: Nathan Caron
+     * Purpose: Create a class that simulates a bullet projectile.
+     * Date: 4/10/2021*/
     class Projectile : GameObject
     {
         private const int radius = 6;
@@ -38,6 +41,7 @@ namespace SuperFruitAttack
             set { isPlayerBullet = value; }
         }
 
+        /// <param name="gameTime"></param>
         public void Tick(GameTime gameTime)
         {
             collider.Position += velocity;

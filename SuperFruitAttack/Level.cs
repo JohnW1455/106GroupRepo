@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SuperFruitAttack
 {
+    /* Author: Nathan Caron
+     *Purpose: create a class that'll use external data to create an in-game level environment.
+     *Date: 5/1/2021*/
     public struct LevelData
     {
         public int Width;

@@ -8,6 +8,9 @@ using SuperFruitAttack.Colliders;
 
 namespace SuperFruitAttack
 {
+    /* Author: John Wager
+     * Purpose: Create a parent enemy class that derives from the game object class.
+     * Date: 3/27/2021*/
     abstract class Enemy : GameObject
     {
         private int health;

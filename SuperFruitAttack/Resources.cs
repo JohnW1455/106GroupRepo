@@ -6,6 +6,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SuperFruitAttack
 {
+    /* Author: Nathan Caron
+     * Purpose: Create a class that specifically handles texture2D and spritefont files from monogame's
+     * content folder.
+     * Date: 4/15/2021*/
     public static class Resources
     {
         public const string ROOT_DIRECTORY = "Content";

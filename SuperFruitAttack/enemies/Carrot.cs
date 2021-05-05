@@ -8,6 +8,9 @@ using SuperFruitAttack.Colliders;
 
 namespace SuperFruitAttack
 {
+    /* Author: Jack Doyle
+     * Purpose: Create a stationary carrot enemy that shoots in the direction of the player.
+     * Date: 4/28/2021*/
     class Carrot : Enemy
     {
 

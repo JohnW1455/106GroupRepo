@@ -8,6 +8,9 @@ using SuperFruitAttack.Colliders;
 
 namespace SuperFruitAttack
 {
+    /* Author: Jack Doyle
+     * Purpose: Create a peapod enemy that shoots downward and is stationary.
+     * Date: 4/28/2021*/
     class PeaPod : Enemy
     {
 

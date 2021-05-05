@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Media;
 namespace SuperFruitAttack
 {
     /// <summary>
-    /// Author: Elliot Gong
+    /// Author: Elliot Gong & Nathan Caron
     /// This class manages all the gameObjects in the game.
     /// </summary>
     static class GameObjectManager

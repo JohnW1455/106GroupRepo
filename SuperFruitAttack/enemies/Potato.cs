@@ -10,9 +10,9 @@ using SuperFruitAttack.Colliders;
 /// </summary>
 namespace SuperFruitAttack
 {
-    /// <summary>
-    /// Basic grunt enemy that walks a set distance, back and forth
-    /// </summary>
+    /* Author: Jack Doyle
+  * Purpose: Create a potato enemy that wanders back and forth.
+  * Date: 4/28/2021*/
     class Potato : Enemy
     {
         protected float homePosition;

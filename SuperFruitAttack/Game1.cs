@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace SuperFruitAttack
 {
-    /* Authors: Nathan Caron, Elliot Gong
+    /* Authors: Nathan Caron, Elliot Gong, Jack Doyle
      * Purpose: Handle game transition and stages.
      * Date: 4/28/2021*/
 

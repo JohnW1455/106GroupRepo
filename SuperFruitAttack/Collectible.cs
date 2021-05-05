@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace SuperFruitAttack
 {
+    /* Author: Nathan Caron
+     * Purpose: Create a power up class
+     * Date: 5/1/2021*/
     public enum PowerUp
     {
         HealthUp,

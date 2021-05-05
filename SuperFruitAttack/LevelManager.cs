@@ -6,6 +6,10 @@ using Newtonsoft.Json;
 
 namespace SuperFruitAttack
 {
+    /* Author: Nathan Caron
+     * Purpose: Create a manager for level objects.
+     * Restrictions: Must account for level addition and deletion as well as reading the proper files.
+     * Date: 4/10/2021*/
     public static class LevelManager
     {
         private static readonly List<Level> _Levels = new List<Level>();
